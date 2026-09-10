@@ -6,7 +6,6 @@ export const PortalLogin = () => {
   const { setRole, showToast } = useApp();
   const [showAdminPass, setShowAdminPass] = useState(false);
   const [showCctvPass, setShowCctvPass] = useState(false);
-  const [showCredModal, setShowCredModal] = useState(false);
 
   // Active Admin Tier selection: 'local_admin' | 'zonal_admin' | 'central_admin'
   const [selectedAdminTier, setSelectedAdminTier] = useState('local_admin');
@@ -23,25 +22,6 @@ export const PortalLogin = () => {
   const [otpModal, setOtpModal] = useState(null); // null | 'citizen' | 'employee'
   const [generatedOtp, setGeneratedOtp] = useState("");
   const [enteredOtp, setEnteredOtp] = useState(["", "", "", "", "", ""]);
-
-  // Quick fill helper for testing/demo
-  const fillCredentials = (type) => {
-    const cred = PORTAL_CREDENTIALS[type];
-    if (!cred) return;
-    if (type === 'citizen') {
-      setCitizenPhone(cred.phone);
-    } else if (type === 'worker') {
-      setEmployeePhone(cred.phone);
-    } else if (type === 'cctv_ops') {
-      setCctvId(cred.id);
-      setCctvPass(cred.pass);
-    } else {
-      setSelectedAdminTier(type);
-      setAdminId(cred.id);
-      setAdminPass(cred.pass);
-    }
-    showToast(`Credentials selected for ${cred.name || type}`, "info");
-  };
 
   const handleCitizenSubmit = (e) => {
     e.preventDefault();
@@ -169,18 +149,6 @@ export const PortalLogin = () => {
 
       {/* Main Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 flex flex-col items-center">
-        {/* Top Floating Action: Authorized Credentials Cheat Sheet */}
-        <div className="w-full flex justify-end mb-2">
-          <button
-            type="button"
-            onClick={() => setShowCredModal(true)}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-bold border border-outline-variant/50 shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            <span className="material-symbols-outlined text-sm text-primary">badge</span>
-            <span>View Authorized Login Credentials</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          </button>
-        </div>
 
         {/* Hero Header Section */}
         <div className="w-full text-center flex flex-col items-center max-w-3xl">
@@ -507,15 +475,9 @@ export const PortalLogin = () => {
             <div className="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs">
               <span className="inline-flex items-center gap-1.5 text-on-surface-variant text-[11px]">
                 <span className="material-symbols-outlined text-base text-secondary">security</span>
-                Role-Based 2FA
+                Role-Based 2FA Protected
               </span>
-              <button
-                type="button"
-                onClick={() => setShowCredModal(true)}
-                className="text-secondary hover:underline font-bold text-[11px] cursor-pointer"
-              >
-                Need Credentials? &rarr;
-              </button>
+              <span className="text-[11px] text-on-surface-variant font-medium">Internal Gov Network</span>
             </div>
           </div>
 
@@ -707,187 +669,7 @@ export const PortalLogin = () => {
         </div>
       )}
 
-      {/* Authorized Credentials Reference Modal */}
-      {showCredModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
-          <div className="w-full max-w-2xl bg-surface-container-lowest rounded-3xl shadow-2xl p-6 sm:p-8 border border-outline-variant/30 flex flex-col max-h-[90vh]">
-            <div className="flex items-center justify-between pb-4 border-b border-outline-variant/30">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                  <span className="material-symbols-outlined text-2xl">badge</span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-on-surface">Authorized Portal Credentials Directory</h3>
-                  <p className="text-xs text-on-surface-variant">Each role & admin tier has distinct authorized credentials</p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowCredModal(false)}
-                className="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant cursor-pointer"
-              >
-                <span className="material-symbols-outlined text-lg">close</span>
-              </button>
-            </div>
-
-            <div className="overflow-y-auto py-4 space-y-3 flex-1 pr-1 text-xs">
-              {/* Ward Admin */}
-              <div className="p-3.5 rounded-xl bg-secondary/5 border border-secondary/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded bg-secondary text-on-secondary font-bold text-[10px] uppercase">
-                      Ward Admin (Local)
-                    </span>
-                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.local_admin.name}</span>
-                  </div>
-                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
-                    <span>ID: <strong className="text-secondary">{PORTAL_CREDENTIALS.local_admin.id}</strong></span>
-                    <span>Pass: <strong className="text-secondary">{PORTAL_CREDENTIALS.local_admin.pass}</strong></span>
-                  </div>
-                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.local_admin.description}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { fillCredentials('local_admin'); setShowCredModal(false); }}
-                  className="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-semibold hover:opacity-90 self-start sm:self-center shrink-0 cursor-pointer"
-                >
-                  Use This
-                </button>
-              </div>
-
-              {/* Zonal Admin */}
-              <div className="p-3.5 rounded-xl bg-blue-500/5 border border-blue-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded bg-blue-600 text-white font-bold text-[10px] uppercase">
-                      Zonal Admin
-                    </span>
-                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.zonal_admin.name}</span>
-                  </div>
-                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
-                    <span>ID: <strong className="text-blue-600">{PORTAL_CREDENTIALS.zonal_admin.id}</strong></span>
-                    <span>Pass: <strong className="text-blue-600">{PORTAL_CREDENTIALS.zonal_admin.pass}</strong></span>
-                  </div>
-                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.zonal_admin.description}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { fillCredentials('zonal_admin'); setShowCredModal(false); }}
-                  className="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-semibold hover:opacity-90 self-start sm:self-center shrink-0 cursor-pointer"
-                >
-                  Use This
-                </button>
-              </div>
-
-              {/* Apex Central Admin */}
-              <div className="p-3.5 rounded-xl bg-purple-500/5 border border-purple-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded bg-purple-700 text-white font-bold text-[10px] uppercase">
-                      Apex Central Admin
-                    </span>
-                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.central_admin.name}</span>
-                  </div>
-                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
-                    <span>ID: <strong className="text-purple-700">{PORTAL_CREDENTIALS.central_admin.id}</strong></span>
-                    <span>Pass: <strong className="text-purple-700">{PORTAL_CREDENTIALS.central_admin.pass}</strong></span>
-                  </div>
-                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.central_admin.description}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { fillCredentials('central_admin'); setShowCredModal(false); }}
-                  className="px-3 py-1.5 rounded-lg bg-purple-700 text-white font-semibold hover:opacity-90 self-start sm:self-center shrink-0 cursor-pointer"
-                >
-                  Use This
-                </button>
-              </div>
-
-              {/* AI Vision & CCTV Ops */}
-              <div className="p-3.5 rounded-xl bg-emerald-500/5 border border-emerald-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded bg-emerald-600 text-white font-bold text-[10px] uppercase">
-                      AI Vision & CCTV Ops
-                    </span>
-                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.cctv_ops.name}</span>
-                  </div>
-                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
-                    <span>ID: <strong className="text-emerald-600">{PORTAL_CREDENTIALS.cctv_ops.id}</strong></span>
-                    <span>Key: <strong className="text-emerald-600">{PORTAL_CREDENTIALS.cctv_ops.pass}</strong></span>
-                  </div>
-                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.cctv_ops.description}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { fillCredentials('cctv_ops'); setShowCredModal(false); }}
-                  className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold hover:opacity-90 self-start sm:self-center shrink-0 cursor-pointer"
-                >
-                  Use This
-                </button>
-              </div>
-
-              {/* Citizen */}
-              <div className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-bold text-[10px] uppercase">
-                      Citizen Portal
-                    </span>
-                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.citizen.name}</span>
-                  </div>
-                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
-                    <span>Phone: <strong>{PORTAL_CREDENTIALS.citizen.phone}</strong></span>
-                    <span>Default OTP: <strong>{PORTAL_CREDENTIALS.citizen.defaultOtp}</strong></span>
-                  </div>
-                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.citizen.description}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { fillCredentials('citizen'); setShowCredModal(false); }}
-                  className="px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface font-semibold hover:bg-surface-container-high self-start sm:self-center shrink-0 cursor-pointer"
-                >
-                  Use This
-                </button>
-              </div>
-
-              {/* Sanitary Staff */}
-              <div className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-bold text-[10px] uppercase">
-                      Field Sanitary Worker
-                    </span>
-                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.worker.name}</span>
-                  </div>
-                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
-                    <span>Phone: <strong>{PORTAL_CREDENTIALS.worker.phone}</strong></span>
-                    <span>Default OTP: <strong>{PORTAL_CREDENTIALS.worker.defaultOtp}</strong></span>
-                  </div>
-                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.worker.description}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { fillCredentials('worker'); setShowCredModal(false); }}
-                  className="px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface font-semibold hover:bg-surface-container-high self-start sm:self-center shrink-0 cursor-pointer"
-                >
-                  Use This
-                </button>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-outline-variant/30 flex justify-end">
-              <button
-                type="button"
-                onClick={() => setShowCredModal(false)}
-                className="px-5 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs cursor-pointer"
-              >
-                Close Directory
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
+

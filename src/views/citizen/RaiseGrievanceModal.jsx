@@ -1,15 +1,92 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
   const { addTicket, showToast } = useApp();
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Garbage Dump / Overflowing Bin');
-  const [location, setLocation] = useState('12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038');
+  const [location, setLocation] = useState('');
+  const [coords, setCoords] = useState({ lat: null, lng: null });
+  const [isLocating, setIsLocating] = useState(false);
+  const [gpsAccuracy, setGpsAccuracy] = useState(null);
   const [priority, setPriority] = useState('High');
   const [notes, setNotes] = useState('');
   const [photoPreview, setPhotoPreview] = useState('https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80');
   const fileInputRef = useRef(null);
+
+  // Trigger real-time location detection when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      detectLiveLocation();
+    }
+  }, [isOpen]);
+
+  const detectLiveLocation = () => {
+    if (!navigator.geolocation) {
+      if (showToast) showToast('Geolocation is not supported by your browser', 'error');
+      setLocation('12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038');
+      setCoords({ lat: 12.9716, lng: 77.6412 });
+      return;
+    }
+
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude, accuracy } = position.coords;
+        setCoords({ lat: latitude, lng: longitude });
+        setGpsAccuracy(Math.round(accuracy));
+
+        try {
+          // Reverse geocode with OpenStreetMap Nominatim
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
+            {
+              headers: {
+                'Accept': 'application/json',
+                'User-Agent': 'SwachhAI-CivicPortal/1.0'
+              }
+            }
+          );
+          
+          if (response.ok) {
+            const data = await response.json();
+            const addr = data.address || {};
+            const street = addr.road || addr.suburb || addr.neighbourhood || addr.residential || '';
+            const locality = addr.city_district || addr.suburb || addr.city || addr.town || 'Bengaluru';
+            const postcode = addr.postcode ? `, ${addr.postcode}` : '';
+            const formatted = data.display_name
+              ? (street ? `${street}, ${locality}${postcode}` : data.display_name.split(',').slice(0, 4).join(','))
+              : `Lat: ${latitude.toFixed(5)}, Lng: ${longitude.toFixed(5)}`;
+            
+            setLocation(formatted);
+            if (showToast) showToast(`Real-time GPS detected: ${street || 'Current location'}`, 'success');
+          } else {
+            setLocation(`Live GPS: ${latitude.toFixed(5)}° N, ${longitude.toFixed(5)}° E`);
+            if (showToast) showToast(`Live GPS locked: ${latitude.toFixed(4)}°, ${longitude.toFixed(4)}°`, 'success');
+          }
+        } catch {
+          setLocation(`Live GPS: ${latitude.toFixed(5)}° N, ${longitude.toFixed(5)}° E`);
+          if (showToast) showToast(`Live GPS locked: ${latitude.toFixed(4)}°, ${longitude.toFixed(4)}°`, 'success');
+        } finally {
+          setIsLocating(false);
+        }
+      },
+      (error) => {
+        setIsLocating(false);
+        console.warn("GPS Location fetch warning:", error.message);
+        if (!location) {
+          setLocation('12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038');
+          setCoords({ lat: 12.9716, lng: 77.6412 });
+        }
+        if (showToast) showToast('GPS location permission denied or unavailable. Fallback default used.', 'info');
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  };
 
   if (!isOpen) return null;
 
@@ -24,10 +101,13 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const finalLocation = location.trim() || 'Live Citizen Location (Bengaluru)';
     addTicket({
-      title: title || `${category} reported at ${location.split(',')[0]}`,
+      title: title || `${category} reported at ${finalLocation.split(',')[0]}`,
       category,
-      location,
+      location: finalLocation,
+      lat: coords.lat,
+      lng: coords.lng,
       priority,
       notes,
       photoUrl: photoPreview
@@ -97,52 +177,83 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
 
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="block font-bold text-on-surface">Location & Street Address (Bengaluru)</label>
-              <span className="text-[11px] text-primary font-mono font-bold flex items-center gap-1">
-                <span className="material-symbols-outlined text-xs text-emerald-500">my_location</span>
-                GPS: 12.9716° N, 77.6412° E
-              </span>
+              <label className="block font-bold text-on-surface">Location & Street Address</label>
+              <div className="flex items-center gap-2">
+                {coords.lat && coords.lng && (
+                  <span className="text-[11px] text-primary font-mono font-bold flex items-center gap-1">
+                    <span className="material-symbols-outlined text-xs text-emerald-500 animate-pulse">my_location</span>
+                    {coords.lat.toFixed(4)}°N, {coords.lng.toFixed(4)}°E
+                    {gpsAccuracy && <span className="text-outline text-[10px]">(&plusmn;{gpsAccuracy}m)</span>}
+                  </span>
+                )}
+                <button
+                  type="button"
+                  onClick={detectLiveLocation}
+                  disabled={isLocating}
+                  className="px-2 py-0.5 rounded-md bg-primary/10 hover:bg-primary/20 text-primary font-bold text-[10px] flex items-center gap-1 transition-colors cursor-pointer"
+                  title="Detect live GPS coordinates from device"
+                >
+                  <span className={`material-symbols-outlined text-xs ${isLocating ? 'animate-spin' : ''}`}>
+                    {isLocating ? 'sync' : 'near_me'}
+                  </span>
+                  <span>{isLocating ? 'Acquiring GPS...' : 'Locate Me'}</span>
+                </button>
+              </div>
             </div>
 
             <div className="relative flex items-center mb-2">
-              <span className="absolute left-3 text-on-surface-variant material-symbols-outlined text-base">location_on</span>
+              <span className="absolute left-3 text-on-surface-variant material-symbols-outlined text-base">
+                {isLocating ? 'hourglass_top' : 'location_on'}
+              </span>
               <input
                 type="text"
                 required
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder="Enter exact street, door no., or landmark in Ward 14"
+                placeholder={isLocating ? "Detecting your real-time physical location..." : "Enter exact street, door no., or landmark"}
                 className="w-full h-10 pl-9 pr-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface focus:border-primary outline-none text-xs"
               />
             </div>
 
             {/* Quick Landmark Picker Buttons */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] text-outline">
-              <span className="shrink-0 font-semibold text-[10px] uppercase text-on-surface-variant">Quick Select:</span>
+              <span className="shrink-0 font-semibold text-[10px] uppercase text-on-surface-variant">Presets:</span>
               <button
                 type="button"
-                onClick={() => setLocation("12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038")}
+                onClick={() => {
+                  setLocation("12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038");
+                  setCoords({ lat: 12.9716, lng: 77.6412 });
+                }}
                 className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
               >
                 12th Cross Park
               </button>
               <button
                 type="button"
-                onClick={() => setLocation("100 Feet Rd, Opposite BDA Complex Arcade, HAL 2nd Stage, Bengaluru 560038")}
+                onClick={() => {
+                  setLocation("100 Feet Rd, Opposite BDA Complex Arcade, HAL 2nd Stage, Bengaluru 560038");
+                  setCoords({ lat: 12.9702, lng: 77.6405 });
+                }}
                 className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
               >
                 100ft Rd BDA Complex
               </button>
               <button
                 type="button"
-                onClick={() => setLocation("Chinmaya Mission Hospital Rd, Metro Pillar #62, Indiranagar, Bengaluru 560038")}
+                onClick={() => {
+                  setLocation("Chinmaya Mission Hospital Rd, Metro Pillar #62, Indiranagar, Bengaluru 560038");
+                  setCoords({ lat: 12.9784, lng: 77.6387 });
+                }}
                 className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
               >
                 CMH Metro Station
               </button>
               <button
                 type="button"
-                onClick={() => setLocation("80 Feet Rd & 7th Main Corner, HAL 3rd Stage, Indiranagar, Bengaluru 560075")}
+                onClick={() => {
+                  setLocation("80 Feet Rd & 7th Main Corner, HAL 3rd Stage, Indiranagar, Bengaluru 560075");
+                  setCoords({ lat: 12.9680, lng: 77.6492 });
+                }}
                 className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
               >
                 80ft Road 7th Main
@@ -187,7 +298,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
 
               <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/70 text-white font-mono text-[10px] backdrop-blur-xs flex items-center gap-1">
                 <span className="material-symbols-outlined text-xs text-emerald-400">my_location</span>
-                GPS: 12.9716° N, 77.6412° E
+                GPS: {coords.lat ? `${coords.lat.toFixed(4)}°N, ${coords.lng.toFixed(4)}°E` : '12.9716° N, 77.6412° E'}
               </span>
 
               <span className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-black/70 text-white text-[10px] font-medium backdrop-blur-xs">
