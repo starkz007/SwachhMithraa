@@ -2,7 +2,6 @@ import React from 'react';
 import { useApp } from './context/AppContext';
 import { Header } from './components/common/Header';
 import { Toast } from './components/common/Toast';
-import { DevPortalSwitcher } from './components/common/DevPortalSwitcher';
 
 import { PortalLogin } from './views/auth/PortalLogin';
 import { CitizenRegistration } from './views/auth/CitizenRegistration';
@@ -36,9 +35,6 @@ export const App = () => {
         {activeRole === 'central_admin' && <CentralAdminLayout />}
         {activeRole === 'cctv_ops' && <CctvLayout />}
       </div>
-
-      {/* Floating 26-Screen Dev & Evaluation Switcher */}
-      <DevPortalSwitcher />
     </div>
   );
 };
