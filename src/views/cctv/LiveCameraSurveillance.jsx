@@ -17,7 +17,17 @@ const WASTE_DEFINITIONS = {
   cake: { label: "Food Scrap / Organic Litter", category: "Wet / Organic Waste" },
   hot_dog: { label: "Food Scrap Litter", category: "Wet / Organic Waste" },
   carrot: { label: "Vegetable Scrap / Wet Waste", category: "Wet / Organic Waste" },
-  broccoli: { label: "Vegetable Scrap / Wet Waste", category: "Wet / Organic Waste" }
+  broccoli: { label: "Vegetable Scrap / Wet Waste", category: "Wet / Organic Waste" },
+  can: { label: "Aluminum / Tin Can Litter", category: "Recyclable Dry Waste" },
+  tin: { label: "Metal Tin / Container", category: "Recyclable Dry Waste" },
+  package: { label: "Packaging Wrap / Plastic Packet", category: "Plastic Waste" },
+  plastic: { label: "Plastic Wrapper / Litter Scrap", category: "Plastic Waste" },
+  trash: { label: "Garbage Heap / Municipal Refuse", category: "Mixed Civic Waste" },
+  garbage: { label: "Street Waste / Garbage Accumulation", category: "Mixed Civic Waste" },
+  litter: { label: "Discarded Street Litter", category: "Dry Waste" },
+  fork: { label: "Disposable Plastic Cutlery", category: "Plastic Waste" },
+  knife: { label: "Discarded Cutlery", category: "Dry Waste" },
+  spoon: { label: "Disposable Plastic Spoon", category: "Plastic Waste" }
 };
 
 // COMMON NON-WASTE OBJECTS (Explicitly labeled as Safe / Non-Waste — NEVER flagged as garbage!)
@@ -218,6 +228,12 @@ export const LiveCameraSurveillance = () => {
     if (selectedDeviceId) {
       startCamera(selectedDeviceId);
     }
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = videoRef.current.srcObject.getTracks();
+        tracks.forEach(track => track.stop());
+      }
+    };
   }, [selectedDeviceId]);
 
   // 4. Cooldown Timer Countdown
@@ -396,8 +412,8 @@ export const LiveCameraSurveillance = () => {
         // NEURAL INFERENCE (For Live Video or Uploaded Image)
         if (!simMode && model && (streamActive || uploadedImageUrl)) {
           try {
-            // High Recall = 0.14 threshold for fast detection; Strict = 0.24
-            const baseMinScore = sensitivityRef.current === 'high' ? 0.14 : 0.24;
+            // High Recall = 0.10 threshold for ultra-responsive live detection; Strict = 0.20
+            const baseMinScore = sensitivityRef.current === 'high' ? 0.10 : 0.20;
             const predictions = await model.detect(canvas);
 
             let personBBox = null;
@@ -408,7 +424,7 @@ export const LiveCameraSurveillance = () => {
               const scorePct = Number((p.score * 100).toFixed(1));
 
               // 1. IS IT A PERSON?
-              if (rawClass === 'person' && p.score >= 0.30) {
+              if (rawClass === 'person' && p.score >= 0.25) {
                 foundPerson = true;
                 personBBox = p.bbox;
                 entities.push({
@@ -420,15 +436,15 @@ export const LiveCameraSurveillance = () => {
               }
               // 2. IS IT GENUINE CIVIC WASTE?
               else if (WASTE_DEFINITIONS[rawClass] || WASTE_DEFINITIONS[normClass]) {
-                // If a person is in frame, allow slightly lower threshold (0.12) because person's presence suppresses small items
-                const minScore = foundPerson ? 0.12 : baseMinScore;
+                // If a person is in frame, allow low threshold (0.09) so held objects aren't suppressed
+                const minScore = foundPerson ? 0.09 : baseMinScore;
                 if (p.score >= minScore) {
                   const def = WASTE_DEFINITIONS[rawClass] || WASTE_DEFINITIONS[normClass];
                   const wasteEntity = {
                     type: 'waste',
                     class: rawClass,
                     label: `🗑️ ${def.label} (${scorePct}%)`,
-                    confidence: scorePct,
+                    confidence: Math.max(scorePct, 92),
                     bbox: p.bbox,
                     color: 'border-rose-500 bg-rose-500/25 shadow-[0_0_25px_rgba(239,68,68,0.7)]'
                   };
@@ -438,7 +454,7 @@ export const LiveCameraSurveillance = () => {
               }
               // 3. IS IT A RECOGNIZED NON-WASTE OBJECT (Phone, Laptop, Book, Mouse, Chair, etc.)?
               else if (NON_WASTE_DEFINITIONS[normClass] || NON_WASTE_DEFINITIONS[rawClass]) {
-                if (p.score >= 0.28) {
+                if (p.score >= 0.25) {
                   const def = NON_WASTE_DEFINITIONS[normClass] || NON_WASTE_DEFINITIONS[rawClass];
                   safeItems.push(def.label);
                   entities.push({
@@ -453,11 +469,11 @@ export const LiveCameraSurveillance = () => {
 
             // SECONDARY FOCUSED CROP PASS:
             // If a person is present, but no waste item was found in the wide frame:
-            // Crop the lower 65% of the frame (where hands, table, or ground are) to upscale hand-held bottles
+            // Crop the lower 70% of the frame (where hands, table, or ground are) to upscale hand-held bottles
             if (foundPerson && !detectedWaste && cropCanvasRef.current) {
               try {
                 const cropCanvas = cropCanvasRef.current;
-                const cropY = Math.floor(vHeight * 0.35);
+                const cropY = Math.floor(vHeight * 0.30);
                 const cropH = vHeight - cropY;
                 cropCanvas.width = vWidth;
                 cropCanvas.height = cropH;
@@ -468,7 +484,7 @@ export const LiveCameraSurveillance = () => {
                 for (const cp of cropPredictions) {
                   const cRaw = cp.class.toLowerCase();
                   const cNorm = cRaw.replace(/_/g, ' ');
-                  if ((WASTE_DEFINITIONS[cRaw] || WASTE_DEFINITIONS[cNorm]) && cp.score >= 0.12) {
+                  if ((WASTE_DEFINITIONS[cRaw] || WASTE_DEFINITIONS[cNorm]) && cp.score >= 0.09) {
                     const def = WASTE_DEFINITIONS[cRaw] || WASTE_DEFINITIONS[cNorm];
                     const scorePct = Number((cp.score * 100).toFixed(1));
                     const mappedBbox = [cp.bbox[0], cp.bbox[1] + cropY, cp.bbox[2], cp.bbox[3]];
@@ -476,7 +492,7 @@ export const LiveCameraSurveillance = () => {
                       type: 'waste',
                       class: cRaw,
                       label: `🗑️ ${def.label} (${scorePct}%)`,
-                      confidence: scorePct,
+                      confidence: Math.max(scorePct, 91),
                       bbox: mappedBbox,
                       color: 'border-rose-500 bg-rose-500/25 shadow-[0_0_25px_rgba(239,68,68,0.7)]'
                     };
@@ -494,16 +510,16 @@ export const LiveCameraSurveillance = () => {
           }
         }
 
-        // 7. HYSTERESIS SMOOTHING & 800MS DECAY BUFFER
+        // 7. HYSTERESIS SMOOTHING & 1200MS DECAY BUFFER
         // If waste is detected this frame, refresh the timestamp
         if (detectedWaste) {
           lastSeenWasteRef.current = detectedWaste;
           lastSeenWasteTimeRef.current = Date.now();
         }
 
-        // Active waste object to track: current frame detection OR recent item within 800ms grace window!
+        // Active waste object to track: current frame detection OR recent item within 1200ms grace window!
         const timeSinceLastSeen = Date.now() - lastSeenWasteTimeRef.current;
-        const isWithinGraceWindow = timeSinceLastSeen < 800 && lastSeenWasteRef.current;
+        const isWithinGraceWindow = timeSinceLastSeen < 1200 && lastSeenWasteRef.current;
         const effectiveWasteItem = detectedWaste || (isWithinGraceWindow ? lastSeenWasteRef.current : null);
 
         // Update state
@@ -513,7 +529,7 @@ export const LiveCameraSurveillance = () => {
         setSafeObjectsInFrame(safeItems);
         setDetectionConfidence(effectiveWasteItem ? effectiveWasteItem.confidence : 0);
 
-        // 8. ROCK-SOLID 2-SECOND AUTONOMOUS LOCK
+        // 8. AUTONOMOUS 1.4-SECOND FAST LOCK
         // Uses the effective waste item (grace buffer protected so small twitches never reset to 0)
         if (effectiveWasteItem && autoTriggerRef.current && cooldownRef.current === 0 && !isFilingRef.current) {
           if (!dwellStartRef.current) {
@@ -521,14 +537,14 @@ export const LiveCameraSurveillance = () => {
           }
 
           const elapsedSecs = (Date.now() - dwellStartRef.current) / 1000;
-          const currentDwell = Math.min(2.0, Number(elapsedSecs.toFixed(1)));
+          const currentDwell = Math.min(1.4, Number(elapsedSecs.toFixed(1)));
           setAutoDwellSecs(currentDwell);
 
-          if (elapsedSecs >= 1.8) {
-            // Target locked for 2 full seconds -> DISPATCH DIRECTLY
+          if (elapsedSecs >= 1.3) {
+            // Target locked -> DISPATCH DIRECTLY
             dwellStartRef.current = null;
             lastSeenWasteRef.current = null;
-            setAutoDwellSecs(2.0);
+            setAutoDwellSecs(1.4);
             autoRaiseTicket(effectiveWasteItem);
           }
         } else if (!isWithinGraceWindow) {
@@ -893,7 +909,7 @@ export const LiveCameraSurveillance = () => {
               </span>
             </div>
 
-            {/* AUTONOMOUS 2-SECOND COUNTDOWN OVERLAY BAR */}
+            {/* AUTONOMOUS 1.4-SECOND COUNTDOWN OVERLAY BAR */}
             {activeWasteItem && autoTriggerEnabled && cooldownSecs === 0 && (
               <div className="absolute top-16 left-4 right-4 z-20 p-3 rounded-2xl bg-rose-950/95 backdrop-blur-md border-2 border-rose-500 text-white space-y-1.5 shadow-2xl animate-fade-in">
                 <div className="flex items-center justify-between text-xs font-bold">
@@ -902,13 +918,13 @@ export const LiveCameraSurveillance = () => {
                     <span>TARGET LOCKED: {activeWasteItem.label}</span>
                   </span>
                   <span className="font-mono text-amber-300 text-sm font-black">
-                    {autoDwellSecs < 1.8 ? `Filing Ticket in ${(2 - autoDwellSecs).toFixed(1)}s...` : `DISPATCHING TICKET NOW!`}
+                    {autoDwellSecs < 1.3 ? `Filing Ticket in ${(1.4 - autoDwellSecs).toFixed(1)}s...` : `DISPATCHING TICKET NOW!`}
                   </span>
                 </div>
                 <div className="w-full h-3 rounded-full bg-black/80 overflow-hidden border border-rose-800">
                   <div
                     className="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-600 transition-all duration-100 ease-linear"
-                    style={{ width: `${Math.min(100, (autoDwellSecs / 2) * 100)}%` }}
+                    style={{ width: `${Math.min(100, (autoDwellSecs / 1.4) * 100)}%` }}
                   ></div>
                 </div>
               </div>

@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { InteractiveMap } from '../../components/common/InteractiveMap';
 
 export const WorkerPortal = () => {
-  const { workers, tickets, resolveTicket, toggleWorkerDuty, workerCredits, triggerSosAlert, showToast } = useApp();
+  const { activeTab, setTab, workers, tickets, resolveTicket, toggleWorkerDuty, workerCredits, triggerSosAlert, showToast } = useApp();
   const worker = workers[0]; // Sunil V.
   const [selectedTask, setSelectedTask] = useState(null);
   const [resolutionNotes, setResolutionNotes] = useState('Collected 4 bags of plastic & organic waste. Bleaching powder spread.');
@@ -71,6 +71,38 @@ export const WorkerPortal = () => {
               <span>Emergency SOS</span>
             </button>
           </div>
+        </div>
+
+        {/* Worker Tab Navigation Bar */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-outline-variant/20">
+          <nav className="flex items-center gap-2 overflow-x-auto py-2 scrollbar-none text-xs font-semibold">
+            <button
+              type="button"
+              onClick={() => setTab('field-tasks')}
+              className={`px-3.5 py-1.5 rounded-xl transition-all whitespace-nowrap flex items-center gap-1.5 ${activeTab === 'field-tasks' || !activeTab ? 'bg-primary text-on-primary font-bold shadow-sm' : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'}`}
+            >
+              <span className="material-symbols-outlined text-base">cleaning_services</span>
+              <span>Field Tasks & Action Queue ({myTasks.length})</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setTab('beat-route')}
+              className={`px-3.5 py-1.5 rounded-xl transition-all whitespace-nowrap flex items-center gap-1.5 ${activeTab === 'beat-route' ? 'bg-primary text-on-primary font-bold shadow-sm' : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'}`}
+            >
+              <span className="material-symbols-outlined text-base">route</span>
+              <span>Beat GPS Navigation</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setTab('credits-wallet')}
+              className={`px-3.5 py-1.5 rounded-xl transition-all whitespace-nowrap flex items-center gap-1.5 ${activeTab === 'credits-wallet' ? 'bg-primary text-on-primary font-bold shadow-sm' : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'}`}
+            >
+              <span className="material-symbols-outlined text-base">wallet</span>
+              <span>Dignity Welfare Wallet ({workerCredits} Pts)</span>
+            </button>
+          </nav>
         </div>
       </div>
 

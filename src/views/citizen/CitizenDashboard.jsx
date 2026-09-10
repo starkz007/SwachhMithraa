@@ -7,8 +7,15 @@ import { RewardStoreModal } from './RewardStoreModal';
 
 export const CitizenDashboard = () => {
   const { activeTab, setTab, tickets, citizenScore, showToast } = useApp();
-  const [raiseModalOpen, setRaiseModalOpen] = useState(false);
+  const [raiseModalOpen, setRaiseModalOpen] = useState(() => activeTab === 'raise-grievance-ticket');
   const [rewardModalOpen, setRewardModalOpen] = useState(false);
+
+  // Sync modal when activeTab changes via dev switcher or external navigation
+  React.useEffect(() => {
+    if (activeTab === 'raise-grievance-ticket') {
+      setRaiseModalOpen(true);
+    }
+  }, [activeTab]);
 
   // Active in-progress ticket
   const activeTicket = tickets.find(t => t.status === 'in_progress') || tickets[0];
