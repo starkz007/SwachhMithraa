@@ -59,8 +59,10 @@ export const BlackspotHeatmap = () => {
                 </span>
               </div>
               <h4 className="font-bold text-base text-on-surface">{spot.name}</h4>
+              {spot.address && <p className="text-xs text-rose-700 font-medium">{spot.address}</p>}
               
               <div className="text-xs space-y-1 text-on-surface-variant">
+                <div className="font-mono text-[11px]">GPS Coordinates: <strong>{spot.lat}° N, {spot.lng}° E</strong></div>
                 <div>Average Dump: <strong>{spot.dumpVolume}</strong></div>
                 <div>Clearance Cadence: <strong>{spot.clearanceCadence}</strong></div>
               </div>

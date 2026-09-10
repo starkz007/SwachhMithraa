@@ -56,7 +56,8 @@ export const LocalityGisRadar = () => {
 
                 <div>
                   <h4 className="font-bold text-sm text-on-surface">{bin.location}</h4>
-                  <p className="text-[11px] text-outline">{bin.type}</p>
+                  {bin.address && <p className="text-[11px] text-primary font-medium mt-0.5">{bin.address}</p>}
+                  <p className="text-[11px] text-outline font-mono mt-0.5">{bin.type} • {bin.lat}° N, {bin.lng}° E</p>
                 </div>
 
                 <div>

@@ -5,7 +5,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
   const { addTicket, showToast } = useApp();
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Garbage Dump / Overflowing Bin');
-  const [location, setLocation] = useState('12th Cross Park, Indiranagar 2nd Stage');
+  const [location, setLocation] = useState('12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038');
   const [priority, setPriority] = useState('High');
   const [notes, setNotes] = useState('');
   const [photoPreview, setPhotoPreview] = useState('https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80');
@@ -96,16 +96,57 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block font-bold text-on-surface mb-1">Location & Nearest Landmark</label>
-            <div className="relative flex items-center">
+            <div className="flex items-center justify-between mb-1">
+              <label className="block font-bold text-on-surface">Location & Street Address (Bengaluru)</label>
+              <span className="text-[11px] text-primary font-mono font-bold flex items-center gap-1">
+                <span className="material-symbols-outlined text-xs text-emerald-500">my_location</span>
+                GPS: 12.9716° N, 77.6412° E
+              </span>
+            </div>
+
+            <div className="relative flex items-center mb-2">
               <span className="absolute left-3 text-on-surface-variant material-symbols-outlined text-base">location_on</span>
               <input
                 type="text"
                 required
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full h-10 pl-9 pr-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface focus:border-primary outline-none"
+                placeholder="Enter exact street, door no., or landmark in Ward 14"
+                className="w-full h-10 pl-9 pr-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface focus:border-primary outline-none text-xs"
               />
+            </div>
+
+            {/* Quick Landmark Picker Buttons */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] text-outline">
+              <span className="shrink-0 font-semibold text-[10px] uppercase text-on-surface-variant">Quick Select:</span>
+              <button
+                type="button"
+                onClick={() => setLocation("12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038")}
+                className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
+              >
+                12th Cross Park
+              </button>
+              <button
+                type="button"
+                onClick={() => setLocation("100 Feet Rd, Opposite BDA Complex Arcade, HAL 2nd Stage, Bengaluru 560038")}
+                className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
+              >
+                100ft Rd BDA Complex
+              </button>
+              <button
+                type="button"
+                onClick={() => setLocation("Chinmaya Mission Hospital Rd, Metro Pillar #62, Indiranagar, Bengaluru 560038")}
+                className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
+              >
+                CMH Metro Station
+              </button>
+              <button
+                type="button"
+                onClick={() => setLocation("80 Feet Rd & 7th Main Corner, HAL 3rd Stage, Indiranagar, Bengaluru 560075")}
+                className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
+              >
+                80ft Road 7th Main
+              </button>
             </div>
           </div>
 

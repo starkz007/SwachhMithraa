@@ -54,7 +54,7 @@ export const VehicleTracker = () => {
               </div>
               <div>
                 <div className="font-bold text-on-surface">Speed: 22 km/h • On Schedule</div>
-                <div className="text-outline">Current Sector: 12th Main Indiranagar</div>
+                <div className="text-outline">Current Sector: 12th Cross Rd, Indiranagar 2nd Stage (12.9716° N, 77.6412° E)</div>
               </div>
             </div>
 

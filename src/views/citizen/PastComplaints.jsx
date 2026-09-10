@@ -82,9 +82,14 @@ export const PastComplaints = () => {
                 </div>
 
                 <h3 className="text-base sm:text-lg font-bold text-on-surface">{ticket.title}</h3>
-                <p className="text-xs text-on-surface-variant flex items-center gap-1">
+                <p className="text-xs text-on-surface-variant flex items-center gap-1.5 flex-wrap">
                   <span className="material-symbols-outlined text-sm text-primary">location_on</span>
                   <span>{ticket.location}</span>
+                  {ticket.lat && ticket.lng && (
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container text-primary font-bold">
+                      {ticket.lat.toFixed(4)}° N, {ticket.lng.toFixed(4)}° E
+                    </span>
+                  )}
                 </p>
 
                 {ticket.assignedWorker && (
@@ -140,6 +145,15 @@ export const PastComplaints = () => {
               <div>
                 <span className="text-xs font-mono font-bold text-primary">{selectedTicket.id}</span>
                 <h3 className="text-lg font-bold text-on-surface">{selectedTicket.title}</h3>
+                <p className="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+                  <span className="material-symbols-outlined text-sm text-primary">location_on</span>
+                  <span>{selectedTicket.location}</span>
+                </p>
+                {selectedTicket.lat && selectedTicket.lng && (
+                  <p className="text-[11px] font-mono text-cyan-700 dark:text-cyan-400 font-bold mt-0.5">
+                    GPS Coordinates: {selectedTicket.lat.toFixed(4)}° N, {selectedTicket.lng.toFixed(4)}° E (Ward 14)
+                  </p>
+                )}
               </div>
               <button
                 type="button"

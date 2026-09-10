@@ -117,10 +117,10 @@ export const CitizenRegistration = () => {
                 onChange={(e) => setFormData({ ...formData, ward: e.target.value })}
                 className="w-full h-11 px-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-sm focus:border-primary outline-none font-semibold"
               >
-                <option>Ward 14 - Indiranagar (Zone 3)</option>
-                <option>Ward 15 - Domlur (Zone 3)</option>
-                <option>Ward 18 - Koramangala (Zone 1)</option>
-                <option>Ward 22 - Malleshwaram (Zone 2)</option>
+                <option>Ward 14 - Indiranagar, East Zone (PIN 560038)</option>
+                <option>Ward 15 - Domlur, East Zone (PIN 560071)</option>
+                <option>Ward 18 - Koramangala, South Zone (PIN 560034)</option>
+                <option>Ward 22 - Malleshwaram, West Zone (PIN 560003)</option>
               </select>
             </div>
 
@@ -131,6 +131,7 @@ export const CitizenRegistration = () => {
                 required
                 value={formData.subLocality}
                 onChange={(e) => setFormData({ ...formData, subLocality: e.target.value })}
+                placeholder="e.g. 12th Cross Rd, Indiranagar 2nd Stage"
                 className="w-full h-11 px-4 rounded-xl bg-surface-container-low border border-outline-variant/30 text-sm focus:border-primary outline-none"
               />
             </div>
@@ -142,6 +143,7 @@ export const CitizenRegistration = () => {
                 required
                 value={formData.houseNo}
                 onChange={(e) => setFormData({ ...formData, houseNo: e.target.value })}
+                placeholder="e.g. #402, Shanti Nilayam, 12th Cross"
                 className="w-full h-11 px-4 rounded-xl bg-surface-container-low border border-outline-variant/30 text-sm focus:border-primary outline-none"
               />
             </div>

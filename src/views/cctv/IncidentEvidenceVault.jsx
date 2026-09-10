@@ -36,7 +36,8 @@ export const IncidentEvidenceVault = () => {
   const confidence = currentIncident?.confidence || 95;
   const fine = currentIncident?.fineAmount || 500;
   const status = currentIncident?.status || "Review Pending";
-  const node = currentIncident?.cameraNode || currentIncident?.nodeId || "POLE-NODE-1402";
+  const node = currentIncident?.cameraNode || currentIncident?.nodeId || "POLE-CAM-1402 (100ft Rd & 12th Main)";
+  const location = currentIncident?.location || "100 Feet Rd & 12th Main Junction, Indiranagar, Bengaluru 560038";
   const time = currentIncident?.timestamp || "Just now";
   const sha = currentIncident?.sha256Hash || "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const bbox = currentIncident?.bbox || { x: 25, y: 30, w: 45, h: 40 };
@@ -152,6 +153,15 @@ export const IncidentEvidenceVault = () => {
               <div className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
                 <span className="material-symbols-outlined text-sm">check_circle</span>
                 <span>VAHAN Central Registry Match: Verified</span>
+              </div>
+              <div className="pt-2 border-t border-outline-variant/20 space-y-1 text-[11px]">
+                <div className="text-on-surface font-semibold flex items-start gap-1">
+                  <span className="material-symbols-outlined text-xs text-primary mt-0.5">location_on</span>
+                  <span>{location}</span>
+                </div>
+                <div className="font-mono text-cyan-700 dark:text-cyan-400 font-bold">
+                  Camera: {node}
+                </div>
               </div>
             </div>
 

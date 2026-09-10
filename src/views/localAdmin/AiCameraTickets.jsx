@@ -96,6 +96,12 @@ export const AiCameraTickets = () => {
                   </div>
 
                   <h4 className="font-bold text-sm text-on-surface">{alert.violationType}</h4>
+                  {alert.location && (
+                    <p className="text-[11px] text-on-surface-variant flex items-center gap-1">
+                      <span className="material-symbols-outlined text-xs text-primary">location_on</span>
+                      <span>{alert.location}</span>
+                    </p>
+                  )}
 
                   <div className="space-y-1 text-on-surface-variant bg-surface-container-low p-2.5 rounded-xl">
                     <div>Offender: <strong>{alert.offenderType}</strong></div>

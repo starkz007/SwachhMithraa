@@ -199,7 +199,7 @@ export const AppProvider = ({ children }) => {
       isAiDetection: isAi,
       ward: ticketData.ward || "Ward 14 - Indiranagar",
       beat: "Beat #4",
-      location: ticketData.location || "Indiranagar 12th Main Road",
+      location: ticketData.location || "100 Feet Rd & 12th Main Junction, HAL 2nd Stage, Indiranagar, Bengaluru 560038",
       lat: 12.9716 + (Math.random() - 0.5) * 0.005,
       lng: 77.6412 + (Math.random() - 0.5) * 0.005,
       reportedBy: ticketData.reportedBy || (isAi ? "AI Optical Surveillance Camera (Node #1402)" : "Rajesh Sharma (Citizen #9842)"),
@@ -223,7 +223,7 @@ export const AppProvider = ({ children }) => {
       const newAlert = {
         id: `AI-CAM-${Math.floor(1000 + Math.random() * 9000)}`,
         nodeId: "POLE-NODE-1402",
-        location: ticketData.location || "Indiranagar 12th Main",
+        location: ticketData.location || "100 Feet Rd & 12th Main Junction, Indiranagar, Bengaluru 560038",
         timestamp: "Just now",
         violation: ticketData.title?.replace('AI Autonomous Flag: ', '') || "Optical Waste Accumulation",
         confidence: ticketData.confidence || 96,

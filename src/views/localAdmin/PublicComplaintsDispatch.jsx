@@ -157,8 +157,15 @@ export const PublicComplaintsDispatch = () => {
                         <div className="text-[11px] text-outline">{t.category}</div>
                       </td>
                       <td className="py-3.5 px-4 text-on-surface-variant">
-                        <div>{t.location}</div>
-                        <div className="text-[10px] text-outline">{t.beat}</div>
+                        <div className="font-medium text-on-surface">{t.location}</div>
+                        <div className="text-[10px] text-outline flex items-center gap-2 mt-0.5">
+                          <span>{t.beat}</span>
+                          {t.lat && t.lng && (
+                            <span className="font-mono text-primary font-bold">
+                              • {t.lat.toFixed(4)}° N, {t.lng.toFixed(4)}° E
+                            </span>
+                          )}
+                        </div>
                       </td>
                       <td className="py-3.5 px-4">
                         <span className="font-semibold text-rose-700">{t.slaRemaining}</span>

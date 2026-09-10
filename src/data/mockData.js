@@ -6,7 +6,8 @@ export const initialTickets = [
     category: "Garbage Dump / Overflowing Bin",
     ward: "Ward 14 - Indiranagar",
     beat: "Beat #4",
-    location: "12th Cross Park, near Children Play Area, Indiranagar 2nd Stage",
+    location: "12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038",
+    landmark: "Children Play Area & Community Gazebo",
     lat: 12.9716,
     lng: 77.6412,
     reportedBy: "Rajesh Sharma (Citizen #9842)",
@@ -33,9 +34,10 @@ export const initialTickets = [
     category: "Debris / Malba",
     ward: "Ward 14 - Indiranagar",
     beat: "Beat #4",
-    location: "Opposite BDA Complex, 100ft Road",
-    lat: 12.9698,
-    lng: 77.6435,
+    location: "100 Feet Rd, Opposite BDA Complex Arcade, HAL 2nd Stage, Bengaluru 560038",
+    landmark: "Opposite BDA Complex Commercial Arcade",
+    lat: 12.9723,
+    lng: 77.6428,
     reportedBy: "Meenakshi Sundaram",
     reportedTime: "Yesterday, 04:30 PM",
     status: "resolved",
@@ -60,7 +62,8 @@ export const initialTickets = [
     category: "Dead Animal / Animal Carcass",
     ward: "Ward 14 - Indiranagar",
     beat: "Beat #4",
-    location: "CMH Road Metro Pillar #62",
+    location: "Chinmaya Mission Hospital Rd, Metro Pillar #62, Indiranagar, Bengaluru 560038",
+    landmark: "Indiranagar Metro Station Entry Gate 2 & Feeder Bay",
     lat: 12.9785,
     lng: 77.6388,
     reportedBy: "Kavitha R.",
@@ -80,7 +83,8 @@ export const initialTickets = [
     category: "Drain Chokage / Stagnant Sludge",
     ward: "Ward 14 - Indiranagar",
     beat: "Beat #4",
-    location: "80 Feet Road, 7th Main Corner",
+    location: "80 Feet Rd & 7th Main Corner, HAL 3rd Stage, Indiranagar, Bengaluru 560075",
+    landmark: "BMTC 80ft Road Bus Stop & Stormwater Culvert",
     lat: 12.9734,
     lng: 77.6472,
     reportedBy: "Praveen Kumar",
@@ -153,7 +157,8 @@ export const initialWorkers = [
 export const initialAiCameraViolations = [
   {
     id: "CAM-VIO-4891",
-    cameraNode: "POLE-CAM-1402 (Indiranagar 100ft Rd)",
+    cameraNode: "POLE-CAM-1402 (Indiranagar 100ft Rd & 12th Main)",
+    location: "100 Feet Rd & 12th Main Junction, Indiranagar, Bengaluru 560038",
     timestamp: "10:14:22 AM Today",
     violationType: "Commercial Waste Dumping",
     confidence: 94.8,
@@ -168,6 +173,7 @@ export const initialAiCameraViolations = [
   {
     id: "CAM-VIO-4892",
     cameraNode: "POLE-CAM-1407 (CMH Metro Station Plaza)",
+    location: "Chinmaya Mission Hospital Rd, Metro Gate 2, Indiranagar, Bengaluru 560038",
     timestamp: "09:48:10 AM Today",
     violationType: "Open Plastic Burning",
     confidence: 97.2,
@@ -181,7 +187,8 @@ export const initialAiCameraViolations = [
   },
   {
     id: "CAM-VIO-4893",
-    cameraNode: "POLE-CAM-1412 (12th Main Food Street)",
+    cameraNode: "POLE-CAM-1412 (12th Main Commercial Hub)",
+    location: "12th Main Rd, HAL 2nd Stage, Indiranagar, Bengaluru 560038",
     timestamp: "08:12:05 AM Today",
     violationType: "Bin Overflow > 90%",
     confidence: 89.4,
@@ -196,23 +203,23 @@ export const initialAiCameraViolations = [
 ];
 
 export const smartBins = [
-  { id: "BIN-101", location: "12th Cross Park Entrance", fillPercent: 92, type: "Dry Recyclables", status: "Critical Overflow", lat: 12.9716, lng: 77.6412 },
-  { id: "BIN-102", location: "CMH Road Metro Gate 2", fillPercent: 44, type: "Wet Compostable", status: "Normal", lat: 12.9785, lng: 77.6388 },
-  { id: "BIN-103", location: "80ft Road Bus Stop", fillPercent: 78, type: "Mixed Urban", status: "Warning", lat: 12.9734, lng: 77.6472 },
-  { id: "BIN-104", location: "100ft Road BDA Corner", fillPercent: 28, type: "Sanitary Hazardous", status: "Optimal", lat: 12.9698, lng: 77.6435 }
+  { id: "BIN-101", location: "12th Cross Park Main Entrance, Indiranagar 2nd Stage", address: "12th Cross Rd, Bengaluru 560038", fillPercent: 92, type: "Dry Recyclables", status: "Critical Overflow", lat: 12.9716, lng: 77.6412 },
+  { id: "BIN-102", location: "CMH Road Metro Gate 2 & Feeder Bay", address: "CMH Rd, Indiranagar, Bengaluru 560038", fillPercent: 44, type: "Wet Compostable", status: "Normal", lat: 12.9785, lng: 77.6388 },
+  { id: "BIN-103", location: "80ft Road & 7th Main BMTC Shelter", address: "80 Feet Rd, Indiranagar, Bengaluru 560075", fillPercent: 78, type: "Mixed Urban", status: "Warning", lat: 12.9734, lng: 77.6472 },
+  { id: "BIN-104", location: "100ft Road BDA Complex Commercial Corner", address: "100 Feet Rd, Indiranagar, Bengaluru 560038", fillPercent: 28, type: "Sanitary Hazardous", status: "Optimal", lat: 12.9723, lng: 77.6428 }
 ];
 
 export const blackspots = [
-  { id: "BLK-01", name: "12th Cross Park Periphery", severity: "High (Level 4)", dumpVolume: "2.4 MT / week", clearanceCadence: "Daily 07:00 AM", lat: 12.9716, lng: 77.6412 },
-  { id: "BLK-02", name: "Behind Metro Substation CMH", severity: "Critical (Level 5)", dumpVolume: "3.8 MT / week", clearanceCadence: "Twice Daily", lat: 12.9772, lng: 77.6394 },
-  { id: "BLK-03", name: "Old Flyover Service Lane", severity: "Moderate (Level 2)", dumpVolume: "1.1 MT / week", clearanceCadence: "Alternate Days", lat: 12.9680, lng: 77.6450 }
+  { id: "BLK-01", name: "12th Cross Park Rear Periphery", address: "12th Cross Rd & 2nd Stage Culvert, Bengaluru 560038", severity: "High (Level 4)", dumpVolume: "2.4 MT / week", clearanceCadence: "Daily 07:00 AM", lat: 12.9716, lng: 77.6412 },
+  { id: "BLK-02", name: "CMH Metro Substation & Transformer Bay", address: "CMH Road, Pillar 62 Underpass, Bengaluru 560038", severity: "Critical (Level 5)", dumpVolume: "3.8 MT / week", clearanceCadence: "Twice Daily", lat: 12.9772, lng: 77.6394 },
+  { id: "BLK-03", name: "Old Airport Road & HAL Underpass Service Lane", address: "Old Airport Rd, Kodihalli, Bengaluru 560008", severity: "Moderate (Level 2)", dumpVolume: "1.1 MT / week", clearanceCadence: "Alternate Days", lat: 12.9648, lng: 77.6450 }
 ];
 
 export const cameraFleet = [
-  { id: "POLE-CAM-1401", location: "100ft Road North Junction", status: "Online", solarCharge: "98%", batteryHealth: "99%", fps: 30, resolution: "4K AI HDR", ptzAvailable: true },
-  { id: "POLE-CAM-1402", location: "Indiranagar 100ft Rd / 12th Main", status: "Online", solarCharge: "92%", batteryHealth: "96%", fps: 30, resolution: "4K AI HDR", ptzAvailable: true },
-  { id: "POLE-CAM-1407", location: "CMH Metro Station Plaza", status: "Online", solarCharge: "88%", batteryHealth: "94%", fps: 30, resolution: "1080p Thermal + Optical", ptzAvailable: false },
-  { id: "POLE-CAM-1412", location: "12th Main Food Street", status: "Online", solarCharge: "95%", batteryHealth: "98%", fps: 30, resolution: "4K AI HDR", ptzAvailable: true }
+  { id: "POLE-CAM-1401", location: "100ft Road & Old Madras Road Junction", address: "100 Feet Rd North End, Indiranagar 560038", status: "Online", solarCharge: "98%", batteryHealth: "99%", fps: 30, resolution: "4K AI HDR", ptzAvailable: true },
+  { id: "POLE-CAM-1402", location: "100ft Road & 12th Main Junction", address: "100ft Rd / 12th Main, Indiranagar 560038", status: "Online", solarCharge: "92%", batteryHealth: "96%", fps: 30, resolution: "4K AI HDR", ptzAvailable: true },
+  { id: "POLE-CAM-1407", location: "CMH Metro Station Entry Plaza", address: "CMH Road Metro Gate 2, Indiranagar 560038", status: "Online", solarCharge: "88%", batteryHealth: "94%", fps: 30, resolution: "1080p Thermal + Optical", ptzAvailable: false },
+  { id: "POLE-CAM-1412", location: "12th Main Commercial & Food Street", address: "12th Main Rd, HAL 2nd Stage, Indiranagar 560038", status: "Online", solarCharge: "95%", batteryHealth: "98%", fps: 30, resolution: "4K AI HDR", ptzAvailable: true }
 ];
 
 export const zonalMetrics = {

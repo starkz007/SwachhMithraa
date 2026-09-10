@@ -128,10 +128,13 @@ export const CameraFleetTelemetry = () => {
                   key={cam.id}
                   type="button"
                   onClick={() => setSelectedCam(cam)}
-                  className={`w-full text-left p-2 rounded-xl text-xs flex items-center justify-between ${selectedCam.id === cam.id ? 'bg-primary text-on-primary font-bold' : 'hover:bg-surface-container-low text-on-surface'}`}
+                  className={`w-full text-left p-2.5 rounded-xl text-xs flex flex-col gap-0.5 ${selectedCam.id === cam.id ? 'bg-primary text-on-primary font-bold' : 'hover:bg-surface-container-low text-on-surface'}`}
                 >
-                  <span>{cam.id}</span>
-                  <span className="text-[10px] opacity-80">{cam.location.split(' ')[0]}</span>
+                  <div className="flex items-center justify-between w-full">
+                    <span>{cam.id}</span>
+                    <span className="text-[10px] font-mono opacity-80">{cam.fps} FPS</span>
+                  </div>
+                  <div className="text-[11px] font-normal opacity-90 truncate">{cam.location}</div>
                 </button>
               ))}
             </div>

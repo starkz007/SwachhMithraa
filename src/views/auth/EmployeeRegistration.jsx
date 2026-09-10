@@ -5,11 +5,11 @@ export const EmployeeRegistration = () => {
   const { setRole, showToast } = useApp();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    name: "Sunil Varma",
-    phone: "+91 98451 22891",
+    name: "",
+    phone: "",
     role: "Sanitation Lead / Sweeper",
-    ward: "Ward 14 - Indiranagar",
-    assignedBeat: "Beat #4 (12th Main to CMH Road)",
+    ward: "Ward 14 - Indiranagar, East Zone (PIN 560038)",
+    assignedBeat: "Beat #4 (Indiranagar 12th Main to CMH Road)",
     safetyGearChecked: true,
     insuranceLinked: true
   });
@@ -56,6 +56,7 @@ export const EmployeeRegistration = () => {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="e.g. Sunil Varma"
                 className="w-full h-11 px-4 rounded-xl bg-surface-container-low border border-outline-variant/30 text-sm focus:border-tertiary outline-none"
               />
             </div>
@@ -81,7 +82,8 @@ export const EmployeeRegistration = () => {
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full h-11 px-4 rounded-xl bg-surface-container-low border border-outline-variant/30 text-sm focus:border-tertiary outline-none"
+                placeholder="e.g. +91 98451 22891"
+                className="w-full h-11 px-4 rounded-xl bg-surface-container-low border border-outline-variant/30 text-sm focus:border-tertiary outline-none font-mono"
               />
             </div>
 

@@ -17,14 +17,14 @@ export const InteractiveMap = ({ mode = "full", height = "500px", onMarkerClick 
   const [truckPos, setTruckPos] = useState({ x: 320, y: 180, angle: 45, step: 0 });
 
   const routePoints = [
-    { x: 180, y: 120, label: "Depot #4 Start" },
-    { x: 260, y: 150, label: "12th Cross Park" },
-    { x: 380, y: 190, label: "100ft Road Junction" },
-    { x: 520, y: 240, label: "CMH Road Metro" },
-    { x: 620, y: 310, label: "80ft Road Market" },
-    { x: 490, y: 390, label: "Defence Colony Gate" },
-    { x: 310, y: 340, label: "BDA Complex Transfer" },
-    { x: 180, y: 220, label: "Return Loop" },
+    { x: 180, y: 120, label: "BBMP Sanitation Depot #4 (Indiranagar)", coords: "12.9810° N, 77.6355° E", address: "Old Madras Rd Depot Bay" },
+    { x: 260, y: 150, label: "12th Cross Public Park", coords: "12.9716° N, 77.6412° E", address: "Indiranagar 2nd Stage, 560038" },
+    { x: 380, y: 190, label: "100ft Road & 12th Main Junction", coords: "12.9723° N, 77.6428° E", address: "Opp. BDA Complex Arcade" },
+    { x: 520, y: 240, label: "Indiranagar Metro Station (CMH Rd)", coords: "12.9785° N, 77.6388° E", address: "Pillar #62 Entry Gate 2" },
+    { x: 620, y: 310, label: "80 Feet Rd & 7th Main Corner", coords: "12.9734° N, 77.6472° E", address: "HAL 3rd Stage, 560075" },
+    { x: 490, y: 390, label: "Defence Colony Main Gate", coords: "12.9768° N, 77.6441° E", address: "6th Cross Rd, Indiranagar" },
+    { x: 310, y: 340, label: "BDA Complex Transfer Point", coords: "12.9710° N, 77.6430° E", address: "Rear Compactor Bay" },
+    { x: 180, y: 220, label: "HAL Old Airport Road Loop", coords: "12.9648° N, 77.6450° E", address: "Kodihalli Service Lane" },
   ];
 
   useEffect(() => {
@@ -243,15 +243,21 @@ export const InteractiveMap = ({ mode = "full", height = "500px", onMarkerClick 
           <g 
             transform={`translate(${truckPos.x}, ${truckPos.y})`} 
             className="cursor-pointer transition-all duration-1000 ease-out"
-            onClick={() => setSelectedItem({
-              type: "Live Tipper Vehicle",
-              id: "Tipper Auto #04 (KA-04-G-8812)",
-              driver: "Ramesh Babu (+91 98450 77123)",
-              speed: "24 km/h",
-              status: "On Schedule • Beat 4",
-              eta: "08:45 AM (Indiranagar 12th Main)",
-              wasteCollected: "1.4 MT Segregated Wet & Dry"
-            })}
+            onClick={() => {
+              const currentWaypoint = routePoints[truckPos.step] || routePoints[0];
+              setSelectedItem({
+                type: "Live Tipper Vehicle",
+                id: "Tipper Auto #04 (KA-04-G-8812)",
+                driver: "Ramesh Babu (+91 98450 77123)",
+                speed: "22 km/h • GPS Locked",
+                status: "On Beat Route • Indiranagar Ward 14",
+                currentStop: currentWaypoint.label,
+                address: currentWaypoint.address,
+                gpsCoords: currentWaypoint.coords,
+                eta: "08:45 AM (Indiranagar 12th Cross)",
+                wasteCollected: "1.8 MT (Wet: 65% | Dry: 35%)"
+              });
+            }}
           >
             {/* Pulsing radar halo */}
             <circle cx="0" cy="0" r="22" fill="#06b6d4" fillOpacity="0.25" className="animate-ping" />
@@ -292,11 +298,28 @@ export const InteractiveMap = ({ mode = "full", height = "500px", onMarkerClick 
           </div>
 
           <div className="space-y-1.5 text-xs">
+            {selectedItem.address && (
+              <div className="text-on-surface font-medium flex items-start gap-1">
+                <span className="material-symbols-outlined text-xs text-primary mt-0.5">location_on</span>
+                <span>{selectedItem.address}</span>
+              </div>
+            )}
+            {selectedItem.gpsCoords && (
+              <div className="text-cyan-700 dark:text-cyan-400 font-mono text-[11px]">
+                <strong>GPS:</strong> {selectedItem.gpsCoords}
+              </div>
+            )}
+            {selectedItem.currentStop && (
+              <div><strong className="text-on-surface-variant">Current Stop:</strong> {selectedItem.currentStop}</div>
+            )}
             {selectedItem.driver && (
               <div><strong className="text-on-surface-variant">Driver:</strong> {selectedItem.driver}</div>
             )}
             {selectedItem.eta && (
               <div className="text-primary font-semibold"><strong>Pickup ETA:</strong> {selectedItem.eta}</div>
+            )}
+            {selectedItem.wasteCollected && (
+              <div><strong className="text-on-surface-variant">Load:</strong> {selectedItem.wasteCollected}</div>
             )}
             {selectedItem.fillPercent !== undefined && (
               <div>

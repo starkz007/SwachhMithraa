@@ -9,37 +9,43 @@ export const LiveCctvGrid = () => {
   const streams = [
     {
       id: "POLE-CAM-1401",
-      location: "100ft Road North Junction",
+      location: "100ft Rd & Old Madras Rd North Junction (12.9810° N, 77.6355° E)",
+      address: "100 Feet Rd, Indiranagar, Bengaluru 560038",
       image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80",
       alert: { label: "Commercial Waste Dumping (94.8%)", bbox: { x: 30, y: 40, w: 35, h: 40 }, color: "border-rose-500 bg-rose-500/20" }
     },
     {
       id: "POLE-CAM-1402",
-      location: "12th Main Food Street Market",
+      location: "100ft Rd & 12th Main Junction (12.9723° N, 77.6428° E)",
+      address: "Opp. BDA Complex Commercial Arcade, Bengaluru 560038",
       image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=80",
       alert: { label: "Overflowing Bin Spillover (89.4%)", bbox: { x: 25, y: 35, w: 40, h: 45 }, color: "border-amber-500 bg-amber-500/20" }
     },
     {
       id: "POLE-CAM-1407",
-      location: "CMH Metro Station Plaza",
+      location: "Chinmaya Mission Hospital Rd Metro Gate 2 (12.9785° N, 77.6388° E)",
+      address: "Pillar #62 Entry Plaza, Indiranagar, Bengaluru 560038",
       image: "https://images.unsplash.com/photo-1618060932014-4deda4932554?w=800&auto=format&fit=crop&q=80",
       alert: { label: "Open Burning Thermal Ping (97.2%)", bbox: { x: 50, y: 35, w: 30, h: 35 }, color: "border-red-600 bg-red-600/30" }
     },
     {
       id: "POLE-CAM-1412",
-      location: "Defence Colony 6th Cross",
+      location: "Defence Colony Main Gate & 6th Cross (12.9768° N, 77.6441° E)",
+      address: "Defence Colony, Indiranagar, Bengaluru 560038",
       image: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?w=800&auto=format&fit=crop&q=80",
       alert: null // Clean street!
     },
     {
       id: "POLE-CAM-1415",
-      location: "Old Airport Road Flyover Substation",
+      location: "Old Airport Rd & HAL Flyover Underpass (12.9648° N, 77.6450° E)",
+      address: "Kodihalli Service Lane, Bengaluru 560008",
       image: "https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=800&auto=format&fit=crop&q=80",
       alert: { label: "Debris Dumping (91.0%)", bbox: { x: 20, y: 45, w: 40, h: 40 }, color: "border-amber-500 bg-amber-500/20" }
     },
     {
       id: "POLE-CAM-1418",
-      location: "Indiranagar BDA Complex Rear",
+      location: "12th Cross Public Park Rear Gate (12.9716° N, 77.6412° E)",
+      address: "12th Cross Rd, Indiranagar 2nd Stage, Bengaluru 560038",
       image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80",
       alert: null
     }
