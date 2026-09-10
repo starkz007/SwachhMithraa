@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary-fixed-dim": "#ffb77d", "inverse-surface": "#283044", "on-secondary": "#ffffff", "surface-dim": "#d2d9f4", "tertiary-fixed": "#ffdcc3", "secondary-fixed-dim": "#7cd4dd", "error-container": "#ffdad6", "background": "#faf8ff", "on-primary-container": "#7e9bf8", "surface-variant": "#dae2fd", "outline-variant": "#c4c6d4", "on-tertiary-container": "#eb851c", "primary": "#001b58", "surface-bright": "#faf8ff", "on-surface": "#131b2e", "surface-container-highest": "#dae2fd", "on-surface-variant": "#444652", "secondary-fixed": "#99f1fa", "on-background": "#131b2e", "primary-container": "#002e87", "on-secondary-container": "#006d75", "on-primary-fixed": "#00174d", "primary-fixed-dim": "#b5c4ff", "surface-tint": "#3b59b1", "secondary-container": "#96eef7", "surface-container-high": "#e2e7ff", "tertiary-container": "#562b00", "on-secondary-fixed-variant": "#004f55", "surface-container-lowest": "#ffffff", "on-tertiary-fixed": "#2f1500", "on-tertiary-fixed-variant": "#6e3900", "surface": "#faf8ff", "tertiary": "#371900", "on-error-container": "#93000a", "error": "#ba1a1a", "surface-container-low": "#f2f3ff", "primary-fixed": "#dbe1ff", "on-secondary-fixed": "#002022", "inverse-on-surface": "#eef0ff", "on-error": "#ffffff", "on-tertiary": "#ffffff", "outline": "#747683", "surface-container": "#eaedff", "on-primary-fixed-variant": "#1e4098", "inverse-primary": "#b5c4ff", "secondary": "#006970", "on-primary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-2xs": "0.25rem", "space-md": "1rem", "space-3xl": "4rem", "space-xs": "0.5rem", "margin-mobile": "1.25rem", "space-xl": "2rem", "margin-desktop": "2.5rem", "space-2xl": "3rem", "space-sm": "0.75rem", "gutter-mobile": "1rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem" }, "fontFamily": { "display-lg-mobile": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"] }, "fontSize": { "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between pt-4 pb-4"><div class="flex flex-col"><div class="px-space-md pb-space-md mb-space-sm flex items-center justify-between"><a class="inline-flex items-center gap-space-xs text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="login" href="#"><span class="material-symbols-outlined text-[18px]">arrow_back</span><span>Return to Admin / CCTV Login</span></a></div><div class="px-space-md mb-space-md"><div class="bg-surface-container-lowest/80 p-space-sm rounded-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><p class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">Node Telemetry Status</p><div class="flex items-center gap-space-xs mt-space-2xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-md text-label-md text-primary font-bold">128 / 128 Nodes Online</span></div></div></div><nav class="flex flex-col gap-space-xs px-space-sm" data-active-classes="bg-primary text-on-primary font-bold rounded-lg shadow-[0_12px_32px_-4px_rgba(0,46,135,0.12)]"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="live-cctv-stream-and-ai-detection-grid" href="#"><span class="material-symbols-outlined text-[20px]">videocam</span><span>Live CCTV &amp; AI Detection Grid</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="camera-fleet-and-pole-telemetry" href="#"><span class="material-symbols-outlined text-[20px]">settings_input_antenna</span><span>Camera Fleet &amp; Pole Telemetry</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="ai-incident-playback-and-evidence-vault" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Incident Playback &amp; Evidence Vault</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="ai-rule-engine-and-automation-settings" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span>AI Rule Engine &amp; Automation</span></a></nav></div><div class="px-space-md pt-space-md"><div class="p-space-sm rounded-lg bg-surface-container-high/60"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[18px]">verified_user</span><span class="font-label-sm text-label-sm text-on-surface font-bold">DPDP Act 2023 Verified</span></div><p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">Edge Inference Enclave Alpha</p></div></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 z-40 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><img alt="Minimal modern geometric logo icon for SwachhMitra, depicting a stylized clean green leaf embracing a civic building or sparkling broom starburst emblem, vibrant emerald green, mint, and saffron gold gradient, flat vector style, pure transparent background.. Design context: - Primary color: #00875a
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W8XhtRIw-nPAIZFyPLPGICVHTiubqIr3l3ceuQGIC4W3u3BZgYO5sLInbR9OibPdTrKO9L1ICkCniDM7geIPNzQ-rgBjNxe6alVkpgjAFD54AqjpX7spflKl1KAXD3k6aR7CFEiYjGP6K1AuIKbufxotRblGYyxrOAFbGwUCduqtbBogedNoSTOnuov4zVaEGUtzccg6lnbVd21u5Tcvq4yo-uu2V6T0OR_mXQIKCNDOmfGPz52zCzBw"/><div class="flex flex-col"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">SwachhMitra AI Vision &amp; CCTV Command Hub</span><span class="inline-flex items-center px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">MoHUA SBM-Urban 2.0</span></div><span class="font-body-sm text-body-sm text-on-surface-variant">Urban Surveillance Enclave • Optical Network Cluster Alpha</span></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-high text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span><span class="font-label-sm text-label-sm text-on-surface font-bold">128 Edge Nodes Synced</span><span class="text-outline font-label-sm">•</span><span class="font-label-sm text-label-sm text-secondary font-bold">Low Latency AI Stream</span></div><div class="hidden lg:flex items-center gap-space-xs"><button class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-lowest text-error hover:bg-error-container hover:text-on-error-container font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">campaign</span><span>Broadcast Alert</span></button><button class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">radar</span><span>Global Ping</span></button><button class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-lowest text-secondary hover:bg-secondary-container hover:text-on-secondary-container font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">picture_as_pdf</span><span>Export Audit</span></button></div><div class="flex items-center bg-surface-container-high rounded-full p-0.5"><button class="px-space-xs py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold" type="button">EN</button><button class="px-space-xs py-0.5 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">HI</button></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="hidden md:flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface font-bold">Eng. Vikrant Patil</span><span class="font-body-sm text-body-sm text-on-surface-variant">Lead AI Vision Ops</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-20 px-margin-desktop py-space-xl flex-1 bg-surface"><div class="flex flex-col w-full gap-space-xl">
+<!-- TOP TELEMETRY & HERO HEADER -->
+<section class="flex flex-col gap-space-lg">
+<!-- Breadcrumb & Session Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="hover:text-primary transition-colors">MoHUA SBM-U 2.0 Optical Network</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="hover:text-primary transition-colors">Bengaluru Urban Surveillance Enclave</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Edge TPU Ops Hub</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm pt-space-2xs">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+            AI Vision &amp; CCTV Command Hub — Urban Edge Inference &amp; Optical Surveillance
+          </h1>
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-label-md text-label-md">
+            एआई विज़न एवं सीसीटीवी कमांड हब
+          </span>
+</div>
+</div>
+<!-- Quick Actions Cluster -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:opacity-95 transition-opacity" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_forward</span>
+<span>Trigger Manual Fleet Sweep</span>
+</button>
+<button class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full bg-surface-container-high text-primary hover:bg-surface-container-highest font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">model_training</span>
+<span>Calibrate YOLOv8 Weights</span>
+</button>
+<button class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>Export Video Evidence Log</span>
+</button>
+<a class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full bg-surface-container-lowest text-secondary font-label-md text-label-md shadow-sm hover:bg-secondary-container transition-colors" data-path="login" href="#">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span>Switch Auth Profile</span>
+</a>
+</div>
+</div>
+<!-- Telemetry KPI Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-start justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Optical Nodes</p>
+<h3 class="font-display-lg text-display-lg text-primary mt-space-2xs font-extrabold">128</h3>
+</div>
+<span class="p-space-xs rounded-lg bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[24px]">sensors</span>
+</span>
+</div>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-secondary font-bold">114 Online</span>
+<span class="text-on-tertiary-container font-semibold">8 Degraded</span>
+<span class="text-error font-semibold">6 Offline</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-secondary" style="width: 89%;"></div>
+<div class="h-full bg-on-tertiary-container" style="width: 6%;"></div>
+<div class="h-full bg-error" style="width: 5%;"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cluster SLA: 98.6% uptime (Airtel IoT Dual-SIM)</p>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-start justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Real-Time Detections Today</p>
+<h3 class="font-display-lg text-display-lg text-on-tertiary-container mt-space-2xs font-extrabold">34</h3>
+</div>
+<span class="p-space-xs rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[24px]">delete_sweep</span>
+</span>
+</div>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary font-bold">
+<span class="material-symbols-outlined text-[16px]">local_shipping</span>
+<span>28 Auto-Dispatched to Ward Tippers</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">6 Pending manual verification at Central Desk</p>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-start justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">AI Model Performance</p>
+<h3 class="font-display-lg text-display-lg text-primary mt-space-2xs font-extrabold">96.4%</h3>
+</div>
+<span class="p-space-xs rounded-lg bg-surface-container-high text-secondary">
+<span class="material-symbols-outlined text-[24px]">memory</span>
+</span>
+</div>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface">
+<span>YOLOv8-UrbanSWM TPU</span>
+<span class="text-secondary font-bold">18ms Latency</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Edge quantization FP16 • 0.08% False positives</p>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-start justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Incident Evidence Vault</p>
+<h3 class="font-display-lg text-display-lg text-primary mt-space-2xs font-extrabold">142</h3>
+</div>
+<span class="p-space-xs rounded-lg bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</span>
+</div>
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-[16px] text-secondary">lock</span>
+<span>DPDP Act 2023 Encrypted</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">10s tamper-proof auto-buffered video streams</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 1: LIVE CCTV STREAM & AI DETECTION GRID -->
+<section class="flex flex-col gap-space-md">
+<!-- Section Toolbar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-error animate-ping"></div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">Live CCTV Stream &amp; AI Detection Grid</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time edge neural inference with dynamic bounding polygon overlays</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<!-- Layout Switcher -->
+<div class="inline-flex items-center bg-surface-container-high rounded-lg p-0.5">
+<button class="px-space-xs py-1 rounded bg-surface-container-lowest shadow-sm text-primary font-label-sm text-label-sm font-bold flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+<span>2x2 Matrix</span>
+</button>
+<button class="px-space-xs py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">apps</span>
+<span>3x3 Multi</span>
+</button>
+<button class="px-space-xs py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">crop_free</span>
+<span>Maximized</span>
+</button>
+</div>
+<!-- Stream Quality Selector -->
+<select class="px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm outline-none cursor-pointer">
+<option>1080p Ultra-Low Latency AI</option>
+<option>Sub-stream 720p Energy Saver</option>
+<option>Raw RTSP 4K Forensic Feed</option>
+</select>
+<!-- Ward Filter -->
+<select class="px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm outline-none cursor-pointer">
+<option>Zone: East (Wards 80 - 88)</option>
+<option>Zone: Central (Wards 109 - 115)</option>
+<option>Zone: Mahadevapura (Wards 82 - 85)</option>
+<option>All Surveillance Nodes (128)</option>
+</select>
+</div>
+</div>
+<!-- 2x2 Video Surveillance Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-md">
+<!-- Camera Feed 1 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="relative bg-inverse-surface aspect-video overflow-hidden">
+<img class="w-full h-full object-cover opacity-90" data-alt="High-angle realistic urban municipal surveillance camera feed overlooking Indiranagar Bengaluru street with metro pillar and sidewalk. Sunlight illuminating parked two-wheelers and a pile of mixed dumped debris. Realistic CCTV timecode and camera HUD overlay in light green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHZWIlMDjzlxW7BcPItSnMn5CB6aLxZzafW61Nj8h_y0It89IXZ9QE-A39bE8-NzRGAoEM950-bmafWxbJoE01gn8a81raT-iySp5vHkYFS1n7TsW_60hEsGDGSxz8uG1C9xbIEw7Uz5pQ2p1G3SwtLS9dO8rx7BfTRnmFUd1gikX8BGGzYcuIWZH5Uwe2Ft9anmA6994aqzhjz4ctFY-Bn-WQVZFZ2hfXy2m4p0FdprSCCtlT7DE"/>
+<!-- Edge Inference AI Overlay -->
+<div class="absolute inset-0 p-space-sm flex flex-col justify-between pointer-events-none">
+<!-- Top HUD -->
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm bg-inverse-surface/75 px-space-xs py-1 rounded backdrop-blur-sm">
+<span class="flex items-center gap-1 text-secondary-fixed">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+                Node #02 • Indiranagar 18th Cross Metro Pillar #42
+              </span>
+<span>25 FPS • 2.4 Mbps • TPU Latency 14ms</span>
+</div>
+<!-- Bounding Box Overlay -->
+<div class="absolute top-1/3 left-1/4 w-1/2 h-1/2 border-2 border-dashed border-tertiary-fixed-dim bg-on-tertiary-container/15 rounded p-1 flex flex-col justify-between">
+<span class="self-start px-space-2xs py-0.5 bg-on-tertiary-container text-surface font-label-sm text-label-sm font-bold rounded">
+                Unlawful Debris Accumulation [94.8%]
+              </span>
+<span class="self-end text-[10px] text-tertiary-fixed font-mono bg-inverse-surface/80 px-1 rounded">
+                Est. Vol: 0.65 m³ • Duration: 18m
+              </span>
+</div>
+<!-- Bottom HUD -->
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm bg-inverse-surface/75 px-space-xs py-1 rounded backdrop-blur-sm">
+<span>LIVE • 1080p60 H.265</span>
+<span>GPS: 12.9784° N, 77.6408° E</span>
+</div>
+</div>
+</div>
+<!-- Action Panel -->
+<div class="p-space-sm flex flex-wrap items-center justify-between gap-space-xs bg-surface-container-lowest">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">
+              Violation Active
+            </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Auto-Dispatch Flagged</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<button class="px-space-xs py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+<span>Capture Snapshot</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">filter_center_focus</span>
+<span>Inspect Box</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm font-bold flex items-center gap-1 hover:opacity-95" type="button">
+<span class="material-symbols-outlined text-[16px]">send_and_archive</span>
+<span>Dispatch Tipper #04</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Camera Feed 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="relative bg-inverse-surface aspect-video overflow-hidden">
+<img class="w-full h-full object-cover opacity-90" data-alt="CCTV surveillance perspective of Shivaji Nagar bustling municipal vegetable market entrance at daylight. A flatbed utility vehicle unloading crates near pavement curbs, marked with an automated bounding box in high-visibility amber." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1QRuSRjCEytiE3QmQYk1aKMzjYtC0w0nTBKKSW4TJcsDIxWu_6Zccpn84PTLpAUwkCf8PPuRacUIipRMyyRJmXoC5Za5zEyPRMnSf1sOZ9oue9iYZsk1lOqagM4vYcMHHl_J57avhyE3RReZPKH7RmyYTPqYI6U2yQbcsUlmLjl0ul1W4QWeNWStov7XRnyXFyzg1zJ-45gtSi_SVYTS350q6depMEJI9N7AUftzmbFwG0buyIZc"/>
+<!-- Edge Inference AI Overlay -->
+<div class="absolute inset-0 p-space-sm flex flex-col justify-between pointer-events-none">
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm bg-inverse-surface/75 px-space-xs py-1 rounded backdrop-blur-sm">
+<span class="flex items-center gap-1 text-secondary-fixed">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+                Node #04 • Shivaji Nagar Market - Broadway Junction
+              </span>
+<span>25 FPS • 3.1 Mbps • Edge TPU Latency 19ms</span>
+</div>
+<!-- Bounding Box Overlay -->
+<div class="absolute top-1/4 right-1/4 w-2/5 h-3/5 border-2 border-dashed border-error bg-error/15 rounded p-1 flex flex-col justify-between">
+<span class="self-start px-space-2xs py-0.5 bg-error text-on-error font-label-sm text-label-sm font-bold rounded">
+                Commercial Organic Spillage [91.2%]
+              </span>
+<span class="self-end text-[10px] text-surface font-mono bg-inverse-surface/80 px-1 rounded">
+                Offender Plate: KA-04-E-4410
+              </span>
+</div>
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm bg-inverse-surface/75 px-space-xs py-1 rounded backdrop-blur-sm">
+<span>LIVE • 1080p PTZ Active</span>
+<span>Tracking Repeat Offender</span>
+</div>
+</div>
+</div>
+<div class="p-space-sm flex flex-wrap items-center justify-between gap-space-xs bg-surface-container-lowest">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">
+              High Severity Spillage
+            </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trade Unit #883</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<button class="px-space-xs py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">zoom_in</span>
+<span>PTZ Zoom (3x)</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-error text-on-error font-label-sm text-label-sm font-bold flex items-center gap-1 hover:opacity-95" type="button">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+<span>Issue Instant Challan</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Camera Feed 3 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="relative bg-inverse-surface aspect-video overflow-hidden">
+<img class="w-full h-full object-cover opacity-90" data-alt="Wide CCTV municipal camera perspective of a pristine landscaped public park promenade in Bangalore with lush palm trees, paved jogging paths, clean flowerbeds, and spotless curbs in clear daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZk8axd9m_JcwjP_QFKaWg9QUavZJ1V_RwwsR7ucbOEWfMYTZzxm-MeXMDCvnR6geabMR5mVvL4z0RSZpMiYv83OoC0G3zyr-J-aT5DpghS0LpyxjLiXsU47KZOew8eMr7FynNzXAJg11fsMWRxMRiVhqhpHNDZWxWNugrn80E4NZkqMv5qKKTyFJmpGlOgaJiCjWwirVd_mLmsCvmDsG4SIzcXgsjgHGpE3hy9T_X284m9_HBA8M"/>
+<!-- Edge Inference AI Overlay -->
+<div class="absolute inset-0 p-space-sm flex flex-col justify-between pointer-events-none">
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm bg-inverse-surface/75 px-space-xs py-1 rounded backdrop-blur-sm">
+<span class="flex items-center gap-1 text-secondary-fixed">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+                Node #01 • 14th Main Park East Gate
+              </span>
+<span>25 FPS • 2.1 Mbps • Edge TPU Latency 16ms</span>
+</div>
+<!-- Clean Status Badge -->
+<div class="m-auto px-space-md py-space-xs rounded-full bg-secondary/90 text-on-secondary backdrop-blur-md flex items-center gap-space-xs shadow-md">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-label-md text-label-md font-bold">Area Clean • Cleanliness Index: 99.1%</span>
+</div>
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm bg-inverse-surface/75 px-space-xs py-1 rounded backdrop-blur-sm">
+<span>LIVE • Sensor Clear</span>
+<span>Last Waste Detected: 38h ago</span>
+</div>
+</div>
+</div>
+<div class="p-space-sm flex flex-wrap items-center justify-between gap-space-xs bg-surface-container-lowest">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">
+              Pristine Zone
+            </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Zero Violations in 24h</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<button class="px-space-xs py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">bookmark_added</span>
+<span>Log Star Rating</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+<span>Trigger Scan</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Camera Feed 4 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="relative bg-inverse-surface aspect-video overflow-hidden">
+<img class="w-full h-full object-cover opacity-85" data-alt="Monochrome infrared night vision CCTV feed under a concrete city flyover underpass in Bangalore. Low light, soft green night-vision tint, showing pillars, concrete floor, and faint shapes of litter bags on pavement edge with glowing AI box." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXOPBKeDqYdeQBrtV9W5LxSDDvcts-i5lNDOmSZBX6vQ93p8K8aPxYrXVf0zp_D0JzLS1nXwOtGkakCyw-R3Go7qWvTh-9wFwzF09Xfteexm0WS_TqB53D5qoF7lRmQlArcdYbdxyocYor80CWnqZag24Okfzk-ZCadG_K7rcupL4n9EuNDRdHfaLdzQimZOEdkZyYQgtyvWuntfrbGx7-QCwwRYdrPMjGKRdED5Q6tZ9oNorApSE"/>
+<!-- Edge Inference AI Overlay -->
+<div class="absolute inset-0 p-space-sm flex flex-col justify-between pointer-events-none">
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm bg-inverse-surface/75 px-space-xs py-1 rounded backdrop-blur-sm">
+<span class="flex items-center gap-1 text-tertiary-fixed">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span>
+                Node #06 • Domlur Flyover Underpass (IR Feed)
+              </span>
+<span>20 FPS • 1.9 Mbps • Edge TPU Latency 21ms</span>
+</div>
+<!-- Night Bounding Box Overlay -->
+<div class="absolute bottom-1/4 left-1/3 w-1/3 h-1/3 border-2 border-tertiary-fixed-dim bg-tertiary-container/30 rounded p-1 flex flex-col justify-between">
+<span class="self-start px-space-2xs py-0.5 bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold rounded">
+                Litter Cluster [87.5%]
+              </span>
+<span class="self-end text-[10px] text-tertiary-fixed font-mono bg-inverse-surface/80 px-1 rounded">
+                IR Contrast Trigger
+              </span>
+</div>
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm bg-inverse-surface/75 px-space-xs py-1 rounded backdrop-blur-sm">
+<span>IR ILLUMINATION 850nm</span>
+<span>Night Patrol Alert Armed</span>
+</div>
+</div>
+</div>
+<div class="p-space-sm flex flex-wrap items-center justify-between gap-space-xs bg-surface-container-lowest">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-bold">
+              Night Detection
+            </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Confidence above 85%</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<button class="px-space-xs py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">wb_twilight</span>
+<span>Toggle Spotlight</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm font-bold flex items-center gap-1 hover:opacity-95" type="button">
+<span class="material-symbols-outlined text-[16px]">notification_important</span>
+<span>Notify Night Marshal</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: CAMERA FLEET & POLE TELEMETRY -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">Camera Fleet &amp; Pole Telemetry</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Optical node health, solar harvesting status, and over-the-air edge diagnostics</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container text-primary font-label-sm text-label-sm font-bold hover:bg-surface-container-high transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Reboot Node OTA</span>
+</button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container text-secondary font-label-sm text-label-sm font-bold hover:bg-surface-container-high transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">cleaning_services</span>
+<span>Trigger Micro-Wiper Pulse</span>
+</button>
+<button class="px-space-sm py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-bold hover:opacity-95 transition-opacity flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">wifi_tethering</span>
+<span>Run Optical Ping</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Left: Interactive Map Visualization -->
+<div class="lg:col-span-6 bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">map</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Ward 82 — Optical Pole Distribution</h3>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Live GPS Telemetry</span>
+</div>
+<!-- Simulated Map Canvas using Static Pipeline -->
+<div class="w-full h-80 rounded-xl relative overflow-hidden bg-surface-container-high shadow-inner" data-location="Indiranagar, Bengaluru, Karnataka, India" style="">
+<!-- Custom Map Overlays / Pins -->
+<div class="absolute inset-0 p-space-md flex flex-col justify-between pointer-events-none">
+<!-- Node Pin 1 -->
+<div class="relative left-1/4 top-1/4 pointer-events-auto flex items-center gap-1 cursor-pointer group">
+<span class="w-4 h-4 rounded-full bg-secondary border-2 border-surface-container-lowest shadow-md animate-pulse"></span>
+<div class="hidden group-hover:flex px-space-xs py-1 rounded bg-inverse-surface text-surface font-label-sm text-label-sm whitespace-nowrap shadow-lg">
+                Node #02: Indiranagar 18th Cross (Online • 88%)
+              </div>
+</div>
+<!-- Node Pin 2 -->
+<div class="relative left-2/3 top-1/3 pointer-events-auto flex items-center gap-1 cursor-pointer group">
+<span class="w-4 h-4 rounded-full bg-on-tertiary-container border-2 border-surface-container-lowest shadow-md"></span>
+<div class="hidden group-hover:flex px-space-xs py-1 rounded bg-inverse-surface text-surface font-label-sm text-label-sm whitespace-nowrap shadow-lg">
+                Node #03: 16th Main Culvert (Dust Warning • 91%)
+              </div>
+</div>
+<!-- Node Pin 3 (Offline) -->
+<div class="relative left-1/2 top-2/3 pointer-events-auto flex items-center gap-1 cursor-pointer group">
+<span class="w-4 h-4 rounded-full bg-error border-2 border-surface-container-lowest shadow-md animate-ping"></span>
+<div class="hidden group-hover:flex px-space-xs py-1 rounded bg-inverse-surface text-surface font-label-sm text-label-sm whitespace-nowrap shadow-lg">
+                Node #05: Kaggadasapura Gate (OFFLINE • Fiber Cut)
+              </div>
+</div>
+<!-- Node Pin 4 -->
+<div class="relative left-1/3 bottom-8 pointer-events-auto flex items-center gap-1 cursor-pointer group">
+<span class="w-4 h-4 rounded-full bg-secondary border-2 border-surface-container-lowest shadow-md"></span>
+<div class="hidden group-hover:flex px-space-xs py-1 rounded bg-inverse-surface text-surface font-label-sm text-label-sm whitespace-nowrap shadow-lg">
+                Node #07: Ulsoor Lake South (Online • 79%)
+              </div>
+</div>
+</div>
+</div>
+<!-- Map Legend -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span>Optimal (Lens Clear / Latency &lt; 20ms)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<span>Smear / Lens Dust Alert</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span>Offline / SLA Breach</span>
+</div>
+</div>
+</div>
+<!-- Right: Detailed Pole Telemetry Matrix -->
+<div class="lg:col-span-6 flex flex-col gap-space-sm">
+<!-- Pole 1 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary font-bold">
+              #02
+            </div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Indiranagar Metro Pillar #42</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Airtel 4G LTE (-74 dBm) • LiFePO4 Solar Battery: 88%</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-secondary font-bold block">ONLINE</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lens 95% Clear</span>
+</div>
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Pole 2 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary font-bold">
+              #03
+            </div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">16th Main Culvert Pole #09</span>
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Jio Enterprise (-65 dBm) • Battery: 94%</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-tertiary-container font-bold block">DUST DETECTED</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Wiper queued @ 14:00</span>
+</div>
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Pole 3 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center text-error font-bold">
+              #05
+            </div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Kaggadasapura Railway Gate</span>
+<span class="w-2 h-2 rounded-full bg-error"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">BWSSB Fiber Cut • Reserve Battery: 12% Crit</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-error font-bold block">OFFLINE (&gt;48h)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ticket #BEL-892 Dispatched</span>
+</div>
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Pole 4 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary font-bold">
+              #07
+            </div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Ulsoor Lake South Promenade</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Airtel IoT Dual-SIM • Solar Harvesting: 14.1V</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-secondary font-bold block">ONLINE</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Heartbeat: 2s ago</span>
+</div>
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: AI INCIDENT PLAYBACK & EVIDENCE VAULT -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">AI Incident Playback &amp; Evidence Vault</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">10-second cryptographically verified MP4 violation clips with digital signature certificates</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>Violation Type: All</span>
+</button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>Past 24 Hours</span>
+</button>
+<button class="px-space-sm py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-bold flex items-center gap-1 hover:opacity-95" type="button">
+<span class="material-symbols-outlined text-[16px]">folder_zip</span>
+<span>Export Judicial Package (ZIP + DSC)</span>
+</button>
+</div>
+</div>
+<!-- Clip Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Clip 1 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="relative bg-inverse-surface aspect-video">
+<img class="w-full h-full object-cover opacity-90" data-alt="CCTV freeze frame of an open-bed commercial truck dumping plastic crates and cardboard refuse at night in Russell Market Bangalore. Video scrubber player controls and timestamp 03:42:10 IST visible." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa-ZYJgJ16F3RWw4hJku2QMhZ8gN4ebciird1QvYGkOEVZGMk_7IOMizNDBh17EL37Bl6taF1XVglixxYeOOrBD9nnjQ0Ud2b43YuPXisl8zl1yjM_HmG5K4votWd0HgjQlxzOJRlrayaTlJeI87nNwjUCy1qLLyCZrcexq7fg91TlXs_KPBXjx_hHqhHnBWrRpLZdBwHfEGw5FO6rx5Vzzp8wY1f72xy4gRoS3BjwQvvu_jBpVbY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent flex flex-col justify-between p-space-xs">
+<span class="self-start px-space-xs py-0.5 rounded bg-error text-on-error font-label-sm text-label-sm font-bold">
+              ₹25,000 Challan Drafted
+            </span>
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">play_circle</span>
+                00:06 / 00:10
+              </span>
+<span>03:42:10 IST</span>
+</div>
+</div>
+<!-- Progress scrubber bar -->
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-surface-container">
+<div class="h-full bg-secondary" style="width: 60%;"></div>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Clip #EV-2024-884</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">Vehicle: KA-03-D-9912</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary mt-space-2xs">Midnight Commercial Dumping</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">Location: Russell Market West Gate. Linked to Trade License TL-2901-A.</p>
+</div>
+<div class="pt-space-xs flex items-center justify-between">
+<span class="font-mono text-[10px] text-outline">SHA256: 8f7e...c21a</span>
+<button class="text-primary hover:text-secondary font-label-sm text-label-sm font-bold flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Download Signed Video</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Clip 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="relative bg-inverse-surface aspect-video">
+<img class="w-full h-full object-cover opacity-90" data-alt="High quality CCTV snapshot of heavy tractor dumper vehicle unloading broken concrete masonry and brick debris on an outer ring road shoulder in Mahadevapura Bangalore. Scrubber timeline at 00:10." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC090hz6kwkgEi2c3BR8i-PzN28w-KPqoQ1KmQk25Q6t6TUEV4OhDo9giYMqR2O1G7H7HMRvGdAI6eAOPiWkKOjBYRG3YEiLEk_sp9gxFWDNstjPn-wKqAP3ji3SZh7S45Z8xMJlH66Rt4uDNY5J4Vsr0EgtOfKgpojm2I1k-7sAGeLlehHftXSPhW0t7LgyoGkADFtKoCguo6F-Y7MF2IzG2oBo88ZhGyxydrCah61Zov7Y-k-Ldc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent flex flex-col justify-between p-space-xs">
+<span class="self-start px-space-xs py-0.5 rounded bg-on-tertiary-container text-surface font-label-sm text-label-sm font-bold">
+              C&amp;D Debris Violation
+            </span>
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">play_circle</span>
+                00:10 / 00:10
+              </span>
+<span>01:15:20 IST</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-surface-container">
+<div class="h-full bg-secondary" style="width: 100%;"></div>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Clip #EV-2024-871</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">Tractor Dumper Identified</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary mt-space-2xs">Construction Unload @ ORR</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">Location: Mahadevapura Service Road. Est. Debris Volume: 420 kg.</p>
+</div>
+<div class="pt-space-xs flex items-center justify-between">
+<span class="font-mono text-[10px] text-outline">SHA256: 41ad...e879</span>
+<button class="text-primary hover:text-secondary font-label-sm text-label-sm font-bold flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Download Signed Video</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Clip 3 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="relative bg-inverse-surface aspect-video">
+<img class="w-full h-full object-cover opacity-90" data-alt="Monochrome thermal infrared CCTV footage clip of dark alleyway dump spot in Bangalore city. Auto-flagged yellow alert badge showing bulk wet waste bags dumped beside stormwater drain." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0f0Yqc-HCmQE079APEIitSwE15OodWjAsEosqLE24kn2RbjSJoDt0zHq5d_bpY2bZdeHrM2lFdsa-w9BrHeCRk5KUjX6GlyxqOfW3pecy1iFpJXHk0P2CAiXwi0bEXke5R9CPdcIZd3ygu-fMRPCAkCDBkQVzqSDnM8qV9hRVR7eLwA0MAZo9wINiRYYAQnHLD2uq4DMR1WmzYYoKD5iIeAd_Mq9MA0rKACG0uxg51r4qMbNAEio"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent flex flex-col justify-between p-space-xs">
+<span class="self-start px-space-xs py-0.5 rounded bg-error text-on-error font-label-sm text-label-sm font-bold">
+              Auto-Escalated to Zonal Joint Comm.
+            </span>
+<div class="flex items-center justify-between text-surface-bright font-mono text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">play_circle</span>
+                00:04 / 00:10
+              </span>
+<span>23:55:04 IST</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-surface-container">
+<div class="h-full bg-secondary" style="width: 40%;"></div>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs flex-1 justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Clip #EV-2024-859</span>
+<span class="font-label-sm text-label-sm text-error font-bold">Bio-Hazard / Meat Waste</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary mt-space-2xs">Bulk Poultry Offal Dumping</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">Location: Shivaji Nagar Border Drain. Night infrared camera capture.</p>
+</div>
+<div class="pt-space-xs flex items-center justify-between">
+<span class="font-mono text-[10px] text-outline">SHA256: 9b20...aa45</span>
+<button class="text-primary hover:text-secondary font-label-sm text-label-sm font-bold flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Download Signed Video</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: AI RULE ENGINE & AUTOMATION SETTINGS -->
+<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">AI Rule Engine &amp; Automation Settings</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Configure real-time edge triggers, automated ward dispatch rules, and statutory privacy parameters</p>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>DPDP Act 2023 Compliant Rule Base</span>
+</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Setting 1: Slider for Detection Confidence -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-sm">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary font-bold">YOLOv8 Confidence Threshold</span>
+<span class="font-mono font-bold text-primary px-space-xs py-0.5 rounded bg-surface-container-lowest">85%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+            Triggers civic grievance and evidence clip capture only when AI model confidence equals or exceeds 85%.
+          </p>
+</div>
+<div class="flex flex-col gap-1">
+<input class="w-full accent-primary cursor-pointer" max="98" min="60" type="range" value="85"/>
+<div class="flex justify-between text-[11px] font-mono text-outline">
+<span>60% (High Recall)</span>
+<span>98% (Ultra Strict)</span>
+</div>
+</div>
+</div>
+<!-- Setting 2: Auto-Dispatch Tipper Toggle -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-sm">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary font-bold">Auto-Dispatch Tipper Truck</span>
+<span class="inline-flex items-center px-space-xs py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">
+              ACTIVE
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+            Automatically issues automated route order to nearest municipal tipper truck if dump volume &gt; 0.5 metric tonnes and persists &gt; 15 mins.
+          </p>
+</div>
+<label class="flex items-center gap-space-xs cursor-pointer">
+<input checked="" class="w-5 h-5 rounded accent-primary" type="checkbox"/>
+<span class="font-label-md text-label-md text-on-surface">Enable auto-assignment to Ward Contractor Tippers</span>
+</label>
+</div>
+<!-- Setting 3: Night Patrol Auto-Alert -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-sm">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary font-bold">Night Patrol Auto-Alert</span>
+<span class="inline-flex items-center px-space-xs py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">
+              22:00 — 05:00 IST
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+            Instantly dispatches encrypted WhatsApp and SMS alerts to night BBMP Marshals upon detecting repeat commercial offender vehicles.
+          </p>
+</div>
+<label class="flex items-center gap-space-xs cursor-pointer">
+<input checked="" class="w-5 h-5 rounded accent-primary" type="checkbox"/>
+<span class="font-label-md text-label-md text-on-surface">Immediate Marshal Siren Notification</span>
+</label>
+</div>
+<!-- Setting 4: False Positive Suppression Filter -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-sm">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary font-bold">Temporal Persistence Filter</span>
+<span class="inline-flex items-center px-space-xs py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">
+              &gt; 3 MINS
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+            Suppresses moving vehicles, delivery packages, and temporary utility cones lasting fewer than 180 seconds.
+          </p>
+</div>
+<label class="flex items-center gap-space-xs cursor-pointer">
+<input checked="" class="w-5 h-5 rounded accent-primary" type="checkbox"/>
+<span class="font-label-md text-label-md text-on-surface">Suppress transient street occlusions</span>
+</label>
+</div>
+<!-- Setting 5: Privacy Masking -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-sm">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary font-bold">Edge Privacy Face Masking</span>
+<span class="inline-flex items-center px-space-xs py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">
+              DPDP ACT ON
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+            Applies non-reversible cryptographic Gaussian blur to pedestrian faces and unrelated civilian license plates on camera hardware.
+          </p>
+</div>
+<label class="flex items-center gap-space-xs cursor-pointer">
+<input checked="" class="w-5 h-5 rounded accent-primary" type="checkbox"/>
+<span class="font-label-md text-label-md text-on-surface">Enforce hardware-level redaction</span>
+</label>
+</div>
+<!-- Apply Button Box -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col justify-between gap-space-sm">
+<div>
+<span class="font-label-lg text-label-lg text-primary font-bold">Fleet Parameter Deployment</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
+            Distribute compiled rules and threshold weights to all 128 TPU Edge inference modules via secure MQTT bus.
+          </p>
+</div>
+<button class="w-full py-space-sm px-space-md rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold hover:opacity-95 transition-opacity flex items-center justify-center gap-space-xs shadow-md" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+<span>Deploy to 128 Edge TPU Nodes</span>
+</button>
+</div>
+</div>
+</section>
+<!-- USER SESSION CONTEXT & RETURN STRIP -->
+<section class="bg-surface-container-high/60 p-space-md rounded-xl flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
+        VP
+      </div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Vikrant Patil</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-lowest font-label-sm text-label-sm text-secondary font-bold">
+            Lead AI Vision Engineer • SBM Urban Enclave
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Authenticated Session ID: SM-AI-OPS-7729-ALPHA • Token Expires in 07h 42m</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<a class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-colors shadow-sm" data-path="login" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span>Back to SwachhMitra Portal Login</span>
+</a>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low py-space-md px-margin-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm"><div><span>Secure GovCloud Enclave • DPDP Act 2023 Compliant Edge Inference • State AI Gateway 09</span></div><div class="flex items-center gap-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Status: Operational</span><span>© MoHUA SBM-Urban 2.0 Optical Network</span></div></div></footer></div></body></html>

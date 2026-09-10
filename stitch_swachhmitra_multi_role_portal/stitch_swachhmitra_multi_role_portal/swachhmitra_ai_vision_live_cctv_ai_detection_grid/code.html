@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>SwachhMitra AI Vision &amp; CCTV Command Hub</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface":"#131b2e","surface-container-highest":"#dae2fd","background":"#faf8ff","surface-variant":"#dae2fd","on-error-container":"#93000a","on-tertiary":"#ffffff","surface-container-lowest":"#ffffff","surface-dim":"#d2d9f4","surface-container-low":"#f2f3ff","error":"#ba1a1a","surface":"#faf8ff","secondary-fixed":"#99f1fa","surface-tint":"#3b59b1","primary-container":"#002e87","inverse-surface":"#283044","on-tertiary-fixed-variant":"#6e3900","on-tertiary-container":"#eb851c","surface-container-high":"#e2e7ff","on-primary-fixed":"#00174d","on-secondary-container":"#006d75","tertiary":"#371900","on-background":"#131b2e","tertiary-container":"#562b00","secondary-fixed-dim":"#7cd4dd","error-container":"#ffdad6","on-primary-fixed-variant":"#1e4098","on-primary":"#ffffff","on-secondary":"#ffffff","primary-fixed":"#dbe1ff","surface-container":"#eaedff","secondary-container":"#96eef7","surface-bright":"#faf8ff","on-surface-variant":"#444652","on-error":"#ffffff","outline":"#747683","secondary":"#006970","primary":"#001b58","outline-variant":"#c4c6d4","tertiary-fixed":"#ffdcc3","on-secondary-fixed":"#002022","inverse-primary":"#b5c4ff","tertiary-fixed-dim":"#ffb77d","primary-fixed-dim":"#b5c4ff","on-secondary-fixed-variant":"#004f55","on-tertiary-fixed":"#2f1500","on-primary-container":"#7e9bf8","inverse-on-surface":"#eef0ff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"margin-desktop":"2.5rem","space-2xl":"3rem","space-2xs":"0.25rem","space-xl":"2rem","gutter-mobile":"1rem","margin-mobile":"1.25rem","space-sm":"0.75rem","space-lg":"1.5rem","space-3xl":"4rem","space-xs":"0.5rem","gutter-desktop":"1.5rem","space-md":"1rem"},fontFamily:{"headline-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"]},fontSize:{"headline-lg":["30px",{lineHeight:"38px",letterSpacing:"-0.015em",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"display-lg-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"800"}],"headline-md":["22px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-sm":["18px",{lineHeight:"24px",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"display-lg":["40px",{lineHeight:"48px",letterSpacing:"-0.02em",fontWeight:"800"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_12px_rgba(0,46,135,0.06)] z-50 flex flex-col justify-between py-space-md"><div class="flex flex-col gap-space-md"><div class="px-space-lg pt-space-xs flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center shadow-md shadow-primary/10"><span class="material-symbols-outlined text-secondary-fixed text-[24px]">videocam</span></div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-primary leading-tight truncate">SwachhMitra</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">CCTV Ops Enclave</span></div></div><div class="px-space-md"><div class="w-full h-px bg-surface-container-high"></div></div><nav class="flex flex-col gap-space-2xs px-space-sm" data-active-classes="bg-primary-container text-on-primary font-headline-sm shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="live-cctv-stream-ai-detection-grid" href="#"><span class="material-symbols-outlined text-[20px] text-secondary group-hover:scale-105 transition-transform">videocam</span><span class="font-label-lg text-label-lg">Live Stream &amp; Grid</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="camera-fleet-pole-telemetry" href="#"><span class="material-symbols-outlined text-[20px] text-secondary group-hover:scale-105 transition-transform">settings_input_antenna</span><span class="font-label-lg text-label-lg">Camera Telemetry</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="incident-playback-evidence-vault" href="#"><span class="material-symbols-outlined text-[20px] text-secondary group-hover:scale-105 transition-transform">video_library</span><span class="font-label-lg text-label-lg">Evidence Vault</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-rule-engine-automation" href="#"><span class="material-symbols-outlined text-[20px] text-secondary group-hover:scale-105 transition-transform">tune</span><span class="font-label-lg text-label-lg">AI Rules &amp; Triggers</span></a></nav></div><div class="px-space-md flex flex-col gap-space-sm"><div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-space-2xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wide text-outline">IoT Gateway</span><span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>Dual SIM</span></div><span class="font-body-sm text-body-sm text-on-surface-variant">Airtel Optical Backbone</span></div><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-error-container hover:text-on-error-container transition-all group" data-path="login" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] group-hover:text-error transition-colors">logout</span><span class="font-label-md text-label-md">Back to Login</span></div><span class="material-symbols-outlined text-[16px] text-outline group-hover:text-error transition-colors">arrow_forward</span></a></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,46,135,0.04)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md min-w-0"><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-primary truncate">SwachhMitra AI Vision &amp; CCTV Command Hub</span></div><div class="hidden xl:inline-flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span><span>128 / 128 Nodes Online</span></div></div><div class="flex items-center gap-space-sm"><button class="hidden sm:inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full bg-error text-on-error font-label-md text-label-md shadow-[0_4px_12px_-2px_rgba(186,26,26,0.3)] hover:opacity-95 transition-opacity" type="button"><span class="material-symbols-outlined text-[16px]">campaign</span><span>Emergency Broadcast</span></button><button class="hidden lg:inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full bg-surface-container-high text-primary font-label-md text-label-md hover:bg-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">radar</span><span>Global Optical Ping</span></button><div class="flex items-center rounded-full bg-surface-container-high p-0.5"><button class="px-space-xs py-space-2xs rounded-full bg-surface-container-lowest text-primary font-label-sm text-label-sm font-bold shadow-xs" type="button">EN</button><button class="px-space-xs py-space-2xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">HI</button></div><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface rounded-full hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container"></span></button><div class="flex items-center gap-space-xs pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface font-bold truncate max-w-[150px]">Eng. Vikrant Patil</span><span class="font-body-sm text-body-sm text-outline truncate max-w-[150px]">Lead AI Vision Ops</span></div></div></div></header><main class="flex-1 pt-16 bg-background w-full px-space-lg"><div class="flex flex-col w-full pb-space-2xl">
+<!-- Subtle Ambient Glow Canvas Backing (Glassmorphism Anchor) -->
+<div class="relative w-full overflow-hidden mb-space-lg pt-space-md">
+<div class="absolute -top-16 -left-20 w-96 h-96 rounded-full bg-secondary-fixed opacity-40 blur-3xl pointer-events-none"></div>
+<div class="absolute -top-24 right-1/4 w-80 h-80 rounded-full bg-primary-fixed opacity-35 blur-3xl pointer-events-none"></div>
+<!-- Header & Summary Stats -->
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-2xs max-w-2xl">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-high w-fit shadow-xs">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">Edge TPU Inference Matrix</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Ward 80 - 88 Focus Cluster</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+          Live CCTV Streams &amp; Real-Time AI Detection Grid
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+          Real-time video surveillance and automated rubbish detection across city wards.
+        </p>
+</div>
+<!-- Quick Action Pill Group -->
+<div class="flex flex-wrap items-center gap-space-xs bg-surface-container-lowest p-1.5 rounded-full shadow-md shadow-primary/5">
+<div class="flex items-center bg-surface-container-low rounded-full p-1">
+<button class="px-space-sm py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1 shadow-sm transition-all" id="btn-grid-2x2" onclick="setGridLayout('2x2')">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+<span>2x2 Grid</span>
+</button>
+<button class="px-space-sm py-1 rounded-full text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-1 transition-all" id="btn-grid-3x3" onclick="setGridLayout('3x3')">
+<span class="material-symbols-outlined text-[16px]">apps</span>
+<span>3x3 Grid</span>
+</button>
+</div>
+<button class="px-space-sm py-1.5 rounded-full bg-surface-container-high text-primary font-label-md text-label-md hover:bg-surface-variant flex items-center gap-1 shadow-xs transition-colors" onclick="triggerQuickScan()">
+<span class="material-symbols-outlined text-[16px] text-secondary">radar</span>
+<span>Trigger Quick Scan</span>
+</button>
+<button class="p-2 rounded-full bg-surface-container-high text-primary hover:bg-surface-variant shadow-xs transition-colors" onclick="refreshFeedsFeedback()" title="Refresh Feeds">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+</button>
+</div>
+</div>
+<!-- 4 KPI Stat Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mt-space-lg relative z-10">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-space-md rounded-xl shadow-[0_12px_28px_-6px_rgba(0,46,135,0.06)] flex items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Active Cameras</span>
+<div class="flex items-baseline gap-space-2xs mt-0.5">
+<span class="font-display-lg text-display-lg text-primary leading-none">128</span>
+<span class="font-label-md text-label-md text-secondary font-bold">Live</span>
+</div>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 0 offline across sector
+          </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shadow-inner">
+<span class="material-symbols-outlined text-[26px]">videocam</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-space-md rounded-xl shadow-[0_12px_28px_-6px_rgba(0,46,135,0.06)] flex items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Detections Today</span>
+<div class="flex items-baseline gap-space-2xs mt-0.5">
+<span class="font-display-lg text-display-lg text-on-tertiary-container leading-none">34</span>
+<span class="font-label-md text-label-md text-on-surface-variant">spots</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">local_shipping</span> 28 auto-dispatched
+          </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant shadow-inner">
+<span class="material-symbols-outlined text-[26px]">delete_sweep</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-space-md rounded-xl shadow-[0_12px_28px_-6px_rgba(0,46,135,0.06)] flex items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">AI Detection Accuracy</span>
+<div class="flex items-baseline gap-space-2xs mt-0.5">
+<span class="font-display-lg text-display-lg text-primary leading-none">96.4%</span>
+<span class="font-label-md text-label-md text-secondary font-bold">conf.</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary">model_training</span> FP16 neural model
+          </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shadow-inner">
+<span class="material-symbols-outlined text-[26px]">analytics</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-space-md rounded-xl shadow-[0_12px_28px_-6px_rgba(0,46,135,0.06)] flex items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Average Stream Latency</span>
+<div class="flex items-baseline gap-space-2xs mt-0.5">
+<span class="font-display-lg text-display-lg text-secondary leading-none">18</span>
+<span class="font-label-md text-label-md text-on-surface-variant">ms</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">bolt</span> Ultra-low latency Edge TPU
+          </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-secondary shadow-inner">
+<span class="material-symbols-outlined text-[26px]">speed</span>
+</div>
+</div>
+</div>
+<!-- Filter & Control Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm mt-space-md p-space-sm rounded-xl bg-surface-container-low shadow-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wide text-outline pl-space-xs">Zone Filter:</span>
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-lowest text-primary font-label-md text-label-md shadow-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Ward 80 - 88 (East Zone)</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</div>
+<div class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors cursor-pointer">
+<span>Camera Fleet: 24 Optics Active</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-secondary font-label-sm text-label-sm font-bold shadow-xs">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span>Optical Stream Synchronized</span>
+</div>
+<button class="px-space-sm py-1 rounded-full bg-surface-container-lowest text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors shadow-xs flex items-center gap-1" onclick="maximizeSelectedStream()">
+<span class="material-symbols-outlined text-[16px]">fullscreen</span>
+<span>Maximize Selected Stream</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Primary Workspace: Split Layout (Video Grid + Real-Time Feed Drawer) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT PANEL: 4-Camera Dynamic Live Grid (8 cols on desktop) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md" id="camera-matrix-container">
+<!-- Video Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md transition-all duration-300" id="video-grid">
+<!-- FEED 1: Indiranagar 18th Cross Metro Pillar #42 -->
+<div class="camera-card group relative bg-surface-container-lowest rounded-xl shadow-[0_8px_24px_-4px_rgba(0,46,135,0.08)] overflow-hidden flex flex-col">
+<!-- Live Player Header Overlay -->
+<div class="relative w-full aspect-video bg-inverse-surface overflow-hidden">
+<!-- Simulated CCTV Live Visual Layer -->
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Clear high-definition surveillance camera viewpoint of an urban Indian metro pillar with surrounding clean road, bright natural daylight, concrete pillars with teal public civic signage, clean asphalt, and realistic urban backdrop under a soft blue sky." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWWijr-hD-f1SCoTo9GT4d9e9lpLIh-iuUnbHvGg64UGcErg2jM4NUSQVGeDwoP2q_MMXhsv7G4iacLOYqU6dXRh5UldRKGLv1bobYDcnKDKFm0Fzp82eZWCTxD8UB9uxgAcMAZGScKqjo8nUJKfBh2oohb2GyGs7BSUJXtIZlfrviC9cJF9cgyN2Lx1eQwNQPC3ru02VXtdaT2CDg0qFKFzutNGQW2nRc2hRljnIC7lzErys5QFc')"></div>
+<!-- Dark Gradient Vignette for UI Readability -->
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-transparent to-inverse-surface/60"></div>
+<!-- Top Stream Metadata Overlay -->
+<div class="absolute top-2 left-2 right-2 flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-inverse-surface/75 backdrop-blur-md shadow-xs">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">LIVE</span>
+<span class="text-surface-container-highest/40">•</span>
+<span class="font-label-sm text-label-sm font-semibold text-surface-container-highest">1080p 25 FPS</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-md bg-inverse-surface/75 backdrop-blur-md font-label-sm text-label-sm text-secondary-fixed">
+<span class="material-symbols-outlined text-[14px]">memory</span>
+<span>Edge TPU 14ms</span>
+</div>
+</div>
+<!-- AI Bounding Box 1: Amber Alert -->
+<div class="absolute top-12 left-10 w-44 h-32 rounded-lg border-2 border-dashed border-tertiary-fixed-dim bg-tertiary-container/20 backdrop-blur-[1px] shadow-[0_0_18px_rgba(235,133,28,0.4)] flex flex-col justify-between p-1.5 pointer-events-none">
+<div class="inline-flex items-center gap-1 bg-tertiary-container text-tertiary-fixed text-[10px] font-bold px-1.5 py-0.5 rounded shadow-xs w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+<span>Unlawful Rubbish Dump (94.8% match)</span>
+</div>
+<div class="self-end bg-inverse-surface/85 text-on-primary text-[9px] px-1 py-0.5 rounded font-mono">
+                Est. Volume: 0.65 m³
+              </div>
+</div>
+<!-- Bottom Left Feed Identification -->
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-primary">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold tracking-tight text-surface-container-lowest drop-shadow">Camera 02 • Indiranagar 18th Cross</span>
+<span class="font-body-sm text-body-sm text-surface-container-highest/80 text-[11px]">Metro Pillar #42 • Node IP: 10.42.18.2</span>
+</div>
+<span class="material-symbols-outlined text-surface-container-lowest/80 text-[18px] cursor-pointer hover:text-secondary-fixed" title="Expand Feed">crop_free</span>
+</div>
+</div>
+<!-- Feed Action Buttons -->
+<div class="p-space-sm flex flex-wrap items-center justify-between gap-space-xs bg-surface-container-low">
+<div class="flex items-center gap-space-2xs">
+<button class="p-1.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-variant transition-colors shadow-xs" onclick="quickAlert('Snapshot captured and archived to telemetry vault.')" title="Take Snapshot">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+</button>
+<button class="p-1.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-variant transition-colors shadow-xs" title="Zoom In">
+<span class="material-symbols-outlined text-[16px]">zoom_in</span>
+</button>
+<button class="px-space-xs py-1 rounded-lg bg-surface-container-lowest text-secondary font-label-sm text-label-sm hover:bg-surface-variant transition-colors shadow-xs" onclick="quickAlert('Flagged clean for routine review.')">
+                Flag Clean
+              </button>
+</div>
+<button class="px-space-sm py-1.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-1 shadow-md shadow-primary/20 hover:opacity-95 transition-opacity" onclick="quickAlert('Tipper Truck #04 dispatched to Metro Pillar #42!')">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">send</span>
+<span>Dispatch Tipper Truck #04</span>
+</button>
+</div>
+</div>
+<!-- FEED 2: Shivaji Nagar Market - Broadway Junction -->
+<div class="camera-card group relative bg-surface-container-lowest rounded-xl shadow-[0_8px_24px_-4px_rgba(0,46,135,0.08)] overflow-hidden flex flex-col">
+<div class="relative w-full aspect-video bg-inverse-surface overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="CCTV perspective of a busy Indian municipal vegetable market intersection with broad paved road, clean street gutters, delivery rickshaws, and soft daytime ambient sunlight with clear civic markings." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBLXeWmdyXNPqKe7ST_pK95bwxqE3ZXQd2ppIrvFcM23KRGvA4K7Jqk8mD9_bFsAHvPkMU689iv8ehQNiU-f-Jb4tk5F6GkkeyXEkqme-sXiB_R1n9tO3n0rb-kllwaLqXHiUg0LY7bhvgZPmcOL3r0FEZrLOSt3lB1QrJhp4pvY4fN3eclNqVZphK7dVG-vCTT-XRp93CrXqi-WXUqI9V6KwKokakoczEOozTHa35gShewqFJfLSs')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-transparent to-inverse-surface/60"></div>
+<div class="absolute top-2 left-2 right-2 flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-inverse-surface/75 backdrop-blur-md shadow-xs">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">LIVE</span>
+<span class="text-surface-container-highest/40">•</span>
+<span class="font-label-sm text-label-sm font-semibold text-secondary-fixed">PTZ ACTIVE</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-md bg-error/85 text-on-error backdrop-blur-md font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>Repeat Offender</span>
+</div>
+</div>
+<!-- AI Bounding Box 2: Red Critical Violation -->
+<div class="absolute top-8 right-8 w-52 h-36 rounded-lg border-2 border-dashed border-error bg-error-container/25 backdrop-blur-[1px] shadow-[0_0_18px_rgba(186,26,26,0.5)] flex flex-col justify-between p-1.5 pointer-events-none">
+<div class="inline-flex items-center gap-1 bg-error text-on-error text-[10px] font-bold px-1.5 py-0.5 rounded shadow-xs w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-on-error animate-ping"></span>
+<span>Commercial Food Waste Spillage (91.2% match)</span>
+</div>
+<div class="self-start bg-inverse-surface/90 text-secondary-fixed text-[9px] px-1.5 py-0.5 rounded font-mono font-bold">
+                Vehicle Plate: KA-04-E-4410
+              </div>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-primary">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold tracking-tight text-surface-container-lowest drop-shadow">Camera 04 • Shivaji Nagar Market</span>
+<span class="font-body-sm text-body-sm text-surface-container-highest/80 text-[11px]">Broadway Junction • Pan-Tilt-Zoom Optical Unit</span>
+</div>
+<span class="material-symbols-outlined text-surface-container-lowest/80 text-[18px] cursor-pointer hover:text-secondary-fixed" title="Expand Feed">crop_free</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-wrap items-center justify-between gap-space-xs bg-surface-container-low">
+<div class="flex items-center gap-space-2xs">
+<button class="px-space-xs py-1 rounded-lg bg-surface-container-lowest text-primary font-label-sm text-label-sm hover:bg-surface-variant transition-colors shadow-xs flex items-center gap-1" onclick="quickAlert('PTZ Optical zoom engaged to 3x.')">
+<span class="material-symbols-outlined text-[14px]">search</span>
+<span>PTZ Zoom (3x)</span>
+</button>
+<button class="px-space-xs py-1 rounded-lg bg-surface-container-lowest text-error font-label-sm text-label-sm hover:bg-error-container transition-colors shadow-xs" onclick="quickAlert('Formal civic fine notice generated for KA-04-E-4410.')">
+                Issue Fine Notice
+              </button>
+</div>
+<button class="px-space-sm py-1.5 rounded-full bg-error text-on-error font-label-md text-label-md flex items-center gap-1 shadow-md hover:opacity-95 transition-opacity" onclick="quickAlert('Night patrol team pinged with GPS coordinates!')">
+<span class="material-symbols-outlined text-[16px]">notifications_active</span>
+<span>Alert Night Patrol</span>
+</button>
+</div>
+</div>
+<!-- FEED 3: 14th Main Park - East Gate -->
+<div class="camera-card group relative bg-surface-container-lowest rounded-xl shadow-[0_8px_24px_-4px_rgba(0,46,135,0.08)] overflow-hidden flex flex-col">
+<div class="relative w-full aspect-video bg-inverse-surface overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="High resolution surveillance image of a pristine public municipal park entrance in India with green trees, manicured flowerbeds, clean paved pedestrian footpath, clear morning illumination, spotless civic environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7JNO4926oz8C8fkcGxK_k7UrrcJ5H-vkLv38P4l6xVkkuiWfjDtFTo1ZsyUCUq-0xVs0VEevf2Hvu5yWe2qUfbm_NIxWdeHtJn_M8M6F38g1Us_3yPXy8UuhNFUbcdlCbmCGW0WkM1zA_MnjrjtQkvqqWQheddLVT1Ihiiojqt8y3KSt6BomyRijDbWP76uLFj2NS9r_74uuwuZ8YeVVhk5UGLNuqAQ5FK_pcDU6811dv7SsK2qE')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-transparent to-inverse-surface/60"></div>
+<div class="absolute top-2 left-2 right-2 flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-inverse-surface/75 backdrop-blur-md shadow-xs">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-secondary-fixed">LIVE</span>
+<span class="text-surface-container-highest/40">•</span>
+<span class="font-label-sm text-label-sm font-semibold text-surface-container-highest">Sensor Clear</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary text-on-secondary backdrop-blur-md font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">eco</span>
+<span>Pristine Status</span>
+</div>
+</div>
+<!-- AI Bounding Box 3: Green Clean Verification -->
+<div class="absolute inset-x-8 bottom-12 top-10 rounded-xl border-2 border-secondary bg-secondary/10 backdrop-blur-[0.5px] flex flex-col justify-between p-2 pointer-events-none">
+<div class="inline-flex items-center gap-1 bg-secondary text-on-secondary text-[10px] font-bold px-2 py-0.5 rounded shadow-xs w-fit">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+<span>Area Clean • Cleanliness Score: 99.1%</span>
+</div>
+<div class="self-end bg-inverse-surface/90 text-surface-container-highest text-[9px] px-1.5 py-0.5 rounded font-mono">
+                Last waste cleared: 38h ago
+              </div>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-primary">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold tracking-tight text-surface-container-lowest drop-shadow">Camera 01 • 14th Main Park</span>
+<span class="font-body-sm text-body-sm text-surface-container-highest/80 text-[11px]">East Gate Promenade • Ward 84</span>
+</div>
+<span class="material-symbols-outlined text-surface-container-lowest/80 text-[18px] cursor-pointer hover:text-secondary-fixed" title="Expand Feed">crop_free</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-wrap items-center justify-between gap-space-xs bg-surface-container-low">
+<div class="flex items-center gap-space-2xs">
+<button class="px-space-xs py-1 rounded-lg bg-surface-container-lowest text-secondary font-label-sm text-label-sm hover:bg-surface-variant transition-colors shadow-xs flex items-center gap-1" onclick="quickAlert('Logged routine clean check in registry.')">
+<span class="material-symbols-outlined text-[14px]">task_alt</span>
+<span>Log Routine Check</span>
+</button>
+</div>
+<button class="px-space-sm py-1.5 rounded-full bg-secondary text-on-secondary font-label-md text-label-md flex items-center gap-1 shadow-md hover:opacity-95 transition-opacity" onclick="quickAlert('Area certified clean in citizen grievance portal.')">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Verify Clean Area</span>
+</button>
+</div>
+</div>
+<!-- FEED 4: Domlur Flyover Underpass (Night IR Feed) -->
+<div class="camera-card group relative bg-surface-container-lowest rounded-xl shadow-[0_8px_24px_-4px_rgba(0,46,135,0.08)] overflow-hidden flex flex-col">
+<div class="relative w-full aspect-video bg-inverse-surface overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105 filter grayscale contrast-125" data-alt="Monochrome thermal infrared night vision CCTV feed under a large concrete highway flyover underpass, showing street curbs, road signs, structural pillars in high contrast infrared night illumination." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2qwko2r5G9misBDScvnKt6YiD5q_BDaTmfRozBuDVzLFUNCUa14FKcHQCwwESCpGeD8NK9Pwhl0picSmshdhhC_jACjo60ny1v_XQiHwN6QqE1qD2wi_vT4GhXJrDBrcLoSv24E_JtfbgG-NR74SPvTMIAZwnkl7y9s3-QlSBH-palPQf1ndC85pV5SdOVuucRL8y_khjwYpzN6vVF0OnYvLAN90CR88NriczuNENOJo9EosAAZ8')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-transparent to-inverse-surface/60"></div>
+<div class="absolute top-2 left-2 right-2 flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-inverse-surface/75 backdrop-blur-md shadow-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-tertiary-fixed">IR ACTIVE</span>
+<span class="text-surface-container-highest/40">•</span>
+<span class="font-label-sm text-label-sm font-semibold text-surface-container-highest">850nm 20 FPS</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-md bg-inverse-surface/80 text-tertiary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">nightlight</span>
+<span>Low Ambient LUX</span>
+</div>
+</div>
+<!-- AI Bounding Box 4: Orange Bounding Box -->
+<div class="absolute bottom-12 right-12 w-48 h-28 rounded-lg border-2 border-dashed border-tertiary bg-tertiary/20 backdrop-blur-[1px] shadow-[0_0_16px_rgba(86,43,0,0.5)] flex flex-col justify-between p-1.5 pointer-events-none">
+<div class="inline-flex items-center gap-1 bg-tertiary text-on-tertiary text-[10px] font-bold px-1.5 py-0.5 rounded shadow-xs w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+<span>Litter Cluster (87.5% match)</span>
+</div>
+<div class="self-end bg-inverse-surface/85 text-surface-container-highest text-[9px] px-1 py-0.5 rounded font-mono">
+                Pillar 18 South Wing
+              </div>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-primary">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold tracking-tight text-surface-container-lowest drop-shadow">Camera 06 • Domlur Flyover Underpass</span>
+<span class="font-body-sm text-body-sm text-surface-container-highest/80 text-[11px]">Night Vision IR Feed • Optical Pole #11</span>
+</div>
+<span class="material-symbols-outlined text-surface-container-lowest/80 text-[18px] cursor-pointer hover:text-secondary-fixed" title="Expand Feed">crop_free</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-wrap items-center justify-between gap-space-xs bg-surface-container-low">
+<div class="flex items-center gap-space-2xs">
+<button class="px-space-xs py-1 rounded-lg bg-surface-container-lowest text-on-tertiary-container font-label-sm text-label-sm hover:bg-surface-variant transition-colors shadow-xs flex items-center gap-1" onclick="quickAlert('Pole 11 Spot-Light triggered for 180 seconds.')">
+<span class="material-symbols-outlined text-[14px]">highlight</span>
+<span>Turn on Spot-Light</span>
+</button>
+</div>
+<button class="px-space-sm py-1.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-1 shadow-md hover:opacity-95 transition-opacity" onclick="quickAlert('Ward Beat Marshall alerted via mobile SMS push!')">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">shield_person</span>
+<span>Notify Beat Marshall</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick AI Model Latency Sparkline Bar -->
+<div class="p-space-sm rounded-xl bg-surface-container-lowest shadow-xs flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">neurology</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-primary">Inference Neural Throttle</span>
+<span class="font-body-sm text-body-sm text-outline">Real-time object bounding processing on Coral Edge TPU v2 Cluster</span>
+</div>
+</div>
+<!-- Inline SVG Sparkline -->
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-secondary font-bold">14.2 ms / frame</span>
+<span class="font-body-sm text-body-sm text-outline text-[11px]">Steady state</span>
+</div>
+<svg class="w-32 h-8 text-secondary" fill="none" viewbox="0 0 100 24">
+<path d="M0 16 L15 14 L30 18 L45 10 L60 12 L75 8 L90 14 L100 11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<circle cx="100" cy="11" fill="currentColor" r="3"></circle>
+</svg>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: Live Detections Feed Side Drawer (4 cols on desktop) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Real-Time Optical Detections Card -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-xl rounded-xl shadow-[0_12px_32px_-4px_rgba(0,46,135,0.08)] p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">notification_important</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary leading-tight">Live Detection Feed</span>
+<span class="font-body-sm text-body-sm text-outline">Last 60 minutes optical alerts</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold animate-pulse">
+            LIVE
+          </span>
+</div>
+<!-- Detection Items Stream -->
+<div class="flex flex-col gap-space-xs divide-y-0">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col gap-space-2xs shadow-xs">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm font-bold text-on-tertiary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                Commercial Waste Dump
+              </span>
+<span class="font-body-sm text-body-sm text-outline font-mono text-[11px]">2 mins ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">
+              Indiranagar 18th Cross (Cam 02)
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium">
+<span>Est. 0.65 m³ • Confidence 94.8%</span>
+<span class="text-secondary font-bold">Unassigned</span>
+</div>
+<div class="flex items-center gap-space-xs pt-1 mt-1">
+<button class="flex-1 py-1 px-space-xs rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm flex items-center justify-center gap-1 shadow-xs hover:opacity-95 transition-opacity" onclick="quickAlert('Tipper truck successfully routed to Cam 02!')">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+<span>Dispatch Tipper</span>
+</button>
+<button class="py-1 px-space-xs rounded-lg bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-variant transition-colors" onclick="this.closest('.p-space-sm').remove()">
+                Dismiss
+              </button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col gap-space-2xs shadow-xs">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm font-bold text-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                Spillage from Commercial Auto
+              </span>
+<span class="font-body-sm text-body-sm text-outline font-mono text-[11px]">7 mins ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">
+              Shivaji Nagar Market (Cam 04)
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium">
+<span>Plate: KA-04-E-4410 • Repeat tag</span>
+<span class="text-error font-bold">Action Needed</span>
+</div>
+<div class="flex items-center gap-space-xs pt-1 mt-1">
+<button class="flex-1 py-1 px-space-xs rounded-lg bg-error text-on-error font-label-sm text-label-sm flex items-center justify-center gap-1 shadow-xs hover:opacity-95 transition-opacity" onclick="quickAlert('Tipper crew and Challan officer assigned!')">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+<span>Dispatch Tipper</span>
+</button>
+<button class="py-1 px-space-xs rounded-lg bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-variant transition-colors" onclick="this.closest('.p-space-sm').remove()">
+                Dismiss
+              </button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col gap-space-2xs shadow-xs">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm font-bold text-on-tertiary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                Litter Underpass Cluster
+              </span>
+<span class="font-body-sm text-body-sm text-outline font-mono text-[11px]">18 mins ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">
+              Domlur Flyover Underpass (Cam 06)
+            </p>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-medium">
+<span>Infrared Night Scan • 87.5%</span>
+<span class="text-secondary font-bold">Auto-Logged</span>
+</div>
+<div class="flex items-center gap-space-xs pt-1 mt-1">
+<button class="flex-1 py-1 px-space-xs rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm flex items-center justify-center gap-1 shadow-xs hover:opacity-95 transition-opacity" onclick="quickAlert('Tipper crew notified for Domlur underpass!')">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+<span>Dispatch Tipper</span>
+</button>
+<button class="py-1 px-space-xs rounded-lg bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-variant transition-colors" onclick="this.closest('.p-space-sm').remove()">
+                Dismiss
+              </button>
+</div>
+</div>
+<!-- Item 4 (Resolved/Dispatched State) -->
+<div class="p-space-sm rounded-xl bg-surface-container-low/70 flex flex-col gap-space-2xs opacity-75 shadow-xs">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm font-bold text-secondary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Cleared by Tipper #02
+              </span>
+<span class="font-body-sm text-body-sm text-outline font-mono text-[11px]">42 mins ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">
+              Old Airport Road Junction (Cam 09)
+            </p>
+<span class="font-body-sm text-body-sm text-outline text-[11px]">
+              Waste removed: 0.42 m³ • Re-verified Clean
+            </span>
+</div>
+</div>
+</div>
+<!-- Quick Command Hub Enclave Directory & Navigation Links -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_12px_28px_-6px_rgba(0,46,135,0.06)] p-space-md flex flex-col gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary">Command Navigation</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Quick access to sibling modules and admin authentication portal.
+        </p>
+<div class="flex flex-col gap-space-2xs">
+<a class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors" data-path="camera-fleet-pole-telemetry" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">settings_input_antenna</span>
+<span class="font-label-md text-label-md">Camera Fleet Telemetry</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors" data-path="incident-playback-evidence-vault" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">video_library</span>
+<span class="font-label-md text-label-md">Incident Playback Vault</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface transition-colors" data-path="ai-rule-engine-automation" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">tune</span>
+<span class="font-label-md text-label-md">AI Rules &amp; Triggers</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-space-xs rounded-lg bg-primary/5 hover:bg-primary/10 text-primary transition-colors" data-path="login" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">login</span>
+<span class="font-label-md text-label-md font-bold">SwachhMitra Portal Desktop Login</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-primary">launch</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Notification Toast Container for Interactive Feedback -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="quick-toast">
+<div class="flex items-center gap-space-xs px-space-md py-space-sm rounded-xl bg-primary-container text-on-primary shadow-xl">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">info</span>
+<span class="font-label-md text-label-md" id="quick-toast-text">Action confirmed</span>
+</div>
+</div>
+</div>
+<!-- Micro-Interactions Script for Grid & Feed Controls -->
+<script>
+  function setGridLayout(type) {
+    const grid = document.getElementById('video-grid');
+    const btn2x2 = document.getElementById('btn-grid-2x2');
+    const btn3x3 = document.getElementById('btn-grid-3x3');
+
+    if (type === '3x3') {
+      grid.className = 'grid grid-cols-1 md:grid-cols-3 gap-space-xs transition-all duration-300';
+      btn3x3.className = 'px-space-sm py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1 shadow-sm transition-all';
+      btn2x2.className = 'px-space-sm py-1 rounded-full text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-1 transition-all';
+      quickAlert('Switched to 3x3 High-Density Optical Grid.');
+    } else {
+      grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-space-md transition-all duration-300';
+      btn2x2.className = 'px-space-sm py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1 shadow-sm transition-all';
+      btn3x3.className = 'px-space-sm py-1 rounded-full text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-1 transition-all';
+      quickAlert('Switched to Standard 2x2 Focus Grid.');
+    }
+  }
+
+  function triggerQuickScan() {
+    quickAlert('Neural quick scan executed across Ward 80-88 optical nodes.');
+  }
+
+  function refreshFeedsFeedback() {
+    quickAlert('Refreshed RTSP live streams with optical packet synchronization.');
+  }
+
+  function maximizeSelectedStream() {
+    quickAlert('Camera 02 (Indiranagar Metro Pillar) maximized to full display canvas.');
+  }
+
+  function quickAlert(message) {
+    const toast = document.getElementById('quick-toast');
+    const text = document.getElementById('quick-toast-text');
+    if (!toast || !text) return;
+    text.textContent = message;
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-20', 'opacity-0');
+    }, 2800);
+  }
+</script></main><footer class="w-full bg-surface-container-low py-space-md shadow-[0_-1px_6px_rgba(0,46,135,0.03)]"><div class="w-full px-space-lg flex flex-col md:flex-row items-center justify-between gap-space-xs text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span><span>DPDP Act 2023 Compliant Enclave • MoHUA SBM-Urban 2.0 Optical Network</span></div><div class="flex items-center gap-space-sm"><span class="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-bold"><span class="w-2 h-2 rounded-full bg-secondary"></span>Operational</span><span>•</span><span>Command Cluster 04</span></div></div></footer></div></body></html>

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>SwachhMitra AI Vision &amp; CCTV Command Hub</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface":"#131b2e","surface-container-highest":"#dae2fd","background":"#faf8ff","surface-variant":"#dae2fd","on-error-container":"#93000a","on-tertiary":"#ffffff","surface-container-lowest":"#ffffff","surface-dim":"#d2d9f4","surface-container-low":"#f2f3ff","error":"#ba1a1a","surface":"#faf8ff","secondary-fixed":"#99f1fa","surface-tint":"#3b59b1","primary-container":"#002e87","inverse-surface":"#283044","on-tertiary-fixed-variant":"#6e3900","on-tertiary-container":"#eb851c","surface-container-high":"#e2e7ff","on-primary-fixed":"#00174d","on-secondary-container":"#006d75","tertiary":"#371900","on-background":"#131b2e","tertiary-container":"#562b00","secondary-fixed-dim":"#7cd4dd","error-container":"#ffdad6","on-primary-fixed-variant":"#1e4098","on-primary":"#ffffff","on-secondary":"#ffffff","primary-fixed":"#dbe1ff","surface-container":"#eaedff","secondary-container":"#96eef7","surface-bright":"#faf8ff","on-surface-variant":"#444652","on-error":"#ffffff","outline":"#747683","secondary":"#006970","primary":"#001b58","outline-variant":"#c4c6d4","tertiary-fixed":"#ffdcc3","on-secondary-fixed":"#002022","inverse-primary":"#b5c4ff","tertiary-fixed-dim":"#ffb77d","primary-fixed-dim":"#b5c4ff","on-secondary-fixed-variant":"#004f55","on-tertiary-fixed":"#2f1500","on-primary-container":"#7e9bf8","inverse-on-surface":"#eef0ff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"margin-desktop":"2.5rem","space-2xl":"3rem","space-2xs":"0.25rem","space-xl":"2rem","gutter-mobile":"1rem","margin-mobile":"1.25rem","space-sm":"0.75rem","space-lg":"1.5rem","space-3xl":"4rem","space-xs":"0.5rem","gutter-desktop":"1.5rem","space-md":"1rem"},fontFamily:{"headline-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"]},fontSize:{"headline-lg":["30px",{lineHeight:"38px",letterSpacing:"-0.015em",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"display-lg-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"800"}],"headline-md":["22px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-sm":["18px",{lineHeight:"24px",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"display-lg":["40px",{lineHeight:"48px",letterSpacing:"-0.02em",fontWeight:"800"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_12px_rgba(0,46,135,0.06)] z-50 flex flex-col justify-between py-space-md"><div class="flex flex-col gap-space-md"><div class="px-space-lg pt-space-xs flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center shadow-md shadow-primary/10"><span class="material-symbols-outlined text-secondary-fixed text-[24px]">videocam</span></div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-primary leading-tight truncate">SwachhMitra</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">CCTV Ops Enclave</span></div></div><div class="px-space-md"><div class="w-full h-px bg-surface-container-high"></div></div><nav class="flex flex-col gap-space-2xs px-space-sm" data-active-classes="bg-primary-container text-on-primary font-headline-sm shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="live-cctv-stream-ai-detection-grid" href="#"><span class="material-symbols-outlined text-[20px] text-secondary group-hover:scale-105 transition-transform">videocam</span><span class="font-label-lg text-label-lg">Live Stream &amp; Grid</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="camera-fleet-pole-telemetry" href="#"><span class="material-symbols-outlined text-[20px] text-secondary group-hover:scale-105 transition-transform">settings_input_antenna</span><span class="font-label-lg text-label-lg">Camera Telemetry</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="incident-playback-evidence-vault" href="#"><span class="material-symbols-outlined text-[20px] text-secondary group-hover:scale-105 transition-transform">video_library</span><span class="font-label-lg text-label-lg">Evidence Vault</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-rule-engine-automation" href="#"><span class="material-symbols-outlined text-[20px] text-secondary group-hover:scale-105 transition-transform">tune</span><span class="font-label-lg text-label-lg">AI Rules &amp; Triggers</span></a></nav></div><div class="px-space-md flex flex-col gap-space-sm"><div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-space-2xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wide text-outline">IoT Gateway</span><span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>Dual SIM</span></div><span class="font-body-sm text-body-sm text-on-surface-variant">Airtel Optical Backbone</span></div><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-error-container hover:text-on-error-container transition-all group" data-path="login" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] group-hover:text-error transition-colors">logout</span><span class="font-label-md text-label-md">Back to Login</span></div><span class="material-symbols-outlined text-[16px] text-outline group-hover:text-error transition-colors">arrow_forward</span></a></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,46,135,0.04)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md min-w-0"><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-primary truncate">SwachhMitra AI Vision &amp; CCTV Command Hub</span></div><div class="hidden xl:inline-flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span><span>128 / 128 Nodes Online</span></div></div><div class="flex items-center gap-space-sm"><button class="hidden sm:inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full bg-error text-on-error font-label-md text-label-md shadow-[0_4px_12px_-2px_rgba(186,26,26,0.3)] hover:opacity-95 transition-opacity" type="button"><span class="material-symbols-outlined text-[16px]">campaign</span><span>Emergency Broadcast</span></button><button class="hidden lg:inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-full bg-surface-container-high text-primary font-label-md text-label-md hover:bg-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">radar</span><span>Global Optical Ping</span></button><div class="flex items-center rounded-full bg-surface-container-high p-0.5"><button class="px-space-xs py-space-2xs rounded-full bg-surface-container-lowest text-primary font-label-sm text-label-sm font-bold shadow-xs" type="button">EN</button><button class="px-space-xs py-space-2xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">HI</button></div><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface rounded-full hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container"></span></button><div class="flex items-center gap-space-xs pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface font-bold truncate max-w-[150px]">Eng. Vikrant Patil</span><span class="font-body-sm text-body-sm text-outline truncate max-w-[150px]">Lead AI Vision Ops</span></div></div></div></header><main class="flex-1 pt-16 bg-background w-full px-space-lg"><div class="flex flex-col w-full">
+<div class="py-space-md flex flex-col gap-space-lg w-full">
+<!-- Header Block -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-64 h-64 bg-secondary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col gap-space-2xs min-w-0 relative z-10">
+<div class="flex items-center gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-[20px]">precision_manufacturing</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">IoT Fleet Telemetry Matrix</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Camera Fleet &amp; Pole Telemetry</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Monitor camera health, solar power, cellular signals, and maintenance schedules across all smart poles.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs relative z-10">
+<button class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-surface-container-high text-primary hover:bg-surface-variant font-label-md text-label-md shadow-xs transition-colors" id="btn-reboot" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Reboot Selected Camera</span>
+</button>
+<button class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-surface-container-high text-primary hover:bg-surface-variant font-label-md text-label-md shadow-xs transition-colors" id="btn-wiper" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_download</span>
+<span>Activate Lens Wiper</span>
+</button>
+<button class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-surface-container-high text-primary hover:bg-surface-variant font-label-md text-label-md shadow-xs transition-colors" id="btn-ping" type="button">
+<span class="material-symbols-outlined text-[18px]">cell_tower</span>
+<span>Test Network Ping</span>
+</button>
+<button class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-full bg-gradient-to-r from-primary-container to-secondary text-on-primary font-label-md text-label-md shadow-md shadow-primary/20 hover:opacity-95 transition-opacity" type="button">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span>Export Health Report (PDF)</span>
+</button>
+</div>
+</div>
+<!-- 4 Hardware Metric Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Total Smart Poles</span>
+<span class="font-display-lg text-display-lg text-primary leading-none">128</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">podium</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<span class="font-body-sm text-body-sm text-secondary font-bold">128 Poles Deployed</span>
+<span class="font-label-sm text-label-sm text-outline">Across 7 Wards</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Online &amp; Healthy</span>
+<span class="font-display-lg text-display-lg text-secondary leading-none">114</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[26px]">check_circle</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<span class="font-body-sm text-body-sm text-secondary font-bold">89% Optimal Status</span>
+<span class="font-label-sm text-label-sm text-outline">Telemetry live</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 89%"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Needs Lens Cleaning</span>
+<span class="font-display-lg text-display-lg text-on-tertiary-container leading-none">8</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[26px]">lens_blur</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<span class="font-body-sm text-body-sm text-on-tertiary-container font-bold">Dust or Dirt Detected</span>
+<span class="font-label-sm text-label-sm text-outline">Wiper scheduled</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-on-tertiary-container h-full rounded-full" style="width: 6.2%"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Offline / Needs Service</span>
+<span class="font-display-lg text-display-lg text-error leading-none">6</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-[26px]">build_circle</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<span class="font-body-sm text-body-sm text-error font-bold">Technician Required</span>
+<span class="font-label-sm text-label-sm text-outline">3 Dispatched</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 4.8%"></div>
+</div>
+</div>
+</div>
+<!-- Ward Pole GIS Map & Deployment View -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">map</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Ward Pole GIS Map &amp; Deployment (Wards 82 - 88)</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Interactive geographic node telemetry across Bangalore East urban zones. Real-time RSSI signal &amp; solar charging state.
+          </p>
+</div>
+<!-- Search Bar and Status Legend -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="relative min-w-[280px]">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-[20px] text-outline">search</span>
+<input class="w-full pl-10 pr-space-md py-2 bg-surface-container-low rounded-lg text-on-surface placeholder:text-outline text-body-sm font-body-sm focus:outline-none focus:bg-surface-container-lowest shadow-inner" id="gis-search-input" placeholder="Search pole by ID, street name, or ward..." type="text"/>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-2 rounded-lg text-label-sm font-label-sm">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span>Good Health (114)</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-tertiary-container">
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<span>Warning / Dirty Lens (8)</span>
+</div>
+<div class="flex items-center gap-1.5 text-error">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span>Offline / Fault (6)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Display Area -->
+<div class="relative w-full h-80 rounded-xl overflow-hidden shadow-inner bg-surface-container">
+<!-- Interactive Map Container -->
+<div class="w-full h-full bg-cover bg-center" data-alt="High quality aerial satellite cartography view of Bangalore Indiranagar and Ulsoor city roads in daylight with subtle street outlines and smart civic infrastructure grid." data-location="Indiranagar Ward 82 Bengaluru India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQwdM9w7OiOz9gNvt4ucjgtAJYXqE7ckIoV-PjHj4USo-AnyOB-KbPxqeLcOrjYCEEz8XCH5JRrDMEe5M1oBakbIGe5OCRN7xAO1fH4Z7Tx_XdEPO-8jH09M4CHMCsoKDxaLvVSoAmISKUYAB4-k0btH3nDa28ym5UDy7g_3hhrvARaPc-Pgp38IaFfd1xQNWNJq9LE5ymwQvhQuJsaMlrfFuwkjVh52hbp-fXpqcBMOt_idrEeZM')"></div>
+<!-- Overhead Radar & Pin Overlay -->
+<div class="absolute inset-0 bg-primary/20 backdrop-blur-[1px] pointer-events-none"></div>
+<!-- Simulated Map Nodes -->
+<!-- Pole 02 Good -->
+<div class="absolute top-1/4 left-1/5 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-secondary opacity-75"></span>
+<div class="relative p-1.5 bg-secondary text-on-secondary rounded-full shadow-md">
+<span class="material-symbols-outlined text-[16px] block">videocam</span>
+</div>
+<div class="absolute bottom-full mb-2 hidden group-hover:flex flex-col bg-surface-container-lowest text-on-surface p-space-xs rounded-lg shadow-xl text-label-sm font-label-sm whitespace-nowrap z-20">
+<span class="font-bold text-primary">Pole #02 - Indiranagar Metro #42</span>
+<span class="text-secondary font-semibold">Solar 88% • Signal -65 dBm</span>
+</div>
+</div>
+</div>
+<!-- Pole 03 Good -->
+<div class="absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="relative flex items-center justify-center">
+<div class="p-1.5 bg-secondary text-on-secondary rounded-full shadow-md">
+<span class="material-symbols-outlined text-[16px] block">videocam</span>
+</div>
+<div class="absolute bottom-full mb-2 hidden group-hover:flex flex-col bg-surface-container-lowest text-on-surface p-space-xs rounded-lg shadow-xl text-label-sm font-label-sm whitespace-nowrap z-20">
+<span class="font-bold text-primary">Pole #03 - 16th Main Culvert #09</span>
+<span class="text-secondary font-semibold">Solar 94% • Signal -74 dBm</span>
+</div>
+</div>
+</div>
+<!-- Pole 05 Dirty Lens -->
+<div class="absolute top-3/5 left-3/4 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="animate-pulse absolute inline-flex h-7 w-7 rounded-full bg-on-tertiary-container opacity-50"></span>
+<div class="relative p-1.5 bg-on-tertiary-container text-on-tertiary rounded-full shadow-md">
+<span class="material-symbols-outlined text-[16px] block">lens_blur</span>
+</div>
+<div class="absolute bottom-full mb-2 hidden group-hover:flex flex-col bg-surface-container-lowest text-on-surface p-space-xs rounded-lg shadow-xl text-label-sm font-label-sm whitespace-nowrap z-20">
+<span class="font-bold text-on-tertiary-container">Pole #05 - Kaggadasapura Gate</span>
+<span class="text-outline">Lens 91% Dust Alert • Solar 79%</span>
+</div>
+</div>
+</div>
+<!-- Pole 07 Offline -->
+<div class="absolute bottom-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="animate-ping absolute inline-flex h-9 w-9 rounded-full bg-error opacity-40"></span>
+<div class="relative p-1.5 bg-error text-on-error rounded-full shadow-md">
+<span class="material-symbols-outlined text-[16px] block">warning</span>
+</div>
+<div class="absolute bottom-full mb-2 hidden group-hover:flex flex-col bg-surface-container-lowest text-on-surface p-space-xs rounded-lg shadow-xl text-label-sm font-label-sm whitespace-nowrap z-20">
+<span class="font-bold text-error">Pole #07 - Ulsoor Lake Prom.</span>
+<span class="text-error font-semibold">Power Fault: Solar 12% Low</span>
+</div>
+</div>
+</div>
+<!-- Pole 14 Good -->
+<div class="absolute top-1/3 right-1/6 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="p-1.5 bg-secondary text-on-secondary rounded-full shadow-md">
+<span class="material-symbols-outlined text-[16px] block">videocam</span>
+</div>
+</div>
+<!-- Floating Quick Ward Metric Bar -->
+<div class="absolute bottom-3 left-3 right-3 bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-xs rounded-xl shadow-md flex flex-wrap items-center justify-between gap-space-xs text-label-sm font-label-sm">
+<div class="flex items-center gap-space-sm text-primary font-bold">
+<span class="material-symbols-outlined text-secondary text-[18px]">satellite_alt</span>
+<span>GNSS Sync: Real-time RTK Active (±2cm Pole Accuracy)</span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant">
+<span>Ward 82: 18 Poles</span>
+<span>Ward 83: 22 Poles</span>
+<span>Ward 84: 16 Poles</span>
+<span>Ward 85: 20 Poles</span>
+<span>Ward 86: 19 Poles</span>
+<span>Ward 88: 15 Poles</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Camera Pole Diagnostics & Status Table -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-primary">Camera Pole Diagnostics &amp; Status</h2>
+<span class="font-body-sm text-body-sm text-outline">Real-time solar charge controller readings, LTE RSSI values, and electro-mechanical wiper health.</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">Auto-refresh:</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            10s
+          </span>
+</div>
+</div>
+<!-- Table Container -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<th class="p-space-sm rounded-l-lg">Pole ID &amp; Location</th>
+<th class="p-space-sm">Battery Level (LiFePO4)</th>
+<th class="p-space-sm">Cellular Signal</th>
+<th class="p-space-sm">Lens Condition</th>
+<th class="p-space-sm">Status</th>
+<th class="p-space-sm text-right rounded-r-lg">Quick Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md divide-y-0">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="p-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">camera_outdoor</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-primary">Pole #02</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Indiranagar Metro Pillar #42 (Ward 82)</span>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex flex-col gap-1 max-w-[140px]">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-bold">88%</span>
+<span class="text-outline">27.2V Solar</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 88%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex items-center gap-space-2xs text-secondary font-label-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_alt</span>
+<span>-65 dBm (4G LTE)</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Airtel Dual IoT SIM</span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">check</span>
+                  100% Clear
+                </span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                  Online
+                </span>
+</td>
+<td class="p-space-sm text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Remote Reboot" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Activate Lens Wiper" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" title="Test Network Ping" type="button">
+<span class="material-symbols-outlined text-[18px]">cell_tower</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="p-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">camera_outdoor</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-primary">Pole #03</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">16th Main Culvert Pole #09 (Ward 83)</span>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex flex-col gap-1 max-w-[140px]">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-bold">94%</span>
+<span class="text-outline">28.4V Solar</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 94%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex items-center gap-space-2xs text-secondary font-label-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_alt</span>
+<span>-74 dBm (4G LTE)</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Jio Commercial IoT</span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">check</span>
+                  100% Clear
+                </span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                  Online
+                </span>
+</td>
+<td class="p-space-sm text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Remote Reboot" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Activate Lens Wiper" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" title="Test Network Ping" type="button">
+<span class="material-symbols-outlined text-[18px]">cell_tower</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Dirty Lens Warning -->
+<tr class="bg-tertiary-fixed/20 hover:bg-tertiary-fixed/30 transition-colors">
+<td class="p-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">lens_blur</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-on-tertiary-fixed-variant">Pole #05</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kaggadasapura Railway Gate (Ward 85)</span>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex flex-col gap-1 max-w-[140px]">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-primary font-bold">79%</span>
+<span class="text-outline">26.1V Solar</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 79%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex items-center gap-space-2xs text-on-surface font-label-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_alt_2_bar</span>
+<span>-82 dBm (4G LTE)</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Airtel Dual IoT SIM</span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                  91% Dust Warning
+                </span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-container font-label-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+                  Degraded
+                </span>
+</td>
+<td class="p-space-sm text-right">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 rounded-lg bg-tertiary-container text-on-tertiary text-label-sm font-label-sm hover:opacity-90 flex items-center gap-1 shadow-xs" title="Trigger Automated Wiper Cycle" type="button">
+<span class="material-symbols-outlined text-[14px]">cloud_download</span>
+<span>Wipe Lens</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Remote Reboot" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Power Low Alert -->
+<tr class="bg-error-container/20 hover:bg-error-container/30 transition-colors">
+<td class="p-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-[18px]">battery_alert</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-error">Pole #07</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ulsoor Lake Promenade (Ward 82)</span>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex flex-col gap-1 max-w-[140px]">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-error font-bold">12% Low</span>
+<span class="text-error font-bold">18.2V Inverter</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 12%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex items-center gap-space-2xs text-error font-label-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_connected_no_internet_0_bar</span>
+<span>-92 dBm Weak</span>
+</div>
+<span class="font-body-sm text-body-sm text-error">Intermittent Packets</span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">remove</span>
+                  Offline Check
+                </span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-error font-label-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+                  Degraded
+                </span>
+</td>
+<td class="p-space-sm text-right">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 rounded-lg bg-error text-on-error text-label-sm font-label-sm hover:opacity-90 flex items-center gap-1 shadow-sm" title="Dispatch Field Crew" type="button">
+<span class="material-symbols-outlined text-[14px]">support_agent</span>
+<span>Dispatch Tech</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Remote Reboot" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Offline > 24h -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="p-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[18px]">power_off</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-outline">Pole #11</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Shivaji Nagar Depot Gate (Ward 84)</span>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex flex-col gap-1 max-w-[140px]">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-outline font-bold">0%</span>
+<span class="text-outline">0.0V Dead</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-outline h-full rounded-full" style="width: 0%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex items-center gap-space-2xs text-outline font-label-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_off</span>
+<span>Disconnected</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">No Carrier Ping</span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-outline font-label-sm text-label-sm">
+                  Unknown
+                </span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-error font-label-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                  Offline &gt;24h
+                </span>
+</td>
+<td class="p-space-sm text-right">
+<div class="inline-flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold px-2 py-1 bg-surface-container rounded-lg">Ticket #BEL-9082 Assigned</span>
+</div>
+</td>
+</tr>
+<!-- Row 6: Healthy -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="p-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">camera_outdoor</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-primary">Pole #14</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Domlur Flyover Underpass (Ward 86)</span>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex flex-col gap-1 max-w-[140px]">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-bold">91%</span>
+<span class="text-outline">28.0V Solar</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 91%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-sm">
+<div class="flex items-center gap-space-2xs text-secondary font-label-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_alt</span>
+<span>-68 dBm (4G LTE)</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Airtel Dual IoT SIM</span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">check</span>
+                  100% Clear
+                </span>
+</td>
+<td class="p-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                  Online
+                </span>
+</td>
+<td class="p-space-sm text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Remote Reboot" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Activate Lens Wiper" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" title="Test Network Ping" type="button">
+<span class="material-symbols-outlined text-[18px]">cell_tower</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Maintenance & Support Vendor Status -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-md mb-space-lg">
+<!-- Vendor 1: BEL -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined text-[24px]">build</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-primary">Bharat Electronics Ltd (BEL)</h3>
+<span class="font-body-sm text-body-sm text-outline">Zone: Indiranagar, Domlur &amp; Ulsoor (Wards 82-84)</span>
+</div>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">
+              98.4% SLA Met
+            </span>
+</div>
+<div class="mt-space-sm grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active Repair Tickets</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">3 Open</span>
+<span class="font-body-sm text-body-sm text-secondary">2 Dispatched on field</span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Avg Technician Arrival</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">42 Mins</span>
+<span class="font-body-sm text-body-sm text-outline">Standard SLA: &lt;2 Hours</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between mt-2">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">directions_run</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">Tech Van #04 - In Transit</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Headed to Pole #07 (Ulsoor Promenade) • ETA 14 Mins</span>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm font-bold hover:bg-surface-variant transition-colors" type="button">
+              Call Driver
+            </button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Annual Maintenance Contract #AMC-2024-BEL-URBAN</span>
+<a class="font-label-sm text-label-sm text-secondary font-bold hover:underline flex items-center gap-1" href="#">
+<span>View BEL Service Logs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Vendor 2: BHEL Urban IoT -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined text-[24px]">solar_power</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-primary">BHEL Urban IoT Infrastructure</h3>
+<span class="font-body-sm text-body-sm text-outline">Zone: Shivaji Nagar &amp; Kaggadasapura (Wards 85-88)</span>
+</div>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">
+              96.9% SLA Met
+            </span>
+</div>
+<div class="mt-space-sm grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active Repair Tickets</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">2 Open</span>
+<span class="font-body-sm text-body-sm text-on-tertiary-container">1 Scheduled for replacement</span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Avg Technician Arrival</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">58 Mins</span>
+<span class="font-body-sm text-body-sm text-outline">Standard SLA: &lt;2 Hours</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between mt-2">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-on-tertiary-container text-[20px]">engineering</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">Tech Van #09 - Scheduled Depot</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pole #11 (Shivaji Nagar Depot) • ETA 45 Mins</span>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm font-bold hover:bg-surface-variant transition-colors" type="button">
+              Call Driver
+            </button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Battery Warranty: 5 Years LiFePO4 Cell Guarantee</span>
+<a class="font-label-sm text-label-sm text-secondary font-bold hover:underline flex items-center gap-1" href="#">
+<span>View BHEL Service Logs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interactions for hardware action feedback
+  document.getElementById('btn-reboot')?.addEventListener('click', () => {
+    alert('Remote soft reboot signal dispatched to active Smart Pole hardware modules.');
+  });
+  document.getElementById('btn-wiper')?.addEventListener('click', () => {
+    alert('Mechanical 3-cycle silicone wiper triggered on all 8 cameras with dust warnings.');
+  });
+  document.getElementById('btn-ping')?.addEventListener('click', () => {
+    alert('4G LTE ICMP ping test initiated. Average latency across 128 nodes: 38ms.');
+  });
+</script></main><footer class="w-full bg-surface-container-low py-space-md shadow-[0_-1px_6px_rgba(0,46,135,0.03)]"><div class="w-full px-space-lg flex flex-col md:flex-row items-center justify-between gap-space-xs text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span><span>DPDP Act 2023 Compliant Enclave • MoHUA SBM-Urban 2.0 Optical Network</span></div><div class="flex items-center gap-space-sm"><span class="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-bold"><span class="w-2 h-2 rounded-full bg-secondary"></span>Operational</span><span>•</span><span>Command Cluster 04</span></div></div></footer></div></body></html>

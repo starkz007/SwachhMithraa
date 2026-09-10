@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>SwachhMitra Local Admin Portal</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"tertiary-fixed-dim":"#ffb77d","on-tertiary-fixed-variant":"#6e3900","on-error":"#ffffff","surface-container-highest":"#dae2fd","surface-bright":"#faf8ff","secondary-container":"#8fdfff","on-secondary-fixed-variant":"#004d62","surface-container-lowest":"#ffffff","tertiary-container":"#b36100","error-container":"#ffdad6","tertiary-fixed":"#ffdcc3","on-surface-variant":"#3e4942","on-tertiary":"#ffffff","surface-container-high":"#e2e7ff","on-tertiary-fixed":"#2f1500","on-surface":"#131b2e","surface-tint":"#006c47","surface":"#faf8ff","inverse-on-surface":"#eef0ff","primary":"#006b47","primary-fixed-dim":"#71dba6","on-background":"#131b2e","secondary-fixed":"#b9eaff","on-primary-fixed":"#002113","on-secondary-fixed":"#001f29","on-primary-fixed-variant":"#005235","secondary":"#006781","surface-dim":"#d2d9f4","inverse-primary":"#71dba6","surface-container-low":"#f2f3ff","on-primary-container":"#ffffff","on-primary":"#ffffff","tertiary":"#8f4c00","outline":"#6e7a71","secondary-fixed-dim":"#81d1f0","primary-fixed":"#8df7c1","on-tertiary-container":"#ffffff","inverse-surface":"#283044","on-secondary-container":"#00647d","background":"#faf8ff","surface-variant":"#dae2fd","surface-container":"#eaedff","on-error-container":"#93000a","error":"#ba1a1a","on-secondary":"#ffffff","outline-variant":"#bdcac0","primary-container":"#00875a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-sm":"0.75rem","space-xs":"0.5rem","space-2xl":"3rem","gutter-mobile":"1rem","space-2xs":"0.25rem","margin-desktop":"2.5rem","space-3xl":"4rem","gutter-desktop":"1.5rem","margin-mobile":"1.25rem","space-lg":"1.5rem","space-xl":"2rem"},"fontFamily":{"headline-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"]},"fontSize":{"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.015em","fontWeight":"700"}],"display-lg-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"display-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_16px_rgba(0,107,71,0.06)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-low/60"><img alt="Minimal modern geometric logo icon for SwachhMitra, depicting a stylized clean green leaf embracing a civic building or sparkling broom starburst emblem, vibrant emerald green, mint, and saffron gold gradient, flat vector style, pure transparent background.. Design context: - Primary color: #00875a
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XY4-zEiNe6HJTHsewTDVANEIGbXfk_8W4wqIK9bIpp9KIj1YK_1ssrA7Vxs-CMUzzMFMMNr8Jhu7wpfJltK15c_3nyUSjqrG9TI7q80XCP4b1qotLRBoWN82vgO4assMAuD8N5NJ52i5uH3HlZhoKtxPCx1BeWymD-hpxLD-Wk-NPAuFg-GSXbiHeZzv9ZYmsKzNO-HbTJBzkObmC4xw42WU01wcwhf1GQVD8vcPFXFhC68hH7hCzu-g"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">SwachhMitra</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Local Admin Portal</span></div></div><div class="px-space-lg pt-space-lg pb-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">BEAT OPERATIONS</span></div><nav class="flex flex-col gap-space-2xs px-space-md" data-active-classes="bg-primary-container text-on-primary-container font-label-lg rounded-xl shadow-[0_4px_14px_rgba(0,135,90,0.25)]"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="locality-gis-radar" href="#"><span class="material-symbols-outlined text-[20px]">radar</span><span>Locality GIS Radar</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="public-complaints-dispatch" href="#"><span class="material-symbols-outlined text-[20px]">report_problem</span><span>Public Complaints &amp; Dispatch</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="ai-camera-tickets" href="#"><span class="material-symbols-outlined text-[20px]">videocam</span><span>AI Camera Tickets</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="worker-roster-assign" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Worker Roster &amp; Assign</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="blackspot-heatmap" href="#"><span class="material-symbols-outlined text-[20px]">local_fire_department</span><span>Blackspot Heatmap</span></a></nav></div><div class="p-space-md m-space-md rounded-xl bg-surface-container-low shadow-[0_2px_8px_rgba(0,107,71,0.04)]"><div class="flex items-center justify-between mb-space-2xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Beat Resolution</span><span class="font-label-lg text-label-lg text-primary">94.2%</span></div><div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden"><div class="bg-primary-container h-full rounded-full w-[94.2%]"></div></div><p class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant">Beat Resolution Rate: 94.2%</p></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><img alt="Minimal modern geometric logo icon for SwachhMitra, depicting a stylized clean green leaf embracing a civic building or sparkling broom starburst emblem, vibrant emerald green, mint, and saffron gold gradient, flat vector style, pure transparent background.. Design context: - Primary color: #00875a
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+. The logo should be visually consistent with these brand tokens." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XY4-zEiNe6HJTHsewTDVANEIGbXfk_8W4wqIK9bIpp9KIj1YK_1ssrA7Vxs-CMUzzMFMMNr8Jhu7wpfJltK15c_3nyUSjqrG9TI7q80XCP4b1qotLRBoWN82vgO4assMAuD8N5NJ52i5uH3HlZhoKtxPCx1BeWymD-hpxLD-Wk-NPAuFg-GSXbiHeZzv9ZYmsKzNO-HbTJBzkObmC4xw42WU01wcwhf1GQVD8vcPFXFhC68hH7hCzu-g"/><div class="flex flex-col"><span class="font-label-lg text-label-lg text-on-surface">Ward 14 • Indiranagar Colony Beat #04</span><span class="font-body-sm text-body-sm text-on-surface-variant">ADM-2041-W14 Desk</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-high/70"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="font-label-sm text-label-sm text-primary">ON DUTY • 24x7 Control Room Connected</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md cursor-pointer"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">language</span><span>English (IN)</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span></div><div class="flex items-center gap-space-sm pl-space-sm"><div class="text-right hidden md:flex flex-col"><span class="font-label-md text-label-md text-on-surface">Suresh M. Gowda</span><span class="font-body-sm text-body-sm text-on-surface-variant">Sanitary Inspector / Local Admin</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface px-space-lg"><div class="flex flex-col w-full pb-space-2xl">
+<!-- Interactive Toast Notification Center (JS Triggerable) -->
+<div class="fixed bottom-space-lg right-space-lg z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-surface-container-lowest shadow-xl text-on-surface" id="toastNotification">
+<span class="material-symbols-outlined text-primary" id="toastIcon">check_circle</span>
+<span class="font-label-md text-label-md" id="toastMessage">Action broadcasted to fleet successfully.</span>
+</div>
+<!-- Operational Context Header Bar (Civic Glassmorphic Command Strip) -->
+<div class="relative w-full rounded-2xl bg-surface-container-lowest shadow-md p-space-lg mb-space-lg overflow-hidden">
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+<div class="absolute right-64 -bottom-20 w-60 h-60 rounded-full bg-secondary-container/20 blur-2xl pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md relative z-10">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="px-space-xs py-0.5 rounded-full bg-primary-container/15 text-primary font-label-sm text-label-sm uppercase tracking-wider font-bold">Beat Operational Desk</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">कार्यकर्ता रोस्टर एवं वाहन आवंटन</span>
+<span class="px-space-xs py-0.5 rounded-md bg-secondary-fixed/50 text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">Shift A (06:30 AM – 02:30 PM)</span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Muster Roll &amp; Fleet Roster</h1>
+<span class="font-label-md text-label-md text-on-surface-variant">Ward 14 • Indiranagar Colony Beat #04</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">
+          Supervised by <strong class="text-on-surface font-semibold">Suresh M. Gowda</strong> (Emp ID: ADM-2041-W14 • Sanitary Inspector). Complete shift deployment, verified biometric attendance check-in, real-time vehicle fuel/EV charge logs, and active door-to-door corridor routing.
+        </p>
+</div>
+<!-- Quick Operational Actions -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="flex items-center gap-space-2xs px-space-md py-space-sm rounded-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all shadow-sm" onclick="triggerAction('Substitute assignment modal opened for Ward 14 relief pool.', 'person_add')">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>+ Substitute Worker</span>
+</button>
+<button class="flex items-center gap-space-2xs px-space-md py-space-sm rounded-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all shadow-sm" onclick="triggerAction('Safety gear &amp; PPE requisition requisition indent #IND-9021 created.', 'inventory_2')">
+<span class="material-symbols-outlined text-[18px]">health_and_safety</span>
+<span>Indent PPE</span>
+</button>
+<button class="flex items-center gap-space-2xs px-space-md py-space-sm rounded-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all shadow-sm" onclick="downloadMuster()">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span>Daily Muster Sheet</span>
+</button>
+<button class="flex items-center gap-space-2xs px-space-md py-space-sm rounded-full bg-gradient-to-r from-primary-container to-secondary text-on-primary font-label-md text-label-md shadow-[0_4px_14px_rgba(0,135,90,0.25)] hover:shadow-lg transition-all active:scale-95" onclick="broadcastAlert()">
+<span class="material-symbols-outlined text-[18px]">campaign</span>
+<span>Broadcast Route Alert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Real-time Shift KPI Strip (4 Pillars) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg">
+<!-- KPI 1: Sanctioned Strength -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Muster Attendance</span>
+<span class="font-display-lg text-display-lg text-primary tracking-tight mt-space-2xs">8 / 8</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">how_to_reg</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>100% Biometric Punch-In</span>
+<span class="text-primary font-semibold">Zero Absentees</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full w-full"></div>
+</div>
+</div>
+</div>
+<!-- KPI 2: Dedicated Vehicles -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Active Beat Fleet</span>
+<span class="font-display-lg text-display-lg text-secondary tracking-tight mt-space-2xs">4 / 4</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">local_shipping</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>2 Compact EV, 1 Tipper, 1 Rickshaw</span>
+<span class="text-secondary font-semibold">All Online</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-full"></div>
+</div>
+</div>
+</div>
+<!-- KPI 3: Fleet Energy / Health -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Avg Charge &amp; Fuel</span>
+<span class="font-display-lg text-display-lg text-tertiary tracking-tight mt-space-2xs">78%</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[24px]">ev_station</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Fast Chargers Ready (Depot #2)</span>
+<span class="text-tertiary font-semibold">Optimal</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full w-[78%]"></div>
+</div>
+</div>
+</div>
+<!-- KPI 4: Shift Quota Progress -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Shift Completion</span>
+<span class="font-display-lg text-display-lg text-on-surface tracking-tight mt-space-2xs">62.5%</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[24px]">timelapse</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Elapsed: 4h 30m / 8h 00m</span>
+<span class="text-on-surface font-semibold">On Schedule</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full w-[62.5%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Roster Workspace (2/3 Column Roster Cards + 1/3 Right Column Operational Panel) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-lg">
+<!-- Left 8-Cols: Detailed Worker Roster & Dedicated Equipment Cards -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Active Duty Squad Personnel (4 Primary Beats)</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Live telemetry ping: 4s ago</span>
+</div>
+<!-- Worker Card 1: Ramesh Kumar (Hydraulic Heavy Tipper) -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm border-b-0">
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Portrait of an Indian municipal sanitation driver in high-visibility neon reflective vest and standard municipal badge, smiling confidently outdoors against an urban Bangalore street background with morning sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfGTc_6Fhe39i6k4yAPuT32jp-Wmc84Xr3D0tt07a4oO3C0BfXdcAqcAjMh0S2lCBjlFIU_oY-H20X_B4uVYtY3lUip6-fHpSWEODOcyqfWL-GxKbIIbglYr_So3o71E2Hj4kmgypcB4YRLuW7P4GWLOAr_f9ABXeYecxew2DWaNQqtEYWHJcWvh7usBgBUBse9NxRsdYjZJJe3XtBNGaE__NSw406v98JgSfVyHkcaIA_L5yEwqw"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-primary ring-2 ring-surface-container-lowest flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[10px]">check</span>
+</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Ramesh Kumar</span>
+<span class="px-space-xs py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">Emp ID: SWM-EMP-84920</span>
+<span class="px-space-xs py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold">Grade IV Waste Operator</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lead Hydraulic Tipper Driver • Indiranagar Beat Squad #1</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<a class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all" href="tel:+919845012891">
+<span class="material-symbols-outlined text-primary text-[18px]">call</span>
+<span>+91 98450 12891</span>
+</a>
+<button class="p-space-xs rounded-lg bg-primary-container text-on-primary-container hover:shadow-md transition-all" onclick="triggerAction('Dispatching reassignment ticket to Ramesh Kumar', 'assignment_turned_in')" title="Assign Direct Task">
+<span class="material-symbols-outlined text-[20px]">add_task</span>
+</button>
+</div>
+</div>
+<!-- Detail Grid for Worker 1 -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-space-sm p-space-sm rounded-xl bg-surface-container-low/70">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Vehicle Allocated</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">local_shipping</span>
+<span class="font-label-md text-label-md text-on-surface">KA-04-GA-1984</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Hydraulic Tipper #04 (EV)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">EV Battery &amp; Telemetry</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">battery_charging_80</span>
+<span class="font-label-md text-label-md text-primary font-bold">78% Charged</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Speed: 14 km/h • On Corridor</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Current Beat Zone</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-tertiary text-[18px]">near_me</span>
+<span class="font-label-md text-label-md text-on-surface truncate">18th Cross Corridor</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Metro Pillar Segment 3</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Punch-in Verification</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">fingerprint</span>
+<span class="font-label-md text-label-md text-on-surface">06:28 AM Verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Depot Gate #2 Biometric</span>
+</div>
+</div>
+<!-- Progress & Micro Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex-1 flex flex-col gap-1 max-w-md">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Task Load Capacity: 3 Assigned Active Tasks</span>
+<span class="text-tertiary font-bold">85% Full (2.1 Tonnes Lifted)</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full w-[85%]"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Next stop: AI Blackspot Clearance at Metro Pillar #42</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Live Breadcrumb Path visualizer launched for Tipper KA-04-GA-1984.', 'route')">
+<span class="material-symbols-outlined text-[16px]">route</span>
+<span>Breadcrumb Path</span>
+</button>
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Vehicle Swap protocol requested for Ramesh Kumar. Ready vehicles: 1.', 'swap_horiz')">
+<span class="material-symbols-outlined text-[16px]">swap_horiz</span>
+<span>Swap Vehicle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Worker Card 2: Sunil V. (Auto-Rickshaw Tipper) -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Portrait of an Indian municipal worker wearing a light green collared sanitation uniform and safety cap, smiling outside an urban community sanitation depot in Karnataka." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnGLgo75pHpgZHUBYRPm5qhg81knJloeywVymH791L5fAF9pCHLIzqURky0GkkU7C6mq6CEbR46lzs46LthDnvRIdJ0vCC68kGGyI42HgkWK2ThqLSbK3EigXe2z4IKcPz03tcTcKR2kxvpPxvebdw_Dem10djUJU2lVYmVPf-zG7HKIEHLTwHiTTgJniU937fVfiOn1G7ZA4VTqJZCWPQ8sc67TSR1-xoHThOmOAAZ38rEGMvv4I"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-primary ring-2 ring-surface-container-lowest flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[10px]">check</span>
+</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Sunil V.</span>
+<span class="px-space-xs py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">Emp ID: SWM-EMP-81204</span>
+<span class="px-space-xs py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-bold">Beat Collection Specialist</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Narrow Lane Commercial Waste Specialist • Beat 04 North</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<a class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all" href="tel:+919482177209">
+<span class="material-symbols-outlined text-primary text-[18px]">call</span>
+<span>+91 94821 77209</span>
+</a>
+<button class="p-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-all" onclick="triggerAction('Task reassignment window opened for Sunil V.', 'alt_route')" title="Re-route Task">
+<span class="material-symbols-outlined text-[20px]">alt_route</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-space-sm p-space-sm rounded-xl bg-surface-container-low/70">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Vehicle Allocated</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">electric_rickshaw</span>
+<span class="font-label-md text-label-md text-on-surface">KA-04-EA-9921</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Rickshaw Tipper #09 (CNG)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">CNG Fuel Reserve</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-tertiary text-[18px]">local_gas_station</span>
+<span class="font-label-md text-label-md text-tertiary font-bold">64% Pressure</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Sufficient for Shift Completion</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Current Beat Zone</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-tertiary text-[18px]">storefront</span>
+<span class="font-label-md text-label-md text-on-surface truncate">Nilgiris Commercial</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">12th Cross Market Sector</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Punch-in Verification</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">qr_code_scanner</span>
+<span class="font-label-md text-label-md text-on-surface">06:31 AM Verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">QR Supervisor Auth</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex-1 flex flex-col gap-1 max-w-md">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">2 Active Tasks in Progress</span>
+<span class="text-primary font-bold">50% Capacity (620 kg / 1200 kg)</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-[50%]"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">En route: Overflowing Bin Grievance Ticket #8841 (ETA 6 mins)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Live telemetry coordinates centered on Sunil V. (KA-04-EA-9921)', 'location_on')">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+<span>View Live GPS</span>
+</button>
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-sm text-label-sm transition-all" onclick="triggerAction('Priority redirect dispatched to Sunil V. for ticket #8841.', 'alt_route')">
+<span class="material-symbols-outlined text-[16px]">send_time_extension</span>
+<span>Re-route Task</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Worker Card 3: Anand K. (Compact Electric Tipper - Standby / Rapid Response) -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Close-up portrait of a young South Indian sanitation technician in a fluorescent safety vest with a digital radio handheld clip, standing under clean morning light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2bgUZv8leacfh63b9fVWeac7sxQ2qD1kVKj_3nv6H-qpCGhB7tFb9EMnsQP_WGjjbTN-gXO5hPt46lp9rL4IoE8TrjaQAQgTK-iiRkJJw1dKvc2s68RTYldLAO3n8EW9_xxB52qcX5S2OVIzrz8OI8-3winXfaFOEMrEcfr5F5ZlcSVGqqbHcBrRazTZPIjYkEQ0ILbYjyOuT4mikAh9pAGH2plONs9wV2k7CdlnGC6UCACkA-Pk"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-primary ring-2 ring-surface-container-lowest flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[10px]">check</span>
+</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Anand K.</span>
+<span class="px-space-xs py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">Emp ID: SWM-EMP-79451</span>
+<span class="px-space-xs py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold">Rapid Response Unit Lead</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sanitation Assistant &amp; Flying Squad Operator</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<a class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all" href="tel:+919741044382">
+<span class="material-symbols-outlined text-primary text-[18px]">call</span>
+<span>+91 97410 44382</span>
+</a>
+<button class="px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm hover:shadow-md transition-all flex items-center gap-space-2xs" onclick="triggerAction('Immediate rapid dispatch siren triggered for Anand K.', 'emergency')">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>Quick Dispatch</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-space-sm p-space-sm rounded-xl bg-surface-container-low/70">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Vehicle Allocated</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">electric_car</span>
+<span class="font-label-md text-label-md text-on-surface">KA-04-ET-3021</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Compact Tipper #02 (EV)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">EV Battery Status</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">battery_full</span>
+<span class="font-label-md text-label-md text-primary font-bold">91% High Reserve</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Fast-Charged at 05:45 AM</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Staging Location</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-tertiary text-[18px]">local_convenience_store</span>
+<span class="font-label-md text-label-md text-on-surface truncate">14th Main Standby</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Ward Depot Central Dock</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Punch-in Verification</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span class="font-label-md text-label-md text-on-surface">06:25 AM Verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Facial AI Recognition #01</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex-1 flex flex-col gap-1 max-w-md">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Task Load Capacity: 1 Routine Task</span>
+<span class="text-primary font-bold">25% (Ready for Emergency Dispatch)</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[25%]"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Status: Idling at Depot • Standby for Citizen SOS Escalations</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Duty shift calendar updated for Anand K.', 'calendar_month')">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+<span>Schedule Duty</span>
+</button>
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Standby route test ping transmitted to vehicle KA-04-ET-3021.', 'sensors')">
+<span class="material-symbols-outlined text-[16px]">sensors</span>
+<span>Signal Test</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Worker Card 4: Manjunath B. & Sweeper Crew (Manual Sweeping / Handcart) -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Portrait of an experienced Indian senior sanitation supervisor with a warm demeanor, wearing a high-visibility orange and green jacket with Swachh Bharat logo on breast pocket, morning depot setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUAhmkCvTaEaX5DRGUbalE4F83k1n-aRXthGk9acEZEPBhyzS9y8JquJ12G-e8V_zJj3jswjr1KRql_3caP2qspxaNA8s-A72YXmdtouEM5xKVaVULSRgOWCL5hMFdl1hoUQV3FwIelus-meMElxRjL_guDAxtopN0PdLfrSs20aXcjNLjBDvTA-nGjGJg0J_PJlnqNK_ApQHgqGGzV_YdHUY_XlxXnNpTZLCxU3G27uNpTwQ49Ew"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-primary ring-2 ring-surface-container-lowest flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[10px]">check</span>
+</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Manjunath B. &amp; Foot Sweeper Crew</span>
+<span class="px-space-xs py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">Emp ID: SWM-EMP-88112</span>
+<span class="px-space-xs py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold">Gang No. 4 Lead</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Manual Street Sweeper &amp; Storm Drain Clearance Lead (4 Crew Members)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<a class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all" href="tel:+919611230944">
+<span class="material-symbols-outlined text-primary text-[18px]">call</span>
+<span>+91 96112 30944</span>
+</a>
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm hover:shadow-md transition-all" onclick="triggerAction('Opening Waste Weight Inflow logger for Handcart #HC-14', 'scale')">
+<span class="material-symbols-outlined text-[16px]">scale</span>
+<span>Log Clearance Weight</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-space-sm p-space-sm rounded-xl bg-surface-container-low/70">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Equipment Assigned</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">shopping_cart</span>
+<span class="font-label-md text-label-md text-on-surface">Cart #HC-14</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Motorized Leaf Blower #03</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Street Distance Swept</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">linear_scale</span>
+<span class="font-label-md text-label-md text-primary font-bold">4.2 / 6.0 km</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">70% Target Swept Today</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Active Sweep Footpath</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-tertiary text-[18px]">footprint</span>
+<span class="font-label-md text-label-md text-on-surface truncate">15th to 17th Cross</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Residential Avenues</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Punch-in Verification</span>
+<div class="flex items-center gap-space-2xs mt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">checklist_rtl</span>
+<span class="font-label-md text-label-md text-on-surface">06:20 AM Verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Depot Roll Call (All 4 Present)</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex-1 flex flex-col gap-1 max-w-md">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Footpath Quota Progress</span>
+<span class="text-primary font-bold">4.2 km swept (1.8 km pending)</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[70%]"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Next collection link-up: Tipper KA-04-GA-1984 at 16th Cross junction (10:45 AM)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Supplies check: Fresh broom heads and bio-hazard gloves dispatched to Gang #4', 'local_shipping')">
+<span class="material-symbols-outlined text-[16px]">cleaning_services</span>
+<span>Re-stock Gear</span>
+</button>
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Calling Gang Lead Manjunath B. (+91 96112 30944)...', 'ring_volume')">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span>SMS Alert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right 4-Cols: Fleet Telemetry Inflow & Shift Administration Deck -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Live Shift Roster & Muster Summary Card -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Shift Schedule &amp; Pool</h3>
+<span class="px-space-xs py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold">Morning Slot</span>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-on-surface font-label-md text-label-md">
+<span>Morning Shift:</span>
+<span class="font-bold text-primary">06:30 – 14:30 IST</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Evening Standby:</span>
+<span>14:30 – 22:30 IST</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Night Emergency Patrol:</span>
+<span>22:30 – 06:30 IST</span>
+</div>
+</div>
+<!-- Standby Relievers / Relief Pool -->
+<div class="mt-space-2xs flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Sub-Depot Relief Pool (Domlur #02)</span>
+<span class="text-primary font-label-sm text-label-sm font-semibold">2 Available</span>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-high/60">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface font-semibold text-label-sm">
+                DK
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Deepak Kumar M.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Grade IV Reliever • Clean License</span>
+</div>
+</div>
+<button class="px-space-xs py-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm hover:shadow-sm" onclick="triggerAction('Deepak Kumar summoned from Domlur standby to Indiranagar Beat #04', 'swap_calls')">
+              Deploy
+            </button>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-high/60">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface font-semibold text-label-sm">
+                PS
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Pooja Shankar</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sanitation Sweeper • Zone Roster #14</span>
+</div>
+</div>
+<button class="px-space-xs py-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm hover:shadow-sm" onclick="triggerAction('Pooja Shankar assigned to secondary lane backup', 'swap_calls')">
+              Deploy
+            </button>
+</div>
+</div>
+<!-- Worker Welfare & Ayushman Bharat Status -->
+<div class="p-space-sm rounded-xl bg-primary-container/10 mt-space-2xs flex flex-col gap-1">
+<div class="flex items-center gap-space-2xs text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>Welfare &amp; PPE Compliance 100%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            All 8 active personnel covered under Ayushman Bharat Pradhan Mantri Jan Arogya Yojana. Reflective boots, cut-resistant gloves &amp; N95 dust masks verified at muster check-in.
+          </p>
+</div>
+</div>
+<!-- Live Shift Inflow Telemetry by Vehicle -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Fleet Telemetry Monitor</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sensors Online</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Live load cell data transmission from on-board weigh sensors and GPS transponders.</p>
+<!-- Dynamic Micro-Visualization of Collected Tonnage -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Shift Tonnage Collected</span>
+<span class="font-headline-sm text-headline-sm text-primary">5.82 / 8.5 Tonnes</span>
+</div>
+<!-- Simple Accessible SVG Progress Bar -->
+<svg class="w-full h-4 rounded-full overflow-hidden" preserveaspectratio="none" viewbox="0 0 100 12">
+<rect fill="#e2e7ff" height="12" width="100"></rect>
+<!-- Tipper #04: 36% -->
+<rect fill="#006b47" height="12" width="36"></rect>
+<!-- Rickshaw #09: 18% -->
+<rect fill="#006781" height="12" width="18" x="36"></rect>
+<!-- Compact #02: 14% -->
+<rect fill="#8f4c00" height="12" width="14.5" x="54"></rect>
+</svg>
+<div class="grid grid-cols-3 gap-space-2xs text-center font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1 justify-center">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+<span>Tipper #04 (2.1t)</span>
+</div>
+<div class="flex items-center gap-1 justify-center">
+<span class="w-2 h-2 rounded-full bg-secondary inline-block"></span>
+<span>Rickshaw #09 (1.1t)</span>
+</div>
+<div class="flex items-center gap-1 justify-center">
+<span class="w-2 h-2 rounded-full bg-tertiary inline-block"></span>
+<span>Tipper #02 (0.9t)</span>
+</div>
+</div>
+</div>
+<!-- Transfer Station Dispatch Schedule -->
+<div class="flex flex-col gap-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Scheduled Transfer Station Runs</span>
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-low text-on-surface">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">recycling</span>
+<span class="font-label-md text-label-md">Koramanagala Transfer Yard</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Slot: 11:30 AM</span>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-low text-on-surface">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">compost</span>
+<span class="font-label-md text-label-md">Indiranagar Wet Composting Plant</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Slot: 01:15 PM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dedicated Fleet Vehicle Roster Table (Comprehensive Asset Tracking) -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">rv_hookup</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Municipal Vehicle Fleet Telemetry Log</h2>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dedicated rolling stock allotted to Ward 14 Beat #04 with IoT CAN bus diagnostics.</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="relative">
+<input class="h-10 pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary w-64 shadow-inner" id="vehicleSearch" onkeyup="filterVehicles()" placeholder="Filter by vehicle #, driver..." type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant absolute left-2.5 top-2.5 text-[18px]">search</span>
+</div>
+<button class="p-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-all" onclick="triggerAction('Telemetry cache refreshed from BBMP Fleet Cloud', 'sync')" title="Refresh Telemetry">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Telemetry Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse" id="fleetTable">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<th class="py-space-sm px-space-md rounded-l-xl">Vehicle Reg &amp; Unit</th>
+<th class="py-space-sm px-space-md">Type / Model</th>
+<th class="py-space-sm px-space-md">Assigned Operator</th>
+<th class="py-space-sm px-space-md">Current State</th>
+<th class="py-space-sm px-space-md">GPS Ping</th>
+<th class="py-space-sm px-space-md">Power / Energy</th>
+<th class="py-space-sm px-space-md">Tonnage Cleared</th>
+<th class="py-space-sm px-space-md text-right rounded-r-xl">Telemetry Command</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-sm text-body-sm text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-lg text-label-lg font-bold">KA-04-GA-1984</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Unit: Tipper #04</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold">Tata Ace EV Bi-Compartment</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">Hydraulic Compactor</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs">
+<span class="font-medium text-on-surface">Ramesh Kumar</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">(SWM-EMP-84920)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Running (14 km/h)
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[14px]">cell_tower</span>
+<span>2s ago • 4G OBD</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs">
+<span class="font-bold text-primary">78%</span>
+<span class="text-on-surface-variant text-body-sm">Li-ion (21.3 kWh)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold text-on-surface">
+              2.12 Tonnes
+            </td>
+<td class="py-space-md px-space-md text-right">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Opening live diagnostics window for KA-04-GA-1984', 'insights')">
+                Diagnose
+              </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-lg text-label-lg font-bold">KA-04-EA-9921</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Unit: Rickshaw #09</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold">Bajaj Maxima Commercial Tipper</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">High-Maneuver Lane Cart</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs">
+<span class="font-medium text-on-surface">Sunil V.</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">(SWM-EMP-81204)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> En Route (Bin #8841)
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[14px]">cell_tower</span>
+<span>6s ago • GPS Tracker</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs">
+<span class="font-bold text-tertiary">64%</span>
+<span class="text-on-surface-variant text-body-sm">CNG Cylinders (6.8 kg)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold text-on-surface">
+              1.10 Tonnes
+            </td>
+<td class="py-space-md px-space-md text-right">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Opening live diagnostics window for KA-04-EA-9921', 'insights')">
+                Diagnose
+              </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<span class="font-label-lg text-label-lg font-bold">KA-04-ET-3021</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Unit: Tipper #02</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold">Mahindra Zor Grand EV Tipper</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">High-Torque Zero Emission</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs">
+<span class="font-medium text-on-surface">Anand K.</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">(SWM-EMP-79451)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Idling (Depot Standby)
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[14px]">cell_tower</span>
+<span>1s ago • Wi-Fi / Depot</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs">
+<span class="font-bold text-primary">91%</span>
+<span class="text-on-surface-variant text-body-sm">Li-ion (Fast Ready)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold text-on-surface">
+              0.90 Tonnes
+            </td>
+<td class="py-space-md px-space-md text-right">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Opening live diagnostics window for KA-04-ET-3021', 'insights')">
+                Diagnose
+              </button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-label-lg text-label-lg font-bold">HC-14-SWM</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Unit: Handcart #HC-14</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="font-semibold">Swachhata Ergonomic Handcart</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">Twin 100L Waste Bins</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs">
+<span class="font-medium text-on-surface">Manjunath B. &amp; Crew</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">(4 Sweepers)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Active Sweeping (4.2 km)
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">smartphone</span>
+<span>Mobile App Geo-Fence</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs">
+<span class="font-bold text-primary">100%</span>
+<span class="text-on-surface-variant text-body-sm">Leaf Blower Battery</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold text-on-surface">
+              1.70 Tonnes
+            </td>
+<td class="py-space-md px-space-md text-right">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm transition-all" onclick="triggerAction('Opening inspection log for Handcart Squad HC-14', 'receipt_long')">
+                Audit Log
+              </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Interactive Client-side Script for Roster Actions and Telemetry Filter -->
+<script>
+    function triggerAction(message, iconName) {
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMsg.innerText = message;
+      toastIcon.innerText = iconName || 'check_circle';
+
+      toast.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+      }, 4000);
+    }
+
+    function broadcastAlert() {
+      const promptText = prompt("Enter SMS/Audio Broadcast Alert message for Beat 04 workforce:", "Urgent: Complete residential corridor before 11:30 AM ahead of road repair at 17th Cross.");
+      if (promptText) {
+        triggerAction("Broadcast alert sent to all 8 checked-in personnel mobile devices.", "campaign");
+      }
+    }
+
+    function downloadMuster() {
+      triggerAction("Generating digitally signed PDF Muster Roll for Ward 14 Beat #04 (Morning Shift)...", "download");
+    }
+
+    function filterVehicles() {
+      const input = document.getElementById("vehicleSearch").value.toUpperCase();
+      const table = document.getElementById("fleetTable");
+      const trs = table.getElementsByTagName("tr");
+
+      for (let i = 1; i < trs.length; i++) {
+        const textContent = trs[i].textContent || trs[i].innerText;
+        if (textContent.toUpperCase().indexOf(input) > -1) {
+          trs[i].style.display = "";
+        } else {
+          trs[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_6px_rgba(0,0,0,0.03)] py-space-md px-space-lg mt-auto"><div class="w-full flex flex-col md:flex-row items-center justify-between gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><span>Connected to Central ULB SWM ERP Cloud • Session ID: SWM-W14-AUTH-90812 | Ward 14 Sanitary Inspector Desk</span><div class="flex items-center gap-space-md"><a class="hover:text-primary transition-colors" href="#">Audit Logs</a><span>•</span><a class="text-error hover:underline transition-colors flex items-center gap-space-2xs" href="#"><span class="material-symbols-outlined text-[14px]">warning</span>Emergency Protocol</a></div></div></footer></div></body></html>
