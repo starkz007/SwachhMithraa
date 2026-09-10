@@ -32,3 +32,5 @@ venv/
 env/
 *.sqlite3
 *.db
+
+*.zip
