@@ -426,8 +426,8 @@ export const PortalLogin = () => {
                       onChange={(e) => setAdminId(e.target.value)}
                       className="w-full h-11 pl-11 pr-4 rounded-xl bg-surface-container-low text-on-surface text-sm border border-outline-variant/30 focus:border-secondary focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all shadow-inner font-mono"
                       placeholder={
-                        selectedAdminTier === 'local_admin' ? "e.g. WARD-ADM-14" :
-                        selectedAdminTier === 'zonal_admin' ? "e.g. ZONE-DIR-03" : "e.g. APEX-CMD-01"
+                        selectedAdminTier === 'local_admin' ? "Enter Ward Officer ID" :
+                        selectedAdminTier === 'zonal_admin' ? "Enter Zonal Director ID" : "Enter Apex Central Command ID"
                       }
                       required
                     />
@@ -510,7 +510,7 @@ export const PortalLogin = () => {
                       value={cctvId}
                       onChange={(e) => setCctvId(e.target.value)}
                       className="w-full h-11 pl-11 pr-4 rounded-xl bg-surface-container-low text-on-surface text-sm border border-outline-variant/30 focus:border-primary focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-inner font-mono"
-                      placeholder="e.g. CAM-ENG-401"
+                      placeholder="Enter Engineer or Operator ID"
                       required
                     />
                   </div>
