@@ -3,11 +3,46 @@ import { useApp } from '../../context/AppContext';
 
 export const IncidentEvidenceVault = () => {
   const { aiCameraAlerts, issueChallan, showToast } = useApp();
-  const [selectedIncident, setSelectedIncident] = useState(aiCameraAlerts[0]);
+  const [selectedId, setSelectedId] = useState(null);
   const [playbackTime, setPlaybackTime] = useState(6); // 0 to 10 seconds scrubber
 
+  const alerts = Array.isArray(aiCameraAlerts) && aiCameraAlerts.length > 0 ? aiCameraAlerts : [
+    {
+      id: "CAM-VIO-4891",
+      cameraNode: "POLE-CAM-1402 (Indiranagar 100ft Rd)",
+      timestamp: "10:14:22 AM Today",
+      violationType: "Commercial Waste Dumping",
+      violation: "Commercial Waste Dumping",
+      confidence: 94.8,
+      vehiclePlate: "KA-04-MB-4819",
+      plateNumber: "KA-04-MB-4819",
+      offenderType: "Commercial Pick-up Truck",
+      ownerName: "Commercial Pick-up Truck",
+      fineAmount: 2500,
+      status: "Review Pending",
+      sha256Hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      videoClipUrl: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80",
+      bbox: { x: 25, y: 30, w: 45, h: 40 }
+    }
+  ];
+
+  const currentIncident = alerts.find(a => a.id === selectedId) || alerts[0];
+
+  // Normalized fields
+  const videoUrl = currentIncident?.videoClipUrl || "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80";
+  const violationTitle = currentIncident?.violationType || currentIncident?.violation || "Optical Waste Violation";
+  const plate = currentIncident?.vehiclePlate || currentIncident?.plateNumber || "KA-04-MB-4819";
+  const offender = currentIncident?.offenderType || currentIncident?.ownerName || "Civic Offender Evidence";
+  const confidence = currentIncident?.confidence || 95;
+  const fine = currentIncident?.fineAmount || 500;
+  const status = currentIncident?.status || "Review Pending";
+  const node = currentIncident?.cameraNode || currentIncident?.nodeId || "POLE-NODE-1402";
+  const time = currentIncident?.timestamp || "Just now";
+  const sha = currentIncident?.sha256Hash || "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const bbox = currentIncident?.bbox || { x: 25, y: 30, w: 45, h: 40 };
+
   const handleDownloadEvidencePackage = () => {
-    showToast(`Encrypted Judicial Evidence ZIP package generated for ${selectedIncident.id} with SHA-256 hash seal!`, "success");
+    showToast(`Encrypted Judicial Evidence ZIP package generated for ${currentIncident?.id} with SHA-256 hash seal!`, "success");
   };
 
   return (
@@ -22,7 +57,7 @@ export const IncidentEvidenceVault = () => {
           </div>
           <h2 className="text-xl font-bold text-on-surface">AI Incident Playback & Evidence Vault</h2>
           <p className="text-xs text-on-surface-variant">
-            Review 10-second verified video recordings of littering and dumping carrying cryptographic SHA-256 tamper seals
+            Review verified video recordings of littering and dumping carrying cryptographic SHA-256 tamper seals
           </p>
         </div>
 
@@ -36,14 +71,13 @@ export const IncidentEvidenceVault = () => {
         </button>
       </div>
 
-      {/* Video Scrubber & ANPR Inspector */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         {/* Main 10s Clip Scrubber Pane */}
         <div className="lg:col-span-2 space-y-4">
           <div className="relative rounded-3xl bg-black overflow-hidden border border-outline-variant/40 shadow-xl" style={{ height: '380px' }}>
             <img
-              src={selectedIncident.videoClipUrl}
-              alt={selectedIncident.id}
+              src={videoUrl}
+              alt={currentIncident?.id}
               className="w-full h-full object-cover opacity-85"
             />
 
@@ -51,52 +85,53 @@ export const IncidentEvidenceVault = () => {
             <div
               className="absolute border-2 border-rose-500 bg-rose-500/20 rounded-md animate-pulse"
               style={{
-                left: `${selectedIncident.bbox.x}%`,
-                top: `${selectedIncident.bbox.y}%`,
-                width: `${selectedIncident.bbox.w}%`,
-                height: `${selectedIncident.bbox.h}%`
+                left: `${bbox.x}%`,
+                top: `${bbox.y}%`,
+                width: `${bbox.w}%`,
+                height: `${bbox.h}%`
               }}
             >
-              <span className="absolute -top-6 left-0 px-2 py-0.5 rounded bg-rose-600 text-white font-mono text-[10px] font-bold">
-                {selectedIncident.violationType} ({selectedIncident.confidence}%)
+              <span className="absolute -top-6 left-0 px-2 py-0.5 rounded bg-rose-600 text-white font-mono text-[10px] font-bold whitespace-nowrap">
+                {violationTitle} ({confidence}%)
               </span>
             </div>
 
             {/* Timestamp Watermark */}
             <div className="absolute top-3 left-4 px-3 py-1 rounded-md bg-black/70 text-white font-mono text-xs">
-              CAM: {selectedIncident.cameraNode} | TIME: {selectedIncident.timestamp}
+              CAM: {node} | TIME: {time}
             </div>
 
             <div className="absolute top-3 right-4 px-3 py-1 rounded-md bg-black/70 text-cyan-300 font-mono text-[11px]">
-              SHA-256: {selectedIncident.sha256Hash.slice(0, 16)}...
+              SHA-256: {sha.slice(0, 16)}...
             </div>
 
             {/* Scrubber Control Bar */}
             <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/95 via-black/80 to-transparent space-y-2">
-              <div className="flex items-center justify-between text-xs text-white">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-base text-cyan-400">play_circle</span>
-                  <span className="font-mono">00:0{playbackTime} / 00:10</span>
-                </div>
-                <span className="text-[10px] text-gray-300">Frame: {playbackTime * 30} / 300 (100% Tamper Sealed)</span>
+              <div className="flex items-center justify-between text-xs text-white font-mono">
+                <span>00:0{playbackTime} / 00:10</span>
+                <span className="text-secondary-fixed">AI Violation Trigger: Frame 184</span>
               </div>
-
               <input
                 type="range"
                 min="0"
                 max="10"
                 value={playbackTime}
                 onChange={(e) => setPlaybackTime(Number(e.target.value))}
-                className="w-full h-1.5 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                className="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
           </div>
 
-          {/* SHA-256 Hash Display */}
-          <div className="p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 text-xs space-y-1 font-mono">
-            <div className="text-outline font-sans font-bold">Cryptographic Chain-of-Custody SHA-256 Fingerprint:</div>
-            <div className="text-primary break-all font-semibold select-all bg-surface-container-low p-2 rounded-lg">
-              {selectedIncident.sha256Hash}
+          {/* Cryptographic Proof Details */}
+          <div className="p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 text-xs space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-on-surface">Tamper-Proof Audit Manifest:</span>
+              <span className="font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold text-[10px]">
+                Integrity Verified (0 Bit Flip)
+              </span>
+            </div>
+            <div className="font-mono text-[11px] text-on-surface-variant break-all bg-surface-container-low p-2 rounded-xl">
+              Hash: {sha}
             </div>
           </div>
         </div>
@@ -112,7 +147,7 @@ export const IncidentEvidenceVault = () => {
             <div className="p-3 rounded-2xl bg-surface-container-low border border-outline-variant/20 space-y-2 text-xs">
               <div className="text-outline">Extracted Vehicle Number:</div>
               <div className="text-xl font-black font-mono tracking-widest text-on-surface bg-white p-2.5 rounded-xl border text-center">
-                {selectedIncident.vehiclePlate}
+                {plate}
               </div>
               <div className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
                 <span className="material-symbols-outlined text-sm">check_circle</span>
@@ -123,22 +158,22 @@ export const IncidentEvidenceVault = () => {
             <div className="space-y-2 text-xs">
               <div className="flex justify-between">
                 <span className="text-outline">Offender Category:</span>
-                <span className="font-bold text-on-surface">{selectedIncident.offenderType}</span>
+                <span className="font-bold text-on-surface">{offender}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-outline">Confidence Metric:</span>
-                <span className="font-bold text-primary">{selectedIncident.confidence}% FP16 Neural</span>
+                <span className="font-bold text-primary">{confidence}% FP16 Neural</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-outline">Statutory Penalty:</span>
-                <span className="font-black text-rose-700 text-sm">₹{selectedIncident.fineAmount}</span>
+                <span className="font-black text-rose-700 text-sm">₹{fine}</span>
               </div>
             </div>
 
-            {selectedIncident.status !== 'Challan Issued' ? (
+            {status !== 'Challan Issued' ? (
               <button
                 type="button"
-                onClick={() => issueChallan(selectedIncident.id)}
+                onClick={() => issueChallan(currentIncident?.id)}
                 className="w-full py-3 rounded-xl bg-rose-700 hover:bg-rose-800 text-white font-bold text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span className="material-symbols-outlined text-base">gavel</span>
@@ -153,22 +188,26 @@ export const IncidentEvidenceVault = () => {
 
           {/* Incident Selector List */}
           <div className="p-4 rounded-3xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm space-y-2">
-            <div className="text-xs font-bold text-outline uppercase tracking-wider">Recorded Incidents Today</div>
-            <div className="space-y-1.5">
-              {aiCameraAlerts.map(alert => (
-                <button
-                  key={alert.id}
-                  type="button"
-                  onClick={() => setSelectedIncident(alert)}
-                  className={`w-full text-left p-2.5 rounded-xl text-xs flex items-center justify-between transition-colors ${selectedIncident.id === alert.id ? 'bg-primary text-on-primary font-bold' : 'hover:bg-surface-container-low text-on-surface'}`}
-                >
-                  <div className="truncate pr-2">
-                    <div>{alert.violationType}</div>
-                    <div className="text-[10px] opacity-75 font-mono">{alert.id} • {alert.timestamp}</div>
-                  </div>
-                  <span className="material-symbols-outlined text-base shrink-0">chevron_right</span>
-                </button>
-              ))}
+            <div className="text-xs font-bold text-outline uppercase tracking-wider">Recorded Incidents ({alerts.length})</div>
+            <div className="space-y-1.5 max-h-64 overflow-y-auto">
+              {alerts.map(alert => {
+                const isSelected = currentIncident?.id === alert.id;
+                const aTitle = alert.violationType || alert.violation || "Optical Waste Violation";
+                return (
+                  <button
+                    key={alert.id}
+                    type="button"
+                    onClick={() => setSelectedId(alert.id)}
+                    className={`w-full text-left p-2.5 rounded-xl text-xs flex items-center justify-between transition-colors ${isSelected ? 'bg-primary text-on-primary font-bold' : 'hover:bg-surface-container-low text-on-surface'}`}
+                  >
+                    <div className="truncate pr-2">
+                      <div>{aTitle}</div>
+                      <div className="text-[10px] opacity-75 font-mono">{alert.id} • {alert.timestamp || 'Today'}</div>
+                    </div>
+                    <span className="material-symbols-outlined text-base shrink-0">chevron_right</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

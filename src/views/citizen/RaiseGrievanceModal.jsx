@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
-  const { addTicket } = useApp();
+  const { addTicket, showToast } = useApp();
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Garbage Dump / Overflowing Bin');
   const [location, setLocation] = useState('12th Cross Park, Indiranagar 2nd Stage');
   const [priority, setPriority] = useState('High');
   const [notes, setNotes] = useState('');
   const [photoPreview, setPhotoPreview] = useState('https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80');
+  const fileInputRef = useRef(null);
 
   if (!isOpen) return null;
 
@@ -32,6 +33,24 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
       photoUrl: photoPreview
     });
     onClose();
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Check size (< 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      if (showToast) showToast('File too large (max 10MB)', 'error');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setPhotoPreview(event.target.result);
+      if (showToast) showToast('Custom photo uploaded successfully!', 'success');
+    };
+    reader.readAsDataURL(file);
   };
 
   const simulatePhotoUpload = () => {
@@ -91,29 +110,70 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block font-bold text-on-surface mb-1">Photo Evidence (Live Geotagged)</label>
-            <div className="relative rounded-2xl overflow-hidden border border-outline-variant/40 bg-surface-container-low h-40 flex items-center justify-center group">
+            <div className="flex items-center justify-between mb-1">
+              <label className="block font-bold text-on-surface">Photo Evidence (Upload Your Photo)</label>
+              <span className="text-[10px] text-primary font-bold">JPG / PNG / WEBP</span>
+            </div>
+
+            {/* Hidden native file input */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept="image/*"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+
+            <div 
+              onClick={() => fileInputRef.current?.click()}
+              className="relative rounded-2xl overflow-hidden border-2 border-dashed border-outline-variant/60 hover:border-primary cursor-pointer bg-surface-container-low h-44 flex flex-col items-center justify-center group transition-colors"
+            >
               {photoPreview ? (
-                <img src={photoPreview} alt="Evidence preview" className="w-full h-full object-cover" />
+                <>
+                  <img src={photoPreview} alt="Evidence preview" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 text-white">
+                    <span className="material-symbols-outlined text-2xl">file_upload</span>
+                    <span className="text-xs font-bold">Click to Upload Different Photo</span>
+                  </div>
+                </>
               ) : (
-                <div className="text-center text-outline">
-                  <span className="material-symbols-outlined text-3xl">add_a_photo</span>
-                  <div>Click to capture or upload photo</div>
+                <div className="text-center text-outline p-4">
+                  <span className="material-symbols-outlined text-4xl mb-1 text-primary">cloud_upload</span>
+                  <div className="text-xs font-bold text-on-surface">Click to Upload Your Own Photo</div>
+                  <div className="text-[10px] text-outline mt-0.5">Supports Camera capture or local file from device</div>
                 </div>
               )}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                <button
-                  type="button"
-                  onClick={simulatePhotoUpload}
-                  className="px-3 py-1.5 rounded-full bg-white text-black font-bold text-[11px] shadow-md flex items-center gap-1"
-                >
-                  <span className="material-symbols-outlined text-sm">photo_camera</span>
-                  <span>Capture / New Photo</span>
-                </button>
-              </div>
-              <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/60 text-white font-mono text-[10px] backdrop-blur-xs">
+
+              <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/70 text-white font-mono text-[10px] backdrop-blur-xs flex items-center gap-1">
+                <span className="material-symbols-outlined text-xs text-emerald-400">my_location</span>
                 GPS: 12.9716° N, 77.6412° E
               </span>
+
+              <span className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-black/70 text-white text-[10px] font-medium backdrop-blur-xs">
+                Tap to replace
+              </span>
+            </div>
+
+            {/* Quick Action Buttons for Photo */}
+            <div className="flex items-center gap-2 mt-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="flex-1 py-2 px-3 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+              >
+                <span className="material-symbols-outlined text-base">upload_file</span>
+                <span>Choose From My Device</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={simulatePhotoUpload}
+                title="Cycle sample test pictures"
+                className="py-2 px-3 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-semibold text-xs flex items-center gap-1 transition-colors"
+              >
+                <span className="material-symbols-outlined text-base">shuffle</span>
+                <span>Try Sample</span>
+              </button>
             </div>
           </div>
 

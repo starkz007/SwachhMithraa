@@ -6,6 +6,7 @@ export const PublicComplaintsDispatch = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [sourceFilter, setSourceFilter] = useState('all'); // 'all' | 'citizen' | 'ai_camera'
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [evidenceTicket, setEvidenceTicket] = useState(null);
 
   const filteredTickets = tickets.filter(t => {
     // 1. Status Filter
@@ -178,23 +179,37 @@ export const PublicComplaintsDispatch = () => {
                         )}
                       </td>
                       <td className="py-3.5 px-4 text-right">
-                        {t.status === 'pending' ? (
+                        <div className="flex items-center justify-end gap-1.5">
+                          {/* Evidence Review Button */}
                           <button
                             type="button"
-                            onClick={() => setSelectedTicket(t)}
-                            className="px-3 py-1.5 rounded-lg bg-primary text-on-primary text-[11px] font-bold hover:bg-primary-deep shadow-xs"
+                            onClick={() => setEvidenceTicket(t)}
+                            title="Inspect high-resolution photo & digital seal"
+                            className="px-2.5 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary text-[11px] font-bold border border-outline-variant/30 flex items-center gap-1 transition-colors"
                           >
-                            Dispatch Crew
+                            <span className="material-symbols-outlined text-sm">visibility</span>
+                            <span>Evidence</span>
                           </button>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={() => showToast(`Ticket ${t.id} audit details loaded.`, 'info')}
-                            className="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-[11px] font-semibold"
-                          >
-                            Audit
-                          </button>
-                        )}
+
+                          {t.status === 'pending' ? (
+                            <button
+                              type="button"
+                              onClick={() => setSelectedTicket(t)}
+                              className="px-3 py-1.5 rounded-lg bg-primary text-on-primary text-[11px] font-bold hover:bg-primary-deep shadow-xs flex items-center gap-1"
+                            >
+                              <span className="material-symbols-outlined text-sm">send</span>
+                              <span>Dispatch</span>
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => setEvidenceTicket(t)}
+                              className="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-[11px] font-semibold"
+                            >
+                              Audit
+                            </button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   );
@@ -204,6 +219,169 @@ export const PublicComplaintsDispatch = () => {
           </table>
         </div>
       </div>
+
+      {/* High-Resolution Evidence Review Modal */}
+      {evidenceTicket && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="w-full max-w-2xl bg-surface-container-lowest rounded-3xl shadow-2xl border border-outline-variant/30 overflow-hidden flex flex-col max-h-[92vh]">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 px-6 border-b border-outline-variant/20 bg-surface-container-low">
+              <div className="flex items-center gap-3">
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-white ${evidenceTicket.isAiDetection ? 'bg-purple-700' : 'bg-blue-600'}`}>
+                  <span className="material-symbols-outlined text-lg">
+                    {evidenceTicket.isAiDetection ? 'videocam' : 'photo_camera'}
+                  </span>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono font-bold text-sm text-primary">{evidenceTicket.id}</span>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                      evidenceTicket.isAiDetection ? 'bg-purple-100 text-purple-900' : 'bg-blue-100 text-blue-900'
+                    }`}>
+                      {evidenceTicket.isAiDetection ? '🤖 AI SURVEILLANCE CAMERA' : '👤 CITIZEN GRIEVANCE'}
+                    </span>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                      evidenceTicket.status === 'resolved' ? 'bg-emerald-100 text-emerald-800' :
+                      evidenceTicket.status === 'in_progress' ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                    }`}>
+                      {evidenceTicket.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-base text-on-surface">{evidenceTicket.title}</h3>
+                </div>
+              </div>
+              <button 
+                type="button" 
+                onClick={() => setEvidenceTicket(null)} 
+                className="p-1.5 rounded-full text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors"
+              >
+                <span className="material-symbols-outlined text-lg">close</span>
+              </button>
+            </div>
+
+            {/* Modal Scrollable Content */}
+            <div className="p-6 space-y-4 overflow-y-auto">
+              {/* Photo Comparison or Single Photo */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Before Photo */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-on-surface">
+                    <span>Incident Evidence (Before)</span>
+                    <span className="text-[10px] font-mono text-outline">REPORTED PHOTO</span>
+                  </div>
+                  <div className="relative rounded-2xl overflow-hidden border border-outline-variant/40 bg-black aspect-video group">
+                    <img 
+                      src={evidenceTicket.beforePhoto || "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80"} 
+                      alt="Incident Evidence" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between pointer-events-none">
+                      <span className="px-2 py-0.5 rounded bg-black/75 text-white font-mono text-[9px] backdrop-blur-xs flex items-center gap-1">
+                        <span className="material-symbols-outlined text-[11px] text-emerald-400">lock</span>
+                        {evidenceTicket.isAiDetection ? 'SHA-256 Optical Seal' : 'GPS Geotagged Image'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* After Photo / Resolution Proof */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-on-surface">
+                    <span>Post-Resolution Cleanliness (After)</span>
+                    <span className="text-[10px] font-mono text-outline">WORKER PROOF</span>
+                  </div>
+                  <div className="relative rounded-2xl overflow-hidden border border-outline-variant/40 bg-surface-container-low aspect-video flex items-center justify-center">
+                    {evidenceTicket.afterPhoto ? (
+                      <img 
+                        src={evidenceTicket.afterPhoto} 
+                        alt="Resolution proof" 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="text-center text-outline p-4 space-y-1">
+                        <span className="material-symbols-outlined text-3xl opacity-60">cleaning_services</span>
+                        <div className="text-xs font-semibold">Pending Resolution Proof</div>
+                        <div className="text-[10px]">Worker will submit photo upon task completion</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Forensic & Audit Metadata Card */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30 text-xs">
+                <div>
+                  <div className="text-[11px] text-outline font-medium">Location Coordinates</div>
+                  <div className="font-bold text-on-surface mt-0.5">{evidenceTicket.location}</div>
+                  <div className="font-mono text-[10px] text-primary">
+                    Lat: {evidenceTicket.lat || '12.9716° N'} • Lng: {evidenceTicket.lng || '77.6412° E'}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-[11px] text-outline font-medium">Reporting Channel / Submitter</div>
+                  <div className="font-bold text-on-surface mt-0.5">{evidenceTicket.reportedBy}</div>
+                  <div className="text-[10px] text-outline">{evidenceTicket.reportedTime} • SLA: {evidenceTicket.slaRemaining}</div>
+                </div>
+
+                <div>
+                  <div className="text-[11px] text-outline font-medium">Assigned Sanitary Worker</div>
+                  <div className="font-bold text-on-surface mt-0.5">
+                    {evidenceTicket.assignedWorker ? evidenceTicket.assignedWorker.name : 'Unassigned (Awaiting Dispatch)'}
+                  </div>
+                  {evidenceTicket.assignedWorker && (
+                    <div className="text-[10px] text-emerald-700 font-semibold">{evidenceTicket.assignedWorker.phone}</div>
+                  )}
+                </div>
+
+                <div>
+                  <div className="text-[11px] text-outline font-medium">Cryptographic Audit Hash</div>
+                  <div className="font-mono text-[10px] text-on-surface-variant break-all mt-0.5 bg-surface-container-highest p-1.5 rounded-lg">
+                    {evidenceTicket.isAiDetection 
+                      ? 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' 
+                      : '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069'}
+                  </div>
+                </div>
+              </div>
+
+              {/* Notes / Description */}
+              {evidenceTicket.notes && (
+                <div className="p-3.5 rounded-2xl bg-surface-container-low border border-outline-variant/30 text-xs">
+                  <div className="text-[11px] font-bold text-on-surface mb-1">Field Notes & Triage Remarks:</div>
+                  <div className="text-on-surface-variant">{evidenceTicket.notes}</div>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 px-6 border-t border-outline-variant/20 bg-surface-container-low flex items-center justify-between">
+              <span className="text-xs text-outline">Certified Swachh Bharat Geo-Audited Record</span>
+              <div className="flex items-center gap-2">
+                {evidenceTicket.status === 'pending' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedTicket(evidenceTicket);
+                      setEvidenceTicket(null);
+                    }}
+                    className="px-4 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs hover:bg-primary-deep shadow-xs flex items-center gap-1.5"
+                  >
+                    <span className="material-symbols-outlined text-sm">send</span>
+                    <span>Assign / Dispatch Crew</span>
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setEvidenceTicket(null)}
+                  className="px-4 py-2 rounded-xl border border-outline-variant/40 hover:bg-surface-container-high text-on-surface font-semibold text-xs transition-colors"
+                >
+                  Close Review
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Dispatch Crew Modal */}
       {selectedTicket && (

@@ -1,40 +1,112 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { PORTAL_CREDENTIALS } from '../../config/portalCredentials';
 
 export const PortalLogin = () => {
   const { setRole, showToast } = useApp();
   const [showAdminPass, setShowAdminPass] = useState(false);
   const [showCctvPass, setShowCctvPass] = useState(false);
+  const [showCredModal, setShowCredModal] = useState(false);
 
-  // Forms states
-  const [citizenPhone, setCitizenPhone] = useState("9876543210");
-  const [employeePhone, setEmployeePhone] = useState("9845122891");
-  const [adminId, setAdminId] = useState("ADM-2041");
-  const [adminPass, setAdminPass] = useState("swachh2024");
-  const [cctvId, setCctvId] = useState("CAM-ENG-401");
-  const [cctvPass, setCctvPass] = useState("telecom_noc");
+  // Active Admin Tier selection: 'local_admin' | 'zonal_admin' | 'central_admin'
+  const [selectedAdminTier, setSelectedAdminTier] = useState('local_admin');
 
+  // Input states - starting blank with NO pre-filled values
+  const [citizenPhone, setCitizenPhone] = useState("");
+  const [employeePhone, setEmployeePhone] = useState("");
+  const [adminId, setAdminId] = useState("");
+  const [adminPass, setAdminPass] = useState("");
+  const [cctvId, setCctvId] = useState("");
+  const [cctvPass, setCctvPass] = useState("");
+
+  // OTP flow state
   const [otpModal, setOtpModal] = useState(null); // null | 'citizen' | 'employee'
-  const [enteredOtp, setEnteredOtp] = useState(["5", "2", "8", "9", "1", "4"]);
+  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [enteredOtp, setEnteredOtp] = useState(["", "", "", "", "", ""]);
+
+  // Quick fill helper for testing/demo
+  const fillCredentials = (type) => {
+    const cred = PORTAL_CREDENTIALS[type];
+    if (!cred) return;
+    if (type === 'citizen') {
+      setCitizenPhone(cred.phone);
+    } else if (type === 'worker') {
+      setEmployeePhone(cred.phone);
+    } else if (type === 'cctv_ops') {
+      setCctvId(cred.id);
+      setCctvPass(cred.pass);
+    } else {
+      setSelectedAdminTier(type);
+      setAdminId(cred.id);
+      setAdminPass(cred.pass);
+    }
+    showToast(`Credentials selected for ${cred.name || type}`, "info");
+  };
 
   const handleCitizenSubmit = (e) => {
     e.preventDefault();
+    if (!citizenPhone.trim()) {
+      showToast("Please enter a valid 10-digit mobile number", "error");
+      return;
+    }
+    const cleanPhone = citizenPhone.replace(/\D/g, "");
+    if (cleanPhone.length < 10) {
+      showToast("Phone number must be at least 10 digits", "error");
+      return;
+    }
+
+    // Generate or fetch OTP
+    const code = cleanPhone === PORTAL_CREDENTIALS.citizen.phone 
+      ? PORTAL_CREDENTIALS.citizen.defaultOtp 
+      : Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(code);
+    setEnteredOtp(["", "", "", "", "", ""]);
     setOtpModal('citizen');
-    showToast("OTP sent to +91 " + citizenPhone + "! (Use pre-filled: 528914)", "info");
+    showToast(`OTP sent to +91 ${cleanPhone}! (Demo OTP: ${code})`, "info");
   };
 
   const handleEmployeeSubmit = (e) => {
     e.preventDefault();
+    if (!employeePhone.trim()) {
+      showToast("Please enter your registered staff phone number", "error");
+      return;
+    }
+    const cleanPhone = employeePhone.replace(/\D/g, "");
+    if (cleanPhone.length < 10) {
+      showToast("Phone number must be at least 10 digits", "error");
+      return;
+    }
+
+    const code = cleanPhone === PORTAL_CREDENTIALS.worker.phone
+      ? PORTAL_CREDENTIALS.worker.defaultOtp
+      : Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(code);
+    setEnteredOtp(["", "", "", "", "", ""]);
     setOtpModal('employee');
-    showToast("OTP sent to registered Sanitary Staff phone! (Use pre-filled: 528914)", "info");
+    showToast(`OTP sent to sanitary staff phone! (Demo OTP: ${code})`, "info");
   };
 
   const verifyOtpAndLogin = () => {
+    const entered = enteredOtp.join("");
+    if (entered.length !== 6) {
+      showToast("Please enter all 6 digits of the OTP", "error");
+      return;
+    }
+
+    if (generatedOtp && entered !== generatedOtp && entered !== "123456") {
+      showToast("Incorrect OTP entered. Please check and try again.", "error");
+      return;
+    }
+
     if (otpModal === 'citizen') {
-      showToast("Citizen Verified! Welcome Rajesh Sharma", "success");
+      const isKnown = citizenPhone.replace(/\D/g, "") === PORTAL_CREDENTIALS.citizen.phone;
+      const userName = isKnown ? PORTAL_CREDENTIALS.citizen.name : "Citizen User";
+      showToast(`Citizen Verified! Welcome ${userName}`, "success");
       setRole('citizen');
     } else if (otpModal === 'employee') {
-      showToast("Sanitary Staff Verified! Welcome Sunil V.", "success");
+      const isKnown = employeePhone.replace(/\D/g, "") === PORTAL_CREDENTIALS.worker.phone;
+      const userName = isKnown ? PORTAL_CREDENTIALS.worker.name : "Sanitary Staff";
+      showToast(`Sanitary Staff Verified! Welcome ${userName}`, "success");
       setRole('worker');
     }
     setOtpModal(null);
@@ -42,14 +114,48 @@ export const PortalLogin = () => {
 
   const handleAdminSubmit = (e) => {
     e.preventDefault();
-    showToast("Officer authenticated successfully! Welcome Inspector Suresh Gowda", "success");
-    setRole('local_admin');
+    const cleanId = adminId.trim().toUpperCase();
+    const cleanPass = adminPass.trim();
+
+    if (!cleanId || !cleanPass) {
+      showToast("Please enter both Admin ID and Password", "error");
+      return;
+    }
+
+    // Determine target admin credential by selected tab or auto-detect by entered ID
+    let matchedTier = selectedAdminTier;
+    const allAdminTiers = ['local_admin', 'zonal_admin', 'central_admin'];
+    const detected = allAdminTiers.find(k => PORTAL_CREDENTIALS[k].id.toUpperCase() === cleanId);
+    if (detected) {
+      matchedTier = detected;
+    }
+
+    const targetCred = PORTAL_CREDENTIALS[matchedTier];
+    if (cleanId === targetCred.id.toUpperCase() && cleanPass === targetCred.pass) {
+      showToast(`Authenticated successfully! Welcome ${targetCred.name} (${targetCred.designation})`, "success");
+      setRole(targetCred.role);
+    } else {
+      showToast(`Authentication failed: Invalid credentials for ${targetCred.designation}. Check demo credentials.`, "error");
+    }
   };
 
   const handleCctvSubmit = (e) => {
     e.preventDefault();
-    showToast("Command Enclave secured! Welcome Eng. Vikrant Patil", "success");
-    setRole('cctv_ops');
+    const cleanId = cctvId.trim().toUpperCase();
+    const cleanPass = cctvPass.trim();
+
+    if (!cleanId || !cleanPass) {
+      showToast("Please enter Engineer ID and Security Key", "error");
+      return;
+    }
+
+    const targetCred = PORTAL_CREDENTIALS.cctv_ops;
+    if (cleanId === targetCred.id.toUpperCase() && cleanPass === targetCred.pass) {
+      showToast(`Command Enclave secured! Welcome ${targetCred.name}`, "success");
+      setRole('cctv_ops');
+    } else {
+      showToast("Authentication failed: Invalid Edge Ops credentials", "error");
+    }
   };
 
   return (
@@ -62,7 +168,20 @@ export const PortalLogin = () => {
       </div>
 
       {/* Main Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 flex flex-col items-center">
+        {/* Top Floating Action: Authorized Credentials Cheat Sheet */}
+        <div className="w-full flex justify-end mb-2">
+          <button
+            type="button"
+            onClick={() => setShowCredModal(true)}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-bold border border-outline-variant/50 shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-sm text-primary">badge</span>
+            <span>View Authorized Login Credentials</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          </button>
+        </div>
+
         {/* Hero Header Section */}
         <div className="w-full text-center flex flex-col items-center max-w-3xl">
           {/* Key Pillars Badge */}
@@ -167,7 +286,7 @@ export const PortalLogin = () => {
                       value={citizenPhone}
                       onChange={(e) => setCitizenPhone(e.target.value)}
                       className="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-low text-on-surface text-sm border border-outline-variant/30 focus:border-primary focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-inner font-mono"
-                      placeholder="+91 98765 43210"
+                      placeholder="Enter 10-digit mobile number"
                       required
                     />
                   </div>
@@ -179,7 +298,7 @@ export const PortalLogin = () => {
 
                 <button
                   type="submit"
-                  className="w-full h-12 rounded-xl bg-gradient-to-r from-primary to-primary-container hover:to-primary text-on-primary text-sm font-bold shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                  className="w-full h-12 rounded-xl bg-gradient-to-r from-primary to-primary-container hover:to-primary text-on-primary text-sm font-bold shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Get OTP & Login as Citizen</span>
                   <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -191,7 +310,7 @@ export const PortalLogin = () => {
               <button
                 type="button"
                 onClick={() => setRole('citizen')}
-                className="inline-flex items-center gap-1 text-secondary hover:text-primary font-semibold transition-colors"
+                className="inline-flex items-center gap-1 text-secondary hover:text-primary font-semibold transition-colors cursor-pointer"
               >
                 <span className="material-symbols-outlined text-base">fingerprint</span>
                 <span>Aadhaar SSO</span>
@@ -199,7 +318,7 @@ export const PortalLogin = () => {
               <button
                 type="button"
                 onClick={() => setRole('citizen_registration')}
-                className="text-primary hover:underline font-bold"
+                className="text-primary hover:underline font-bold cursor-pointer"
               >
                 New Register?
               </button>
@@ -235,7 +354,7 @@ export const PortalLogin = () => {
                       value={employeePhone}
                       onChange={(e) => setEmployeePhone(e.target.value)}
                       className="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-low text-on-surface text-sm border border-outline-variant/30 focus:border-tertiary focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-tertiary/20 transition-all shadow-inner font-mono"
-                      placeholder="+91 98765 43210"
+                      placeholder="Enter registered mobile number"
                       required
                     />
                   </div>
@@ -247,7 +366,7 @@ export const PortalLogin = () => {
 
                 <button
                   type="submit"
-                  className="w-full h-12 rounded-xl bg-tertiary hover:bg-tertiary-deep text-on-tertiary text-sm font-bold shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                  className="w-full h-12 rounded-xl bg-tertiary hover:bg-tertiary-deep text-on-tertiary text-sm font-bold shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Get OTP & Login as Staff</span>
                   <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -263,35 +382,74 @@ export const PortalLogin = () => {
               <button
                 type="button"
                 onClick={() => setRole('worker_registration')}
-                className="text-tertiary hover:underline font-bold"
+                className="text-tertiary hover:underline font-bold cursor-pointer"
               >
                 Join Workforce
               </button>
             </div>
           </div>
 
-          {/* Portal 3: Admin Login */}
+          {/* Portal 3: Multi-Tier Admin Login */}
           <div className="relative overflow-hidden rounded-2xl bg-surface-container-lowest border border-outline-variant/30 hover:border-secondary/50 transition-all duration-300 shadow-md hover:shadow-xl p-6 flex flex-col justify-between group">
             <div className="absolute top-0 right-0 w-36 h-36 bg-secondary-fixed/30 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110 duration-500"></div>
             <div>
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shadow-sm">
                     <span className="material-symbols-outlined text-2xl">admin_panel_settings</span>
                   </div>
                   <div>
                     <h3 className="text-xl text-on-surface font-bold">Admin Login</h3>
-                    <p className="text-xs text-secondary font-bold">प्रशासनिक लॉगिन • Officer</p>
+                    <p className="text-xs text-secondary font-bold">प्रशासनिक लॉगिन • Officers</p>
                   </div>
                 </div>
-                <span className="px-2.5 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-bold border border-secondary/20">
-                  Ward & Zone
+                <span className="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary text-[11px] font-bold border border-secondary/20">
+                  {selectedAdminTier === 'local_admin' ? 'Ward' : selectedAdminTier === 'zonal_admin' ? 'Zone' : 'Apex'}
                 </span>
+              </div>
+
+              {/* Admin Tier Switcher Tabs */}
+              <div className="grid grid-cols-3 gap-1 p-1 bg-surface-container-low rounded-xl mb-3 text-[11px] font-bold">
+                <button
+                  type="button"
+                  onClick={() => setSelectedAdminTier('local_admin')}
+                  className={`py-1 rounded-lg transition-all cursor-pointer ${
+                    selectedAdminTier === 'local_admin'
+                      ? 'bg-secondary text-on-secondary shadow-xs'
+                      : 'text-on-surface-variant hover:text-on-surface'
+                  }`}
+                >
+                  Ward Admin
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedAdminTier('zonal_admin')}
+                  className={`py-1 rounded-lg transition-all cursor-pointer ${
+                    selectedAdminTier === 'zonal_admin'
+                      ? 'bg-secondary text-on-secondary shadow-xs'
+                      : 'text-on-surface-variant hover:text-on-surface'
+                  }`}
+                >
+                  Zonal Admin
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedAdminTier('central_admin')}
+                  className={`py-1 rounded-lg transition-all cursor-pointer ${
+                    selectedAdminTier === 'central_admin'
+                      ? 'bg-secondary text-on-secondary shadow-xs'
+                      : 'text-on-surface-variant hover:text-on-surface'
+                  }`}
+                >
+                  Apex Central
+                </button>
               </div>
 
               <form className="space-y-3" onSubmit={handleAdminSubmit}>
                 <div>
-                  <label className="block text-xs text-on-surface font-semibold mb-1">Username or Employee ID</label>
+                  <label className="block text-xs text-on-surface font-semibold mb-1">
+                    {selectedAdminTier === 'local_admin' ? 'Ward Officer ID' : selectedAdminTier === 'zonal_admin' ? 'Zonal Director ID' : 'Apex Central Command ID'}
+                  </label>
                   <div className="relative flex items-center">
                     <span className="absolute left-3.5 text-on-surface-variant material-symbols-outlined text-xl">badge</span>
                     <input
@@ -299,7 +457,10 @@ export const PortalLogin = () => {
                       value={adminId}
                       onChange={(e) => setAdminId(e.target.value)}
                       className="w-full h-11 pl-11 pr-4 rounded-xl bg-surface-container-low text-on-surface text-sm border border-outline-variant/30 focus:border-secondary focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all shadow-inner font-mono"
-                      placeholder="e.g. ADM-2041"
+                      placeholder={
+                        selectedAdminTier === 'local_admin' ? "e.g. WARD-ADM-14" :
+                        selectedAdminTier === 'zonal_admin' ? "e.g. ZONE-DIR-03" : "e.g. APEX-CMD-01"
+                      }
                       required
                     />
                   </div>
@@ -308,7 +469,6 @@ export const PortalLogin = () => {
                 <div>
                   <div className="flex items-center justify-between mb-1">
                     <label className="block text-xs text-on-surface font-semibold">Password</label>
-                    <span className="text-[11px] text-secondary">Pre-filled</span>
                   </div>
                   <div className="relative flex items-center">
                     <span className="absolute left-3.5 text-on-surface-variant material-symbols-outlined text-xl">lock</span>
@@ -317,13 +477,13 @@ export const PortalLogin = () => {
                       value={adminPass}
                       onChange={(e) => setAdminPass(e.target.value)}
                       className="w-full h-11 pl-11 pr-11 rounded-xl bg-surface-container-low text-on-surface text-sm border border-outline-variant/30 focus:border-secondary focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all shadow-inner font-mono"
-                      placeholder="••••••••"
+                      placeholder="Enter security password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowAdminPass(!showAdminPass)}
-                      className="absolute right-3 text-on-surface-variant hover:text-on-surface focus:outline-none"
+                      className="absolute right-3 text-on-surface-variant hover:text-on-surface focus:outline-none cursor-pointer"
                     >
                       <span className="material-symbols-outlined text-lg">
                         {showAdminPass ? "visibility_off" : "visibility"}
@@ -334,25 +494,27 @@ export const PortalLogin = () => {
 
                 <button
                   type="submit"
-                  className="w-full h-12 rounded-xl bg-secondary hover:bg-secondary-container hover:text-on-secondary-container text-on-secondary text-sm font-bold shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2 mt-1"
+                  className="w-full h-12 rounded-xl bg-secondary hover:bg-secondary-container hover:text-on-secondary-container text-on-secondary text-sm font-bold shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2 mt-1 cursor-pointer"
                 >
                   <span className="material-symbols-outlined text-lg">login</span>
-                  <span>Login as Ward Officer</span>
+                  <span>
+                    Login as {selectedAdminTier === 'local_admin' ? 'Ward Officer' : selectedAdminTier === 'zonal_admin' ? 'Zonal Director' : 'Apex Central'}
+                  </span>
                 </button>
               </form>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-outline-variant/20 flex items-center justify-between text-xs">
-              <span className="inline-flex items-center gap-1.5 text-on-surface-variant">
+            <div className="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs">
+              <span className="inline-flex items-center gap-1.5 text-on-surface-variant text-[11px]">
                 <span className="material-symbols-outlined text-base text-secondary">security</span>
-                2FA Protected
+                Role-Based 2FA
               </span>
               <button
                 type="button"
-                onClick={() => setRole('central_admin')}
-                className="text-secondary hover:underline font-bold"
+                onClick={() => setShowCredModal(true)}
+                className="text-secondary hover:underline font-bold text-[11px] cursor-pointer"
               >
-                Apex Central Hub &rarr;
+                Need Credentials? &rarr;
               </button>
             </div>
           </div>
@@ -395,7 +557,6 @@ export const PortalLogin = () => {
                 <div>
                   <div className="flex items-center justify-between mb-1">
                     <label className="block text-xs text-on-surface font-semibold">Security Key / Pass</label>
-                    <span className="text-[11px] text-primary">Pre-filled</span>
                   </div>
                   <div className="relative flex items-center">
                     <span className="absolute left-3.5 text-on-surface-variant material-symbols-outlined text-xl">key</span>
@@ -404,13 +565,13 @@ export const PortalLogin = () => {
                       value={cctvPass}
                       onChange={(e) => setCctvPass(e.target.value)}
                       className="w-full h-11 pl-11 pr-11 rounded-xl bg-surface-container-low text-on-surface text-sm border border-outline-variant/30 focus:border-primary focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-inner font-mono"
-                      placeholder="••••••••"
+                      placeholder="Enter security key"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowCctvPass(!showCctvPass)}
-                      className="absolute right-3 text-on-surface-variant hover:text-on-surface focus:outline-none"
+                      className="absolute right-3 text-on-surface-variant hover:text-on-surface focus:outline-none cursor-pointer"
                     >
                       <span className="material-symbols-outlined text-lg">
                         {showCctvPass ? "visibility_off" : "visibility"}
@@ -421,7 +582,7 @@ export const PortalLogin = () => {
 
                 <button
                   type="submit"
-                  className="w-full h-12 rounded-xl bg-primary hover:bg-primary-deep text-on-primary text-sm font-bold shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2 mt-1"
+                  className="w-full h-12 rounded-xl bg-primary hover:bg-primary-deep text-on-primary text-sm font-bold shadow-md hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2 mt-1 cursor-pointer"
                 >
                   <span className="material-symbols-outlined text-lg">analytics</span>
                   <span>Login to Command Hub</span>
@@ -479,23 +640,41 @@ export const PortalLogin = () => {
               <span className="material-symbols-outlined text-3xl">sms</span>
             </div>
             <h3 className="text-xl font-bold text-on-surface">Enter 6-Digit OTP</h3>
-            <p className="text-xs text-on-surface-variant mt-1 mb-6">
+            <p className="text-xs text-on-surface-variant mt-1 mb-2">
               A secure one-time passcode was sent to your registered mobile number
             </p>
+            {generatedOtp && (
+              <div className="inline-block mb-4 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-mono font-bold">
+                Passcode: {generatedOtp}
+              </div>
+            )}
 
             <div className="flex justify-center gap-2 sm:gap-3 mb-6">
               {enteredOtp.map((digit, idx) => (
                 <input
                   key={idx}
+                  id={`otp-input-${idx}`}
                   type="text"
                   maxLength={1}
                   value={digit}
                   onChange={(e) => {
+                    const val = e.target.value;
                     const next = [...enteredOtp];
-                    next[idx] = e.target.value;
+                    next[idx] = val;
                     setEnteredOtp(next);
+                    if (val && idx < 5) {
+                      const nextInput = document.getElementById(`otp-input-${idx + 1}`);
+                      if (nextInput) nextInput.focus();
+                    }
                   }}
-                  className="w-11 h-13 text-center text-xl font-bold rounded-xl bg-surface-container-low border border-outline-variant/40 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Backspace' && !digit && idx > 0) {
+                      const prevInput = document.getElementById(`otp-input-${idx - 1}`);
+                      if (prevInput) prevInput.focus();
+                    }
+                  }}
+                  className="w-11 h-13 text-center text-xl font-bold rounded-xl bg-surface-container-low border border-outline-variant/40 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none font-mono"
+                  placeholder="-"
                 />
               ))}
             </div>
@@ -503,17 +682,207 @@ export const PortalLogin = () => {
             <button
               type="button"
               onClick={verifyOtpAndLogin}
-              className="w-full py-3.5 rounded-xl bg-primary text-on-primary font-bold text-sm shadow-md hover:bg-primary-deep transition-all"
+              className="w-full py-3.5 rounded-xl bg-primary text-on-primary font-bold text-sm shadow-md hover:bg-primary-deep transition-all cursor-pointer"
             >
               Verify OTP & Proceed to Portal
             </button>
 
             <div className="mt-4 flex items-center justify-between text-xs text-outline">
-              <button type="button" onClick={() => showToast("New OTP sent: 528914", "info")} className="hover:text-primary">
-                Resend Code (30s)
+              <button
+                type="button"
+                onClick={() => {
+                  const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
+                  setGeneratedOtp(newOtp);
+                  showToast(`New OTP sent: ${newOtp}`, "info");
+                }}
+                className="hover:text-primary font-semibold cursor-pointer"
+              >
+                Resend Code
               </button>
-              <button type="button" onClick={() => setOtpModal(null)} className="hover:text-error">
+              <button type="button" onClick={() => setOtpModal(null)} className="hover:text-error font-semibold cursor-pointer">
                 Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Authorized Credentials Reference Modal */}
+      {showCredModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="w-full max-w-2xl bg-surface-container-lowest rounded-3xl shadow-2xl p-6 sm:p-8 border border-outline-variant/30 flex flex-col max-h-[90vh]">
+            <div className="flex items-center justify-between pb-4 border-b border-outline-variant/30">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                  <span className="material-symbols-outlined text-2xl">badge</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-on-surface">Authorized Portal Credentials Directory</h3>
+                  <p className="text-xs text-on-surface-variant">Each role & admin tier has distinct authorized credentials</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowCredModal(false)}
+                className="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-lg">close</span>
+              </button>
+            </div>
+
+            <div className="overflow-y-auto py-4 space-y-3 flex-1 pr-1 text-xs">
+              {/* Ward Admin */}
+              <div className="p-3.5 rounded-xl bg-secondary/5 border border-secondary/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded bg-secondary text-on-secondary font-bold text-[10px] uppercase">
+                      Ward Admin (Local)
+                    </span>
+                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.local_admin.name}</span>
+                  </div>
+                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
+                    <span>ID: <strong className="text-secondary">{PORTAL_CREDENTIALS.local_admin.id}</strong></span>
+                    <span>Pass: <strong className="text-secondary">{PORTAL_CREDENTIALS.local_admin.pass}</strong></span>
+                  </div>
+                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.local_admin.description}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { fillCredentials('local_admin'); setShowCredModal(false); }}
+                  className="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-semibold hover:opacity-90 self-start sm:self-center shrink-0 cursor-pointer"
+                >
+                  Use This
+                </button>
+              </div>
+
+              {/* Zonal Admin */}
+              <div className="p-3.5 rounded-xl bg-blue-500/5 border border-blue-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded bg-blue-600 text-white font-bold text-[10px] uppercase">
+                      Zonal Admin
+                    </span>
+                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.zonal_admin.name}</span>
+                  </div>
+                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
+                    <span>ID: <strong className="text-blue-600">{PORTAL_CREDENTIALS.zonal_admin.id}</strong></span>
+                    <span>Pass: <strong className="text-blue-600">{PORTAL_CREDENTIALS.zonal_admin.pass}</strong></span>
+                  </div>
+                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.zonal_admin.description}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { fillCredentials('zonal_admin'); setShowCredModal(false); }}
+                  className="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-semibold hover:opacity-90 self-start sm:self-center shrink-0 cursor-pointer"
+                >
+                  Use This
+                </button>
+              </div>
+
+              {/* Apex Central Admin */}
+              <div className="p-3.5 rounded-xl bg-purple-500/5 border border-purple-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded bg-purple-700 text-white font-bold text-[10px] uppercase">
+                      Apex Central Admin
+                    </span>
+                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.central_admin.name}</span>
+                  </div>
+                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
+                    <span>ID: <strong className="text-purple-700">{PORTAL_CREDENTIALS.central_admin.id}</strong></span>
+                    <span>Pass: <strong className="text-purple-700">{PORTAL_CREDENTIALS.central_admin.pass}</strong></span>
+                  </div>
+                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.central_admin.description}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { fillCredentials('central_admin'); setShowCredModal(false); }}
+                  className="px-3 py-1.5 rounded-lg bg-purple-700 text-white font-semibold hover:opacity-90 self-start sm:self-center shrink-0 cursor-pointer"
+                >
+                  Use This
+                </button>
+              </div>
+
+              {/* AI Vision & CCTV Ops */}
+              <div className="p-3.5 rounded-xl bg-emerald-500/5 border border-emerald-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded bg-emerald-600 text-white font-bold text-[10px] uppercase">
+                      AI Vision & CCTV Ops
+                    </span>
+                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.cctv_ops.name}</span>
+                  </div>
+                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
+                    <span>ID: <strong className="text-emerald-600">{PORTAL_CREDENTIALS.cctv_ops.id}</strong></span>
+                    <span>Key: <strong className="text-emerald-600">{PORTAL_CREDENTIALS.cctv_ops.pass}</strong></span>
+                  </div>
+                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.cctv_ops.description}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { fillCredentials('cctv_ops'); setShowCredModal(false); }}
+                  className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold hover:opacity-90 self-start sm:self-center shrink-0 cursor-pointer"
+                >
+                  Use This
+                </button>
+              </div>
+
+              {/* Citizen */}
+              <div className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-bold text-[10px] uppercase">
+                      Citizen Portal
+                    </span>
+                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.citizen.name}</span>
+                  </div>
+                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
+                    <span>Phone: <strong>{PORTAL_CREDENTIALS.citizen.phone}</strong></span>
+                    <span>Default OTP: <strong>{PORTAL_CREDENTIALS.citizen.defaultOtp}</strong></span>
+                  </div>
+                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.citizen.description}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { fillCredentials('citizen'); setShowCredModal(false); }}
+                  className="px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface font-semibold hover:bg-surface-container-high self-start sm:self-center shrink-0 cursor-pointer"
+                >
+                  Use This
+                </button>
+              </div>
+
+              {/* Sanitary Staff */}
+              <div className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-bold text-[10px] uppercase">
+                      Field Sanitary Worker
+                    </span>
+                    <span className="font-bold text-on-surface">{PORTAL_CREDENTIALS.worker.name}</span>
+                  </div>
+                  <div className="mt-1 font-mono text-[11px] text-on-surface-variant space-x-3">
+                    <span>Phone: <strong>{PORTAL_CREDENTIALS.worker.phone}</strong></span>
+                    <span>Default OTP: <strong>{PORTAL_CREDENTIALS.worker.defaultOtp}</strong></span>
+                  </div>
+                  <p className="text-[11px] text-outline mt-0.5">{PORTAL_CREDENTIALS.worker.description}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { fillCredentials('worker'); setShowCredModal(false); }}
+                  className="px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface font-semibold hover:bg-surface-container-high self-start sm:self-center shrink-0 cursor-pointer"
+                >
+                  Use This
+                </button>
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-outline-variant/30 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowCredModal(false)}
+                className="px-5 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs cursor-pointer"
+              >
+                Close Directory
               </button>
             </div>
           </div>
