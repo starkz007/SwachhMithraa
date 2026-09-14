@@ -55,16 +55,27 @@ export const PastComplaints = () => {
       </div>
 
       {/* Complaints List */}
-      <div className="grid grid-cols-1 gap-4">
-        {filtered.map((ticket) => {
-          const isResolved = ticket.status === 'resolved';
-          const isInProgress = ticket.status === 'in_progress';
+      {filtered.length === 0 ? (
+        <div className="p-12 text-center rounded-3xl bg-surface-container-lowest border border-outline-variant/30 space-y-3">
+          <span className="material-symbols-outlined text-5xl text-outline">inbox</span>
+          <h3 className="text-base font-bold text-on-surface">No Complaints Found</h3>
+          <p className="text-xs text-on-surface-variant max-w-sm mx-auto">
+            {filter === 'all'
+              ? 'No civic grievances have been recorded on this device yet. Click "Raise Grievance" above to submit a live complaint.'
+              : `No grievances currently in "${filter.replace('_', ' ')}" status.`}
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4">
+          {filtered.map((ticket) => {
+            const isResolved = ticket.status === 'resolved';
+            const isInProgress = ticket.status === 'in_progress';
 
-          return (
-            <div
-              key={ticket.id}
-              className="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-5"
-            >
+            return (
+              <div
+                key={ticket.id}
+                className="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-5"
+              >
               <div className="space-y-2 flex-1">
                 <div className="flex flex-wrap items-center gap-2 text-xs">
                   <span className="font-mono font-bold text-primary">{ticket.id}</span>
@@ -136,6 +147,7 @@ export const PastComplaints = () => {
           );
         })}
       </div>
+      )}
 
       {/* Ticket Detail Modal */}
       {selectedTicket && (
@@ -204,7 +216,14 @@ export const PastComplaints = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <div className="text-[11px] font-bold text-outline uppercase">Before (Citizen Lodged)</div>
-                  <img src={selectedTicket.beforePhoto} alt="Before" className="w-full h-36 rounded-xl object-cover border" />
+                  {selectedTicket.beforePhoto ? (
+                    <img src={selectedTicket.beforePhoto} alt="Before" className="w-full h-36 rounded-xl object-cover border" />
+                  ) : (
+                    <div className="w-full h-36 rounded-xl bg-surface-container flex flex-col items-center justify-center text-outline text-xs p-3 text-center">
+                      <span className="material-symbols-outlined text-2xl mb-1">no_photography</span>
+                      <span>No Photo Attached</span>
+                    </div>
+                  )}
                 </div>
                 <div className="space-y-1">
                   <div className="text-[11px] font-bold text-emerald-700 uppercase">After (Crew Resolved)</div>

@@ -85,11 +85,9 @@ export const VehicleTracker = () => {
           {/* Driver Profile */}
           <div className="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm space-y-4">
             <div className="flex items-center gap-3.5">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80"
-                alt="Driver Ramesh Babu"
-                className="w-13 h-13 rounded-2xl object-cover border-2 border-secondary"
-              />
+              <div className="w-13 h-13 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center border-2 border-secondary font-bold text-lg">
+                <span className="material-symbols-outlined text-2xl">local_shipping</span>
+              </div>
               <div>
                 <div className="text-sm font-bold text-on-surface">Ramesh Babu</div>
                 <div className="text-xs text-secondary font-semibold">Authorized Tipper Auto Driver</div>

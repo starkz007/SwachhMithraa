@@ -276,18 +276,28 @@ export const PublicComplaintsDispatch = () => {
                     <span>Incident Evidence (Before)</span>
                     <span className="text-[10px] font-mono text-outline">REPORTED PHOTO</span>
                   </div>
-                  <div className="relative rounded-2xl overflow-hidden border border-outline-variant/40 bg-black aspect-video group">
-                    <img 
-                      src={evidenceTicket.beforePhoto || "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80"} 
-                      alt="Incident Evidence" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between pointer-events-none">
-                      <span className="px-2 py-0.5 rounded bg-black/75 text-white font-mono text-[9px] backdrop-blur-xs flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[11px] text-emerald-400">lock</span>
-                        {evidenceTicket.isAiDetection ? 'SHA-256 Optical Seal' : 'GPS Geotagged Image'}
-                      </span>
-                    </div>
+                  <div className="relative rounded-2xl overflow-hidden border border-outline-variant/40 bg-black aspect-video group flex items-center justify-center">
+                    {evidenceTicket.beforePhoto ? (
+                      <>
+                        <img 
+                          src={evidenceTicket.beforePhoto} 
+                          alt="Incident Evidence" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between pointer-events-none">
+                          <span className="px-2 py-0.5 rounded bg-black/75 text-white font-mono text-[9px] backdrop-blur-xs flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[11px] text-emerald-400">lock</span>
+                            {evidenceTicket.isAiDetection ? 'SHA-256 Optical Seal' : 'GPS Geotagged Evidence'}
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="text-center text-outline p-6 space-y-1">
+                        <span className="material-symbols-outlined text-3xl opacity-60">no_photography</span>
+                        <div className="text-xs font-semibold text-white">No Photo Attached</div>
+                        <div className="text-[10px] text-gray-400">Complaint lodged via text description & GPS coords</div>
+                      </div>
+                    )}
                   </div>
                 </div>
 

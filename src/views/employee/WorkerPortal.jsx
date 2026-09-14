@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 import { InteractiveMap } from '../../components/common/InteractiveMap';
+import { compressImageToFit } from '../../utils/imageUtils';
 
 export const WorkerPortal = () => {
   const { activeTab, setTab, workers, tickets, resolveTicket, toggleWorkerDuty, workerCredits, triggerSosAlert, showToast } = useApp();
   const worker = workers[0]; // Sunil V.
   const [selectedTask, setSelectedTask] = useState(null);
-  const [resolutionNotes, setResolutionNotes] = useState('Collected 4 bags of plastic & organic waste. Bleaching powder spread.');
-  const [resolutionPhoto, setResolutionPhoto] = useState('https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?w=800&auto=format&fit=crop&q=80');
+  const [resolutionNotes, setResolutionNotes] = useState('Sanitized area and disposed waste at designated transfer bay.');
+  const [resolutionPhoto, setResolutionPhoto] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const handleWorkerPhotoUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const optimized = await compressImageToFit(file);
+      if (optimized) {
+        setResolutionPhoto(optimized);
+        if (showToast) showToast('Clean-up verification photo attached!', 'success');
+      }
+    } catch (err) {
+      console.warn("Worker photo error:", err);
+    }
+  };
 
   // Filter tasks assigned to this worker or in this beat
   const myTasks = tickets.filter(t => t.assignedWorker?.id === worker.id || (t.status === 'pending' && t.beat === 'Beat #4'));
@@ -233,16 +249,50 @@ export const WorkerPortal = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block font-bold text-outline mb-1">Before Condition</label>
-                  <img src={selectedTask.beforePhoto} alt="Before" className="w-full h-32 rounded-xl object-cover border" />
+                  {selectedTask.beforePhoto ? (
+                    <img src={selectedTask.beforePhoto} alt="Before" className="w-full h-32 rounded-xl object-cover border border-outline-variant/30" />
+                  ) : (
+                    <div className="w-full h-32 rounded-xl bg-surface-container flex flex-col items-center justify-center text-outline text-center p-2">
+                      <span className="material-symbols-outlined text-2xl mb-1">no_photography</span>
+                      <span className="text-[11px] font-semibold">No Photo Attached</span>
+                    </div>
+                  )}
                 </div>
                 <div>
                   <label className="block font-bold text-emerald-700 mb-1">After Clean-Up Photo</label>
-                  <div className="relative rounded-xl overflow-hidden h-32 border border-emerald-400">
-                    <img src={resolutionPhoto} alt="After resolution" className="w-full h-full object-cover" />
-                    <span className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/60 text-[9px] text-white font-mono">
-                      GPS Tagged
-                    </span>
-                  </div>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    accept="image/*"
+                    capture="environment"
+                    onChange={handleWorkerPhotoUpload}
+                    className="hidden"
+                  />
+                  {resolutionPhoto ? (
+                    <div className="relative rounded-xl overflow-hidden h-32 border border-emerald-400 group">
+                      <img src={resolutionPhoto} alt="After resolution" className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-[11px] font-bold transition-opacity"
+                      >
+                        Change Photo
+                      </button>
+                      <span className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/60 text-[9px] text-white font-mono">
+                        GPS Tagged
+                      </span>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full h-32 rounded-xl border-2 border-dashed border-emerald-500/50 hover:border-emerald-600 bg-emerald-50/50 hover:bg-emerald-50 flex flex-col items-center justify-center text-emerald-800 transition-colors cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-2xl mb-1">add_a_photo</span>
+                      <span className="text-xs font-bold">Snap / Upload Proof</span>
+                      <span className="text-[10px] text-emerald-600">Camera or Gallery</span>
+                    </button>
+                  )}
                 </div>
               </div>
 

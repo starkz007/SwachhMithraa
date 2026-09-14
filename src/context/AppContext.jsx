@@ -35,7 +35,14 @@ export const AppProvider = ({ children }) => {
   // Reactive Domain Data
   const [tickets, setTickets] = useState(() => {
     const saved = localStorage.getItem('swachh_tickets');
-    return saved ? JSON.parse(saved) : initialTickets;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        // Exclude legacy mock tickets
+        return parsed.filter(t => !['SWM-2024-1048', 'SWM-2024-1051', 'SWM-2024-1055', 'SWM-2024-1060'].includes(t.id));
+      } catch (e) {}
+    }
+    return initialTickets;
   });
 
   const [workers, setWorkers] = useState(() => {
@@ -112,38 +119,69 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem('swachh_worker_credits', workerCredits);
   }, [workerCredits]);
 
-  // Synchronize with live Python FastAPI backend if online
+  // Synchronize with universal Cloud Datastore (and live FastAPI if online)
   useEffect(() => {
-    const unsub = api.onStatusChange((isOnline) => {
-      setBackendConnected(isOnline);
-      if (isOnline) {
-        // Hydrate from live Python SQLite/Postgres database
-        api.getTickets().then(remoteTickets => {
-          if (remoteTickets && remoteTickets.length > 0) {
-            setTickets(prev => {
-              const remoteIds = new Set(remoteTickets.map(t => t.id));
-              const localUnsynced = prev.filter(t => !remoteIds.has(t.id));
-              return [...remoteTickets, ...localUnsynced];
+    let isMounted = true;
+
+    const syncCloudData = async () => {
+      try {
+        const remoteTickets = await api.getTickets();
+        if (isMounted && remoteTickets && Array.isArray(remoteTickets)) {
+          setTickets(prev => {
+            const ticketMap = new Map();
+            // Retain local tickets
+            prev.forEach(t => {
+              if (t && t.id) ticketMap.set(t.id, t);
             });
-          }
-        });
+            // Merge remote cloud tickets (remote cloud state takes precedence)
+            remoteTickets.forEach(rt => {
+              if (rt && rt.id) {
+                const existing = ticketMap.get(rt.id);
+                ticketMap.set(rt.id, existing ? { ...existing, ...rt } : rt);
+              }
+            });
+            return Array.from(ticketMap.values());
+          });
+        }
+      } catch (e) {
+        console.debug("Cloud poll sync skipped:", e);
+      }
+    };
 
-        api.getWorkers().then(remoteWorkers => {
-          if (remoteWorkers && remoteWorkers.length > 0) {
-            setWorkers(remoteWorkers);
-          }
-        });
+    // Initial fetch on mount
+    syncCloudData();
 
-        api.getAiViolations().then(remoteViolations => {
-          if (remoteViolations && remoteViolations.length > 0) {
-            setAiCameraAlerts(remoteViolations);
-          }
-        });
+    // Poll every 5 seconds for real-time cross-device sync
+    const interval = setInterval(syncCloudData, 5000);
+
+    // Sync immediately when user switches tabs or focuses device
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        syncCloudData();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    // Synchronize with live Python FastAPI backend if online
+    const unsub = api.onStatusChange((isOnline) => {
+      if (isMounted) {
+        setBackendConnected(isOnline);
+        if (isOnline) {
+          syncCloudData();
+          api.getWorkers().then(rw => rw && isMounted && setWorkers(rw));
+          api.getAiViolations().then(rv => rv && isMounted && setAiCameraAlerts(rv));
+        }
       }
     });
 
-    return unsub;
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      unsub();
+    };
   }, []);
+
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type, id: Date.now() });
@@ -192,38 +230,38 @@ export const AppProvider = ({ children }) => {
     const isAi = ticketData.isAiDetection || ticketData.source === 'ai_camera' || ticketData.category?.includes('AI CCTV');
     const newTicket = {
       id: newId,
-      title: ticketData.title || "Civic Hygiene Complaint",
+      title: ticketData.title || (ticketData.category ? `${ticketData.category}` : "Civic Hygiene Complaint"),
       titleHi: ticketData.titleHi || ticketData.title || "स्वच्छता शिकायत",
       category: ticketData.category || (isAi ? "AI CCTV: Live Optical Waste Flag" : "Garbage Dump / Overflowing Bin"),
       source: isAi ? 'ai_camera' : 'citizen',
       isAiDetection: isAi,
-      ward: ticketData.ward || "Ward 14 - Indiranagar",
-      beat: "Beat #4",
-      location: ticketData.location || "100 Feet Rd & 12th Main Junction, HAL 2nd Stage, Indiranagar, Bengaluru 560038",
-      lat: (ticketData.lat !== undefined && ticketData.lat !== null) ? ticketData.lat : 12.9716 + (Math.random() - 0.5) * 0.005,
-      lng: (ticketData.lng !== undefined && ticketData.lng !== null) ? ticketData.lng : 77.6412 + (Math.random() - 0.5) * 0.005,
-      reportedBy: ticketData.reportedBy || (isAi ? "AI Optical Surveillance Camera (Node #1402)" : "Rajesh Sharma (Citizen #9842)"),
+      ward: ticketData.ward || "Civic Division",
+      beat: ticketData.beat || "General Beat",
+      location: ticketData.location || "Reported Location",
+      lat: (ticketData.lat !== undefined && ticketData.lat !== null) ? ticketData.lat : 12.9716,
+      lng: (ticketData.lng !== undefined && ticketData.lng !== null) ? ticketData.lng : 77.6412,
+      reportedBy: ticketData.reportedBy || (isAi ? "AI Optical Surveillance Camera" : "Citizen User"),
       reportedTime: "Just now",
       status: "pending",
-      priority: ticketData.priority || "Critical",
+      priority: ticketData.priority || "High",
       assignedWorker: null,
-      beforePhoto: ticketData.photoUrl || "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80",
+      beforePhoto: ticketData.photoUrl || null,
       afterPhoto: null,
       slaRemaining: "24h 00m",
-      notes: ticketData.notes || (isAi ? "Autonomous Optical Surveillance Detection. SHA-256 digital seal recorded." : "Citizen lodged ticket with photo evidence.")
+      notes: ticketData.notes || (isAi ? "Autonomous Optical Surveillance Detection." : "Citizen lodged complaint via portal.")
     };
 
     setTickets(prev => [newTicket, ...prev]);
 
-    // Asynchronously synchronize with Python FastAPI Backend if online
-    api.createTicket(newTicket).catch(err => console.debug("FastAPI sync queued locally:", err));
+    // Asynchronously synchronize with Cloud Datastore and FastAPI Backend
+    api.createTicket(newTicket).catch(err => console.debug("Cloud ticket sync error:", err));
 
     // If source is AI Camera, also push directly into aiCameraAlerts state so it appears in AI Camera Tickets Desk!
     if (isAi) {
       const newAlert = {
         id: `AI-CAM-${Math.floor(1000 + Math.random() * 9000)}`,
         nodeId: "POLE-NODE-1402",
-        location: ticketData.location || "100 Feet Rd & 12th Main Junction, Indiranagar, Bengaluru 560038",
+        location: ticketData.location || "Reported Location",
         timestamp: "Just now",
         violation: ticketData.title?.replace('AI Autonomous Flag: ', '') || "Optical Waste Accumulation",
         confidence: ticketData.confidence || 96,
@@ -236,7 +274,6 @@ export const AppProvider = ({ children }) => {
         ticketId: newId
       };
       setAiCameraAlerts(prev => [newAlert, ...prev]);
-      api.createAiViolation(newAlert).catch(err => console.debug("FastAPI violation sync queued locally:", err));
     } else {
       setCitizenScore(prev => Math.min(100, prev + 5)); // Reward citizen for reporting
     }
@@ -247,9 +284,10 @@ export const AppProvider = ({ children }) => {
 
   const dispatchWorker = (ticketId, workerId) => {
     const targetWorker = workers.find(w => w.id === workerId) || workers[0];
+    let updatedTicket = null;
     setTickets(prev => prev.map(t => {
       if (t.id === ticketId) {
-        return {
+        updatedTicket = {
           ...t,
           status: 'in_progress',
           assignedWorker: {
@@ -257,36 +295,38 @@ export const AppProvider = ({ children }) => {
             name: targetWorker.name,
             phone: targetWorker.phone,
             beat: targetWorker.beat,
-            status: "Dispatched with Cart",
-            photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
+            status: "Dispatched with Cart"
           }
         };
+        return updatedTicket;
       }
       return t;
     }));
 
-    // Async sync with FastAPI
-    api.assignTicket(ticketId, targetWorker.id, targetWorker.name).catch(err => console.debug("FastAPI assign queued locally:", err));
+    // Async sync with Cloud Datastore and FastAPI
+    api.assignTicket(ticketId, targetWorker.id, targetWorker.name, updatedTicket).catch(err => console.debug("Assign sync error:", err));
 
     showToast(`Dispatched ${targetWorker.name} to ticket #${ticketId}. Task queued on worker handset.`, 'info');
   };
 
   const resolveTicket = (ticketId, afterPhotoUrl, notes = "Cleaned and sanitized area.") => {
+    let updatedTicket = null;
     setTickets(prev => prev.map(t => {
       if (t.id === ticketId) {
-        return {
+        updatedTicket = {
           ...t,
           status: 'resolved',
-          afterPhoto: afterPhotoUrl || "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?w=800&auto=format&fit=crop&q=80",
+          afterPhoto: afterPhotoUrl || null,
           notes: `${t.notes || ''} [Resolved by worker: ${notes}]`,
           slaRemaining: "Completed within SLA"
         };
+        return updatedTicket;
       }
       return t;
     }));
 
-    // Async sync with FastAPI
-    api.resolveTicket(ticketId, afterPhotoUrl, notes).catch(err => console.debug("FastAPI resolve queued locally:", err));
+    // Async sync with Cloud Datastore and FastAPI
+    api.resolveTicket(ticketId, afterPhotoUrl, notes, updatedTicket).catch(err => console.debug("Resolve sync error:", err));
 
     setWorkerCredits(prev => prev + 150); // Reward worker
     setCitizenScore(prev => Math.min(100, prev + 10)); // Reward citizen closure

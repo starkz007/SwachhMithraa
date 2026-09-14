@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
+import { compressImageToFit } from '../../utils/imageUtils';
 
 export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
   const { addTicket, showToast } = useApp();
@@ -11,7 +12,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
   const [gpsAccuracy, setGpsAccuracy] = useState(null);
   const [priority, setPriority] = useState('High');
   const [notes, setNotes] = useState('');
-  const [photoPreview, setPhotoPreview] = useState('https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80');
+  const [photoPreview, setPhotoPreview] = useState(null);
   const fileInputRef = useRef(null);
 
   // Trigger real-time location detection when modal opens
@@ -24,8 +25,6 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
   const detectLiveLocation = () => {
     if (!navigator.geolocation) {
       if (showToast) showToast('Geolocation is not supported by your browser', 'error');
-      setLocation('12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038');
-      setCoords({ lat: 12.9716, lng: 77.6412 });
       return;
     }
 
@@ -52,7 +51,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
             const data = await response.json();
             const addr = data.address || {};
             const street = addr.road || addr.suburb || addr.neighbourhood || addr.residential || '';
-            const locality = addr.city_district || addr.suburb || addr.city || addr.town || 'Bengaluru';
+            const locality = addr.city_district || addr.suburb || addr.city || addr.town || '';
             const postcode = addr.postcode ? `, ${addr.postcode}` : '';
             const formatted = data.display_name
               ? (street ? `${street}, ${locality}${postcode}` : data.display_name.split(',').slice(0, 4).join(','))
@@ -74,11 +73,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
       (error) => {
         setIsLocating(false);
         console.warn("GPS Location fetch warning:", error.message);
-        if (!location) {
-          setLocation('12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038');
-          setCoords({ lat: 12.9716, lng: 77.6412 });
-        }
-        if (showToast) showToast('GPS location permission denied or unavailable. Fallback default used.', 'info');
+        if (showToast) showToast('GPS location permission denied or unavailable. Please type your location.', 'info');
       },
       {
         enableHighAccuracy: true,
@@ -101,46 +96,38 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const finalLocation = location.trim() || 'Live Citizen Location (Bengaluru)';
+    const finalLocation = location.trim() || (coords.lat ? `GPS: ${coords.lat.toFixed(4)}°N, ${coords.lng.toFixed(4)}°E` : 'Reported Location');
     addTicket({
-      title: title || `${category} reported at ${finalLocation.split(',')[0]}`,
+      title: title || `${category} at ${finalLocation.split(',')[0]}`,
       category,
       location: finalLocation,
       lat: coords.lat,
       lng: coords.lng,
       priority,
       notes,
-      photoUrl: photoPreview
+      photoUrl: photoPreview || null
     });
     onClose();
   };
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Check size (< 10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      if (showToast) showToast('File too large (max 10MB)', 'error');
-      return;
+    if (showToast) showToast('Processing photo evidence...', 'info');
+
+    try {
+      const optimized = await compressImageToFit(file);
+      if (optimized) {
+        setPhotoPreview(optimized);
+        if (showToast) showToast('Photo attached successfully!', 'success');
+      } else {
+        if (showToast) showToast('Unable to process photo', 'error');
+      }
+    } catch (err) {
+      console.warn("Photo compression error:", err);
+      if (showToast) showToast('Error processing photo', 'error');
     }
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setPhotoPreview(event.target.result);
-      if (showToast) showToast('Custom photo uploaded successfully!', 'success');
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const simulatePhotoUpload = () => {
-    const samples = [
-      "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1618060932014-4deda4932554?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=80"
-    ];
-    const picked = samples[Math.floor(Math.random() * samples.length)];
-    setPhotoPreview(picked);
   };
 
   return (
@@ -177,7 +164,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
 
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="block font-bold text-on-surface">Location & Street Address</label>
+              <label className="block font-bold text-on-surface">Location & Address</label>
               <div className="flex items-center gap-2">
                 {coords.lat && coords.lng && (
                   <span className="text-[11px] text-primary font-mono font-bold flex items-center gap-1">
@@ -190,7 +177,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
                   type="button"
                   onClick={detectLiveLocation}
                   disabled={isLocating}
-                  className="px-2 py-0.5 rounded-md bg-primary/10 hover:bg-primary/20 text-primary font-bold text-[10px] flex items-center gap-1 transition-colors cursor-pointer"
+                  className="px-2.5 py-1 rounded-md bg-primary/10 hover:bg-primary/20 text-primary font-bold text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
                   title="Detect live GPS coordinates from device"
                 >
                   <span className={`material-symbols-outlined text-xs ${isLocating ? 'animate-spin' : ''}`}>
@@ -201,7 +188,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            <div className="relative flex items-center mb-2">
+            <div className="relative flex items-center mb-1">
               <span className="absolute left-3 text-on-surface-variant material-symbols-outlined text-base">
                 {isLocating ? 'hourglass_top' : 'location_on'}
               </span>
@@ -210,61 +197,17 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
                 required
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder={isLocating ? "Detecting your real-time physical location..." : "Enter exact street, door no., or landmark"}
+                placeholder={isLocating ? "Detecting your real-time location via GPS..." : "Enter street address, landmark, or area"}
                 className="w-full h-10 pl-9 pr-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface focus:border-primary outline-none text-xs"
               />
             </div>
-
-            {/* Quick Landmark Picker Buttons */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] text-outline">
-              <span className="shrink-0 font-semibold text-[10px] uppercase text-on-surface-variant">Presets:</span>
-              <button
-                type="button"
-                onClick={() => {
-                  setLocation("12th Cross Rd, near Children Play Area, Indiranagar 2nd Stage, Bengaluru 560038");
-                  setCoords({ lat: 12.9716, lng: 77.6412 });
-                }}
-                className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
-              >
-                12th Cross Park
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setLocation("100 Feet Rd, Opposite BDA Complex Arcade, HAL 2nd Stage, Bengaluru 560038");
-                  setCoords({ lat: 12.9702, lng: 77.6405 });
-                }}
-                className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
-              >
-                100ft Rd BDA Complex
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setLocation("Chinmaya Mission Hospital Rd, Metro Pillar #62, Indiranagar, Bengaluru 560038");
-                  setCoords({ lat: 12.9784, lng: 77.6387 });
-                }}
-                className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
-              >
-                CMH Metro Station
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setLocation("80 Feet Rd & 7th Main Corner, HAL 3rd Stage, Indiranagar, Bengaluru 560075");
-                  setCoords({ lat: 12.9680, lng: 77.6492 });
-                }}
-                className="px-2.5 py-0.5 rounded-lg bg-surface-container-high hover:bg-primary/15 hover:text-primary whitespace-nowrap text-[11px] transition-colors"
-              >
-                80ft Road 7th Main
-              </button>
-            </div>
+            <p className="text-[10px] text-outline">Click "Locate Me" to auto-fetch your device's physical GPS location or type manually.</p>
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="block font-bold text-on-surface">Photo Evidence (Upload Your Photo)</label>
-              <span className="text-[10px] text-primary font-bold">JPG / PNG / WEBP</span>
+              <label className="block font-bold text-on-surface">Photo Evidence</label>
+              <span className="text-[10px] text-outline font-medium">Camera / Device File</span>
             </div>
 
             {/* Hidden native file input */}
@@ -272,86 +215,73 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
               type="file"
               ref={fileInputRef}
               accept="image/*"
+              capture="environment"
               onChange={handleFileUpload}
               className="hidden"
             />
 
             <div 
               onClick={() => fileInputRef.current?.click()}
-              className="relative rounded-2xl overflow-hidden border-2 border-dashed border-outline-variant/60 hover:border-primary cursor-pointer bg-surface-container-low h-44 flex flex-col items-center justify-center group transition-colors"
+              className="relative rounded-2xl overflow-hidden border-2 border-dashed border-outline-variant/60 hover:border-primary cursor-pointer bg-surface-container-low h-48 flex flex-col items-center justify-center group transition-colors"
             >
               {photoPreview ? (
                 <>
                   <img src={photoPreview} alt="Evidence preview" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 text-white">
                     <span className="material-symbols-outlined text-2xl">file_upload</span>
-                    <span className="text-xs font-bold">Click to Upload Different Photo</span>
+                    <span className="text-xs font-bold">Tap to Replace Photo</span>
                   </div>
                 </>
               ) : (
-                <div className="text-center text-outline p-4">
-                  <span className="material-symbols-outlined text-4xl mb-1 text-primary">cloud_upload</span>
-                  <div className="text-xs font-bold text-on-surface">Click to Upload Your Own Photo</div>
-                  <div className="text-[10px] text-outline mt-0.5">Supports Camera capture or local file from device</div>
+                <div className="text-center text-outline p-5 flex flex-col items-center justify-center">
+                  <span className="material-symbols-outlined text-4xl mb-2 text-primary">add_a_photo</span>
+                  <div className="text-xs font-bold text-on-surface">Tap to Take or Upload Photo</div>
+                  <div className="text-[10px] text-outline mt-1 max-w-xs">Capture live evidence with your camera or select from your gallery/device</div>
                 </div>
               )}
 
-              <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/70 text-white font-mono text-[10px] backdrop-blur-xs flex items-center gap-1">
-                <span className="material-symbols-outlined text-xs text-emerald-400">my_location</span>
-                GPS: {coords.lat ? `${coords.lat.toFixed(4)}°N, ${coords.lng.toFixed(4)}°E` : '12.9716° N, 77.6412° E'}
-              </span>
-
-              <span className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-black/70 text-white text-[10px] font-medium backdrop-blur-xs">
-                Tap to replace
-              </span>
+              {coords.lat && (
+                <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/70 text-white font-mono text-[10px] backdrop-blur-xs flex items-center gap-1">
+                  <span className="material-symbols-outlined text-xs text-emerald-400">my_location</span>
+                  GPS: {coords.lat.toFixed(4)}°N, {coords.lng.toFixed(4)}°E
+                </span>
+              )}
             </div>
 
-            {/* Quick Action Buttons for Photo */}
+            {/* Quick Action Button for Photo */}
             <div className="flex items-center gap-2 mt-2">
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex-1 py-2 px-3 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                className="flex-1 py-2 px-3 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span className="material-symbols-outlined text-base">upload_file</span>
-                <span>Choose From My Device</span>
+                <span>{photoPreview ? 'Change Photo' : 'Upload / Capture Photo'}</span>
               </button>
-
-              <button
-                type="button"
-                onClick={simulatePhotoUpload}
-                title="Cycle sample test pictures"
-                className="py-2 px-3 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-semibold text-xs flex items-center gap-1 transition-colors"
-              >
-                <span className="material-symbols-outlined text-base">shuffle</span>
-                <span>Try Sample</span>
-              </button>
+              {photoPreview && (
+                <button
+                  type="button"
+                  onClick={() => setPhotoPreview(null)}
+                  className="py-2 px-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-error font-bold text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-base">delete</span>
+                  <span>Remove</span>
+                </button>
+              )}
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block font-bold text-on-surface mb-1">Urgency Priority</label>
-              <select
-                value={priority}
-                onChange={(e) => setPriority(e.target.value)}
-                className="w-full h-10 px-3 rounded-xl bg-surface-container-low border border-outline-variant/30 font-medium text-on-surface focus:border-primary outline-none"
-              >
-                <option value="Critical">Critical (Immediate Hazard)</option>
-                <option value="High">High (&lt; 6 Hours)</option>
-                <option value="Medium">Medium (&lt; 24 Hours)</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block font-bold text-on-surface mb-1">Ward Jurisdiction</label>
-              <input
-                type="text"
-                disabled
-                value="Ward 14 • Indiranagar Beat #4"
-                className="w-full h-10 px-3 rounded-xl bg-surface-container text-on-surface-variant font-medium border border-outline-variant/30 outline-none"
-              />
-            </div>
+          <div>
+            <label className="block font-bold text-on-surface mb-1">Urgency Priority</label>
+            <select
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+              className="w-full h-10 px-3 rounded-xl bg-surface-container-low border border-outline-variant/30 font-medium text-on-surface focus:border-primary outline-none"
+            >
+              <option value="Critical">Critical (Immediate Hazard)</option>
+              <option value="High">High (&lt; 6 Hours)</option>
+              <option value="Medium">Medium (&lt; 24 Hours)</option>
+            </select>
           </div>
 
           <div>
@@ -360,7 +290,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
               rows={2}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="e.g. Near the children swings, plastic garbage blowing onto street..."
+              placeholder="Describe the condition, landmark, or specific details..."
               className="w-full p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface focus:border-primary outline-none"
             />
           </div>
@@ -375,7 +305,7 @@ export const RaiseGrievanceModal = ({ isOpen, onClose }) => {
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 rounded-xl bg-primary text-on-primary font-bold shadow-md hover:bg-primary-deep flex items-center gap-1.5"
+              className="px-5 py-2.5 rounded-xl bg-primary text-on-primary font-bold shadow-md hover:bg-primary-deep flex items-center gap-1.5 cursor-pointer"
             >
               <span className="material-symbols-outlined text-base">send</span>
               <span>Submit Grievance to Municipal Control</span>
