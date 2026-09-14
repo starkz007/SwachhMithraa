@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { InteractiveMap } from '../../components/common/InteractiveMap';
 
 export const WardGisAiDispatch = () => {
-  const { tickets, workers, dispatchWorker, showToast } = useApp();
+  const { tickets, workers, dispatchWorker, refreshTickets, showToast } = useApp();
   const [selectedPendingTicket, setSelectedPendingTicket] = useState(null);
   const pendingTickets = tickets.filter(t => t.status === 'pending');
   const onDutyWorkers = workers.filter(w => w.dutyStatus === 'on_duty');
@@ -47,7 +47,7 @@ export const WardGisAiDispatch = () => {
           <button
             type="button"
             onClick={handleAutoDispatchAll}
-            className="px-4 py-2.5 rounded-full bg-primary hover:bg-primary-deep text-on-primary text-xs font-bold shadow-md flex items-center gap-1.5 transition-all"
+            className="px-4 py-2.5 rounded-full bg-primary hover:bg-primary-deep text-on-primary text-xs font-bold shadow-md flex items-center gap-1.5 transition-all cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">smart_toy</span>
             <span>Trigger AI Auto-Dispatch ({pendingTickets.length})</span>
@@ -55,11 +55,11 @@ export const WardGisAiDispatch = () => {
 
           <button
             type="button"
-            onClick={() => showToast("Ward telemetry refreshed: 128 nodes, 4 vehicles, 12 staff in sync.", "info")}
-            className="px-4 py-2.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-bold transition-colors flex items-center gap-1"
+            onClick={refreshTickets}
+            className="px-4 py-2.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">sync</span>
-            <span>Sync Telemetry</span>
+            <span>Sync Cloud Database</span>
           </button>
         </div>
       </div>

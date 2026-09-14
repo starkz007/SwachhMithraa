@@ -30,7 +30,6 @@ class ApiService {
   getGithubHeaders() {
     return {
       'Authorization': `Bearer ${this.githubToken}`,
-      'User-Agent': 'SwachhMithra-App',
       'Accept': 'application/vnd.github.v3+json',
       'Content-Type': 'application/json'
     };
@@ -49,11 +48,20 @@ class ApiService {
     this.statusListeners.forEach(cb => cb(this.isBackendOnline));
   }
 
-  // Probe FastAPI health endpoint
+  // Probe FastAPI health endpoint - only probe when running locally to avoid mixed content
   async checkHealth() {
+    if (typeof window !== 'undefined') {
+      const host = window.location.hostname;
+      if (!host.includes('localhost') && !host.includes('127.0.0.1')) {
+        this.isBackendOnline = false;
+        this.hasChecked = true;
+        return false;
+      }
+    }
+
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 1800);
+      const timeoutId = setTimeout(() => controller.abort(), 1200);
       const res = await fetch(`${API_BASE_URL}/api/health`, {
         signal: controller.signal
       });
@@ -99,18 +107,14 @@ class ApiService {
     // Cloud Datastore: Fetch from GitHub Issues API across all devices
     try {
       const res = await fetch(
-        `https://api.github.com/repos/${this.githubRepo}/issues?state=all&per_page=100&sort=created&direction=desc`,
+        `https://api.github.com/repos/${this.githubRepo}/issues?state=all&labels=grievance&per_page=100&sort=created&direction=desc&_t=${Date.now()}`,
         { headers: this.getGithubHeaders() }
       );
       if (res.ok) {
         const issues = await res.json();
         const cloudTickets = [];
         for (const issue of issues) {
-          const isGrievance =
-            issue.labels?.some(l => (typeof l === 'string' ? l : l.name) === 'grievance') ||
-            issue.title?.startsWith('[GRIEVANCE]');
-
-          if (isGrievance && issue.body) {
+          if (issue.body) {
             try {
               const ticket = JSON.parse(issue.body);
               ticket.issueNumber = issue.number;
@@ -124,22 +128,47 @@ class ApiService {
           }
         }
 
-        if (cloudTickets.length > 0) {
-          localStorage.setItem('swachh_tickets', JSON.stringify(cloudTickets));
-          return cloudTickets;
-        }
+        // Always overwrite localStorage with live cloud state (including empty array)
+        localStorage.setItem('swachh_tickets', JSON.stringify(cloudTickets));
+        return cloudTickets;
       }
     } catch (e) {
       console.warn('GitHub Cloud Datastore query error:', e);
     }
 
-    // Fallback: Return from localStorage
+    // Fallback: Return from localStorage if offline
     const local = localStorage.getItem('swachh_tickets');
     if (local) {
       try {
         return JSON.parse(local);
       } catch (e) {}
     }
+    return [];
+  }
+
+  async deleteAllCloudTickets() {
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${this.githubRepo}/issues?state=all&labels=grievance&per_page=100`,
+        { headers: this.getGithubHeaders() }
+      );
+      if (res.ok) {
+        const issues = await res.json();
+        for (const issue of issues) {
+          await fetch(`https://api.github.com/repos/${this.githubRepo}/issues/${issue.number}`, {
+            method: 'PATCH',
+            headers: this.getGithubHeaders(),
+            body: JSON.stringify({
+              state: 'closed',
+              labels: ['archived_old']
+            })
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('Delete cloud tickets error:', e);
+    }
+    localStorage.removeItem('swachh_tickets');
     return [];
   }
 

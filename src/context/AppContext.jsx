@@ -32,17 +32,26 @@ export const AppProvider = ({ children }) => {
     return localStorage.getItem('swachh_lang') || 'en';
   });
 
-  // Reactive Domain Data
+  // Automatic Cache Purge: Forces every device that logged in previously to purge legacy stale data
+  const SWACHH_VERSION_RESET = 'swachh_v4_purged_2026';
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('swachh_v_ver') !== SWACHH_VERSION_RESET) {
+      localStorage.removeItem('swachh_tickets');
+      localStorage.removeItem('swachh_ai_camera_alerts');
+      localStorage.setItem('swachh_v_ver', SWACHH_VERSION_RESET);
+    }
+  }
+
+  // Reactive Domain Data - Initialized clean
   const [tickets, setTickets] = useState(() => {
     const saved = localStorage.getItem('swachh_tickets');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Exclude legacy mock tickets
-        return parsed.filter(t => !['SWM-2024-1048', 'SWM-2024-1051', 'SWM-2024-1055', 'SWM-2024-1060'].includes(t.id));
+        return Array.isArray(parsed) ? parsed : [];
       } catch (e) {}
     }
-    return initialTickets;
+    return [];
   });
 
   const [workers, setWorkers] = useState(() => {
@@ -126,22 +135,9 @@ export const AppProvider = ({ children }) => {
     const syncCloudData = async () => {
       try {
         const remoteTickets = await api.getTickets();
-        if (isMounted && remoteTickets && Array.isArray(remoteTickets)) {
-          setTickets(prev => {
-            const ticketMap = new Map();
-            // Retain local tickets
-            prev.forEach(t => {
-              if (t && t.id) ticketMap.set(t.id, t);
-            });
-            // Merge remote cloud tickets (remote cloud state takes precedence)
-            remoteTickets.forEach(rt => {
-              if (rt && rt.id) {
-                const existing = ticketMap.get(rt.id);
-                ticketMap.set(rt.id, existing ? { ...existing, ...rt } : rt);
-              }
-            });
-            return Array.from(ticketMap.values());
-          });
+        if (isMounted && Array.isArray(remoteTickets)) {
+          // Live Cloud is the single source of truth across all devices
+          setTickets(remoteTickets);
         }
       } catch (e) {
         console.debug("Cloud poll sync skipped:", e);
@@ -151,8 +147,8 @@ export const AppProvider = ({ children }) => {
     // Initial fetch on mount
     syncCloudData();
 
-    // Poll every 5 seconds for real-time cross-device sync
-    const interval = setInterval(syncCloudData, 5000);
+    // Poll every 4 seconds for real-time cross-device sync
+    const interval = setInterval(syncCloudData, 4000);
 
     // Sync immediately when user switches tabs or focuses device
     const handleVisibility = () => {
@@ -387,6 +383,23 @@ export const AppProvider = ({ children }) => {
     showToast(`Official Gazette notification ${newDir.id} published and broadcasted city-wide!`, 'success');
   };
 
+  const refreshTickets = async () => {
+    showToast("Syncing with live cloud datastore...", "info");
+    const remote = await api.getTickets();
+    if (Array.isArray(remote)) {
+      setTickets(remote);
+      showToast(`Cloud synchronized! ${remote.length} live complaints active across all devices.`, "success");
+    }
+  };
+
+  const clearAllComplaints = async () => {
+    showToast("Purging all complaints across all devices...", "info");
+    await api.deleteAllCloudTickets();
+    setTickets([]);
+    localStorage.removeItem('swachh_tickets');
+    showToast("All complaints wiped clean across all devices!", "success");
+  };
+
   return (
     <AppContext.Provider value={{
       activeRole,
@@ -416,6 +429,8 @@ export const AppProvider = ({ children }) => {
       issueChallan,
       triggerSosAlert,
       publishDirective,
+      refreshTickets,
+      clearAllComplaints,
       showToast
     }}>
       {children}

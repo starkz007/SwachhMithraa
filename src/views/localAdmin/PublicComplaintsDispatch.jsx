@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const PublicComplaintsDispatch = () => {
-  const { tickets, workers, dispatchWorker, showToast } = useApp();
+  const { tickets, workers, dispatchWorker, refreshTickets, clearAllComplaints, showToast } = useApp();
   const [statusFilter, setStatusFilter] = useState('all');
   const [sourceFilter, setSourceFilter] = useState('all'); // 'all' | 'citizen' | 'ai_camera'
   const [selectedTicket, setSelectedTicket] = useState(null);
@@ -36,7 +36,7 @@ export const PublicComplaintsDispatch = () => {
               <span className="material-symbols-outlined text-sm">assignment_turned_in</span>
               Municipal Triage Desk
             </span>
-            <span className="text-xs text-outline font-medium">Ward 14 (Indiranagar) Command</span>
+            <span className="text-xs text-outline font-medium">Universal Cross-Device Cloud Sync Active</span>
           </div>
           <h2 className="text-xl font-bold text-on-surface">Public Complaints Triage & Dispatch Desk</h2>
           <p className="text-xs text-on-surface-variant">
@@ -44,8 +44,28 @@ export const PublicComplaintsDispatch = () => {
           </p>
         </div>
 
-        {/* Source Channel Filter Tabs */}
+        {/* Action Controls & Source Filter */}
         <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={refreshTickets}
+            className="px-3.5 py-2 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+            title="Fetch all latest complaints from central cloud database"
+          >
+            <span className="material-symbols-outlined text-sm">sync</span>
+            <span>Sync Cloud</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={clearAllComplaints}
+            className="px-3 py-2 rounded-xl bg-surface-container hover:bg-error/10 text-outline hover:text-error font-semibold text-xs flex items-center gap-1 transition-colors cursor-pointer"
+            title="Delete all earlier complaints from all devices and reset"
+          >
+            <span className="material-symbols-outlined text-sm">delete_sweep</span>
+            <span>Reset All</span>
+          </button>
+
           <div className="flex items-center gap-1 p-1 bg-surface-container-low rounded-xl border border-outline-variant/30 text-xs font-semibold">
             <button
               type="button"

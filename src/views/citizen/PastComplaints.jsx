@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const PastComplaints = () => {
-  const { tickets, showToast } = useApp();
+  const { tickets, refreshTickets, showToast } = useApp();
   const [filter, setFilter] = useState('all'); // 'all' | 'in_progress' | 'resolved' | 'pending'
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [rating, setRating] = useState(5);
@@ -28,29 +28,41 @@ export const PastComplaints = () => {
           </p>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex items-center gap-1.5 p-1 bg-surface-container-low rounded-xl border border-outline-variant/30 text-xs font-semibold">
+        {/* Filter Pills & Sync Button */}
+        <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
-            onClick={() => setFilter('all')}
-            className={`px-3 py-1.5 rounded-lg transition-colors ${filter === 'all' ? 'bg-primary text-white' : 'text-on-surface-variant hover:text-on-surface'}`}
+            onClick={refreshTickets}
+            className="px-3.5 py-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+            title="Check latest status from municipal cloud"
           >
-            All ({tickets.length})
+            <span className="material-symbols-outlined text-sm">sync</span>
+            <span>Refresh</span>
           </button>
-          <button
-            type="button"
-            onClick={() => setFilter('in_progress')}
-            className={`px-3 py-1.5 rounded-lg transition-colors ${filter === 'in_progress' ? 'bg-tertiary text-white' : 'text-on-surface-variant hover:text-on-surface'}`}
-          >
-            In Progress
-          </button>
-          <button
-            type="button"
-            onClick={() => setFilter('resolved')}
-            className={`px-3 py-1.5 rounded-lg transition-colors ${filter === 'resolved' ? 'bg-emerald-700 text-white' : 'text-on-surface-variant hover:text-on-surface'}`}
-          >
-            Resolved
-          </button>
+
+          <div className="flex items-center gap-1.5 p-1 bg-surface-container-low rounded-xl border border-outline-variant/30 text-xs font-semibold">
+            <button
+              type="button"
+              onClick={() => setFilter('all')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${filter === 'all' ? 'bg-primary text-white' : 'text-on-surface-variant hover:text-on-surface'}`}
+            >
+              All ({tickets.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setFilter('in_progress')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${filter === 'in_progress' ? 'bg-tertiary text-white' : 'text-on-surface-variant hover:text-on-surface'}`}
+            >
+              In Progress
+            </button>
+            <button
+              type="button"
+              onClick={() => setFilter('resolved')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${filter === 'resolved' ? 'bg-emerald-700 text-white' : 'text-on-surface-variant hover:text-on-surface'}`}
+            >
+              Resolved
+            </button>
+          </div>
         </div>
       </div>
 
