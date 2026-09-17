@@ -56,53 +56,7 @@ export const initialWorkers = [
   }
 ];
 
-export const initialAiCameraViolations = [
-  {
-    id: "CAM-VIO-4891",
-    cameraNode: "POLE-CAM-1402 (Indiranagar 100ft Rd & 12th Main)",
-    location: "100 Feet Rd & 12th Main Junction, Indiranagar, Bengaluru 560038",
-    timestamp: "10:14:22 AM Today",
-    violationType: "Commercial Waste Dumping",
-    confidence: 94.8,
-    vehiclePlate: "KA-04-MB-4819",
-    offenderType: "Commercial Pick-up Truck",
-    fineAmount: 2500,
-    status: "Review Pending", // 'Review Pending' | 'Challan Issued' | 'Dismissed'
-    sha256Hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    videoClipUrl: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80",
-    bbox: { x: 34, y: 48, w: 28, h: 32 }
-  },
-  {
-    id: "CAM-VIO-4892",
-    cameraNode: "POLE-CAM-1407 (CMH Metro Station Plaza)",
-    location: "Chinmaya Mission Hospital Rd, Metro Gate 2, Indiranagar, Bengaluru 560038",
-    timestamp: "09:48:10 AM Today",
-    violationType: "Open Plastic Burning",
-    confidence: 97.2,
-    vehiclePlate: "N/A (Pedestrian / Vendor)",
-    offenderType: "Street Vendor",
-    fineAmount: 1000,
-    status: "Challan Issued",
-    sha256Hash: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
-    videoClipUrl: "https://images.unsplash.com/photo-1618060932014-4deda4932554?w=800&auto=format&fit=crop&q=80",
-    bbox: { x: 55, y: 40, w: 22, h: 26 }
-  },
-  {
-    id: "CAM-VIO-4893",
-    cameraNode: "POLE-CAM-1412 (12th Main Commercial Hub)",
-    location: "12th Main Rd, HAL 2nd Stage, Indiranagar, Bengaluru 560038",
-    timestamp: "08:12:05 AM Today",
-    violationType: "Bin Overflow > 90%",
-    confidence: 89.4,
-    vehiclePlate: "N/A (Smart Sensor Alert)",
-    offenderType: "Civic Infrastructure Overflow",
-    fineAmount: 0,
-    status: "Auto-Dispatched",
-    sha256Hash: "a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e",
-    videoClipUrl: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=80",
-    bbox: { x: 20, y: 52, w: 25, h: 35 }
-  }
-];
+export const initialAiCameraViolations = [];
 
 export const smartBins = [
   { id: "BIN-101", location: "12th Cross Park Main Entrance, Indiranagar 2nd Stage", address: "12th Cross Rd, Bengaluru 560038", fillPercent: 92, type: "Dry Recyclables", status: "Critical Overflow", lat: 12.9716, lng: 77.6412 },

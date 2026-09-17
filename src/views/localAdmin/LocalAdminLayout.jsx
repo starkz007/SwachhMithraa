@@ -8,13 +8,14 @@ import { AiCameraTickets } from './AiCameraTickets';
 import { LocalityGisRadar } from './LocalityGisRadar';
 
 export const LocalAdminLayout = () => {
-  const { activeTab, setTab, tickets } = useApp();
+  const { activeTab, setTab, tickets, aiCameraAlerts } = useApp();
   const pendingCount = tickets.filter(t => t.status === 'pending').length;
+  const aiViolationsCount = Array.isArray(aiCameraAlerts) ? aiCameraAlerts.length : 0;
 
   const navItems = [
     { id: 'ward-gis-dispatch', label: 'Ward GIS & AI Dispatch', icon: 'map' },
     { id: 'public-complaints-dispatch', label: 'Public Complaints Triage', icon: 'assignment_turned_in', badge: pendingCount > 0 ? pendingCount : null },
-    { id: 'ai-camera-tickets', label: 'AI Camera Tickets', icon: 'videocam', badge: '3' },
+    { id: 'ai-camera-tickets', label: 'AI Camera Tickets', icon: 'videocam', badge: aiViolationsCount > 0 ? aiViolationsCount : null },
     { id: 'worker-roster-assign', label: 'Worker Roster & Assign', icon: 'groups' },
     { id: 'blackspot-heatmap', label: 'Blackspot Heatmap', icon: 'local_fire_department' },
     { id: 'locality-gis-radar', label: 'Locality GIS Radar', icon: 'radar' },

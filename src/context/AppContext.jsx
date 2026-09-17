@@ -33,7 +33,7 @@ export const AppProvider = ({ children }) => {
   });
 
   // Automatic Cache Purge: Forces every device that logged in previously to purge legacy stale data
-  const SWACHH_VERSION_RESET = 'swachh_v4_purged_2026';
+  const SWACHH_VERSION_RESET = 'swachh_v5_clean_2026';
   if (typeof window !== 'undefined') {
     if (localStorage.getItem('swachh_v_ver') !== SWACHH_VERSION_RESET) {
       localStorage.removeItem('swachh_tickets');
@@ -42,7 +42,7 @@ export const AppProvider = ({ children }) => {
     }
   }
 
-  // Reactive Domain Data - Initialized clean
+  // Reactive Domain Data - Initialized clean (no fake demo tickets)
   const [tickets, setTickets] = useState(() => {
     const saved = localStorage.getItem('swachh_tickets');
     if (saved) {
@@ -61,7 +61,13 @@ export const AppProvider = ({ children }) => {
 
   const [aiCameraAlerts, setAiCameraAlerts] = useState(() => {
     const saved = localStorage.getItem('swachh_ai_camera_alerts');
-    return saved ? JSON.parse(saved) : initialAiCameraViolations;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return Array.isArray(parsed) ? parsed.filter(a => !['CAM-VIO-4891', 'CAM-VIO-4892', 'CAM-VIO-4893'].includes(a.id)) : [];
+      } catch (e) {}
+    }
+    return [];
   });
 
   const [smartBins, setSmartBins] = useState(() => {

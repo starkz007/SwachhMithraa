@@ -6,45 +6,66 @@ export const IncidentEvidenceVault = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [playbackTime, setPlaybackTime] = useState(6); // 0 to 10 seconds scrubber
 
-  const alerts = Array.isArray(aiCameraAlerts) && aiCameraAlerts.length > 0 ? aiCameraAlerts : [
-    {
-      id: "CAM-VIO-4891",
-      cameraNode: "POLE-CAM-1402 (Indiranagar 100ft Rd)",
-      timestamp: "10:14:22 AM Today",
-      violationType: "Commercial Waste Dumping",
-      violation: "Commercial Waste Dumping",
-      confidence: 94.8,
-      vehiclePlate: "KA-04-MB-4819",
-      plateNumber: "KA-04-MB-4819",
-      offenderType: "Commercial Pick-up Truck",
-      ownerName: "Commercial Pick-up Truck",
-      fineAmount: 2500,
-      status: "Review Pending",
-      sha256Hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      videoClipUrl: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80",
-      bbox: { x: 25, y: 30, w: 45, h: 40 }
-    }
-  ];
+  const alerts = Array.isArray(aiCameraAlerts) ? aiCameraAlerts : [];
+  const currentIncident = alerts.find(a => a.id === selectedId) || alerts[0] || null;
 
-  const currentIncident = alerts.find(a => a.id === selectedId) || alerts[0];
+  const handleDownloadEvidencePackage = () => {
+    if (!currentIncident) return;
+    showToast(`Encrypted Judicial Evidence ZIP package generated for ${currentIncident.id} with SHA-256 hash seal!`, "success");
+  };
+
+  if (!currentIncident || alerts.length === 0) {
+    return (
+      <div className="space-y-6 animate-fade-in">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+                <span className="material-symbols-outlined text-sm">verified</span>
+                Judicial Evidence Registry • Indian Evidence Act Sec 65B
+              </span>
+            </div>
+            <h2 className="text-xl font-bold text-on-surface">AI Incident Playback & Evidence Vault</h2>
+            <p className="text-xs text-on-surface-variant">
+              Cryptographically sealed optical records of verified municipal dumping infractions
+            </p>
+          </div>
+        </div>
+
+        <div className="p-12 rounded-3xl bg-surface-container-lowest border border-outline-variant/30 text-center space-y-4 max-w-2xl mx-auto shadow-sm">
+          <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
+            <span className="material-symbols-outlined text-3xl">verified_user</span>
+          </div>
+          <div>
+            <h3 className="font-bold text-base text-on-surface">No Optical Incidents in Evidence Vault</h3>
+            <p className="text-xs text-on-surface-variant mt-1 max-w-md mx-auto">
+              All municipal surveillance pole nodes are operating normally with zero unaddressed optical infractions. New detections from live AI camera streams will be cryptographically archived here with SHA-256 seals.
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-3 pt-2">
+            <span className="inline-flex items-center gap-1 text-xs font-mono text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Judicial Vault Status: SECURE & AUDITED
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Normalized fields
-  const videoUrl = currentIncident?.videoClipUrl || "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80";
+  const videoUrl = currentIncident?.videoClipUrl || currentIncident?.photoUrl || "";
   const violationTitle = currentIncident?.violationType || currentIncident?.violation || "Optical Waste Violation";
-  const plate = currentIncident?.vehiclePlate || currentIncident?.plateNumber || "KA-04-MB-4819";
+  const plate = currentIncident?.vehiclePlate || currentIncident?.plateNumber || "N/A (Pedestrian / Hand Litter)";
   const offender = currentIncident?.offenderType || currentIncident?.ownerName || "Civic Offender Evidence";
   const confidence = currentIncident?.confidence || 95;
   const fine = currentIncident?.fineAmount || 500;
   const status = currentIncident?.status || "Review Pending";
-  const node = currentIncident?.cameraNode || currentIncident?.nodeId || "POLE-CAM-1402 (100ft Rd & 12th Main)";
-  const location = currentIncident?.location || "100 Feet Rd & 12th Main Junction, Indiranagar, Bengaluru 560038";
-  const time = currentIncident?.timestamp || "Just now";
+  const node = currentIncident?.cameraNode || currentIncident?.nodeId || "POLE-CAM-1402 (Indiranagar 12th Main)";
+  const location = currentIncident?.location || "Ward 82 (Live Optical Node)";
+  const time = currentIncident?.timestamp || "Recorded by AI Node";
   const sha = currentIncident?.sha256Hash || "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
   const bbox = currentIncident?.bbox || { x: 25, y: 30, w: 45, h: 40 };
-
-  const handleDownloadEvidencePackage = () => {
-    showToast(`Encrypted Judicial Evidence ZIP package generated for ${currentIncident?.id} with SHA-256 hash seal!`, "success");
-  };
 
   return (
     <div className="space-y-6 animate-fade-in">

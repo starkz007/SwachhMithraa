@@ -412,8 +412,8 @@ export const LiveCameraSurveillance = () => {
         // NEURAL INFERENCE (For Live Video or Uploaded Image)
         if (!simMode && model && (streamActive || uploadedImageUrl)) {
           try {
-            // High Recall = 0.10 threshold for ultra-responsive live detection; Strict = 0.20
-            const baseMinScore = sensitivityRef.current === 'high' ? 0.10 : 0.20;
+            // High Recall = 0.22 threshold for clean live detection; Strict = 0.38
+            const baseMinScore = sensitivityRef.current === 'high' ? 0.22 : 0.38;
             const predictions = await model.detect(canvas);
 
             let personBBox = null;
@@ -422,9 +422,16 @@ export const LiveCameraSurveillance = () => {
               const rawClass = p.class.toLowerCase();
               const normClass = rawClass.replace(/_/g, ' ');
               const scorePct = Number((p.score * 100).toFixed(1));
+              const [bx, by, bw, bh] = p.bbox || [0, 0, 0, 0];
+
+              // Geometric filtering: reject noise artifacts or fullscreen glitch detections
+              const frameArea = vWidth * vHeight;
+              const boxArea = bw * bh;
+              const areaRatio = boxArea / frameArea;
+              const aspectRatio = bw / Math.max(1, bh);
 
               // 1. IS IT A PERSON?
-              if (rawClass === 'person' && p.score >= 0.25) {
+              if (rawClass === 'person' && p.score >= 0.35) {
                 foundPerson = true;
                 personBBox = p.bbox;
                 entities.push({
@@ -436,15 +443,17 @@ export const LiveCameraSurveillance = () => {
               }
               // 2. IS IT GENUINE CIVIC WASTE?
               else if (WASTE_DEFINITIONS[rawClass] || WASTE_DEFINITIONS[normClass]) {
-                // If a person is in frame, allow low threshold (0.09) so held objects aren't suppressed
-                const minScore = foundPerson ? 0.09 : baseMinScore;
-                if (p.score >= minScore) {
+                // Must be plausible size: between 0.3% and 75% of view, reasonable aspect ratio 0.15 - 6.0
+                const isPlausibleGeometry = areaRatio >= 0.003 && areaRatio <= 0.75 && aspectRatio >= 0.15 && aspectRatio <= 6.0;
+                const minScore = foundPerson ? 0.20 : baseMinScore;
+
+                if (p.score >= minScore && isPlausibleGeometry) {
                   const def = WASTE_DEFINITIONS[rawClass] || WASTE_DEFINITIONS[normClass];
                   const wasteEntity = {
                     type: 'waste',
                     class: rawClass,
                     label: `🗑️ ${def.label} (${scorePct}%)`,
-                    confidence: Math.max(scorePct, 92),
+                    confidence: Math.max(scorePct, 88),
                     bbox: p.bbox,
                     color: 'border-rose-500 bg-rose-500/25 shadow-[0_0_25px_rgba(239,68,68,0.7)]'
                   };
@@ -454,7 +463,7 @@ export const LiveCameraSurveillance = () => {
               }
               // 3. IS IT A RECOGNIZED NON-WASTE OBJECT (Phone, Laptop, Book, Mouse, Chair, etc.)?
               else if (NON_WASTE_DEFINITIONS[normClass] || NON_WASTE_DEFINITIONS[rawClass]) {
-                if (p.score >= 0.25) {
+                if (p.score >= 0.30) {
                   const def = NON_WASTE_DEFINITIONS[normClass] || NON_WASTE_DEFINITIONS[rawClass];
                   safeItems.push(def.label);
                   entities.push({
@@ -484,7 +493,11 @@ export const LiveCameraSurveillance = () => {
                 for (const cp of cropPredictions) {
                   const cRaw = cp.class.toLowerCase();
                   const cNorm = cRaw.replace(/_/g, ' ');
-                  if ((WASTE_DEFINITIONS[cRaw] || WASTE_DEFINITIONS[cNorm]) && cp.score >= 0.09) {
+                  const [, , cbw, cbh] = cp.bbox || [0, 0, 0, 0];
+                  const cropArea = vWidth * cropH;
+                  const cAreaRatio = (cbw * cbh) / cropArea;
+
+                  if ((WASTE_DEFINITIONS[cRaw] || WASTE_DEFINITIONS[cNorm]) && cp.score >= 0.20 && cAreaRatio >= 0.005) {
                     const def = WASTE_DEFINITIONS[cRaw] || WASTE_DEFINITIONS[cNorm];
                     const scorePct = Number((cp.score * 100).toFixed(1));
                     const mappedBbox = [cp.bbox[0], cp.bbox[1] + cropY, cp.bbox[2], cp.bbox[3]];
@@ -492,7 +505,7 @@ export const LiveCameraSurveillance = () => {
                       type: 'waste',
                       class: cRaw,
                       label: `🗑️ ${def.label} (${scorePct}%)`,
-                      confidence: Math.max(scorePct, 91),
+                      confidence: Math.max(scorePct, 88),
                       bbox: mappedBbox,
                       color: 'border-rose-500 bg-rose-500/25 shadow-[0_0_25px_rgba(239,68,68,0.7)]'
                     };
